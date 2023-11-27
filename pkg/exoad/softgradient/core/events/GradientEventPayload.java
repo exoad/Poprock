@@ -19,31 +19,19 @@ public final record GradientEventPayload(GradientColor[] colors,float startX,flo
 
       @Override public boolean equals(Object obj)
       {
-            if(this==obj)
-                  return true;
-            if(obj==null)
-                  return false;
-            if(getClass()!=obj.getClass())
-                  return false;
+            if(this==obj) return true;
+            if(obj==null||getClass()!=obj.getClass()) return false;
             GradientEventPayload other=(GradientEventPayload)obj;
-            if(colors==null)
-            {
-                  if(other.colors!=null)
-                        return false;
-            }
-            else if(Arrays.equals(
-                        colors,
-                        other.colors)==false)
-                  return false;
-            if(Float.floatToIntBits(endX)!=Float.floatToIntBits(other.endX))
-                  return false;
-            if(Float.floatToIntBits(endY)!=Float.floatToIntBits(other.endY))
-                  return false;
-            if(Float.floatToIntBits(startX)!=Float.floatToIntBits(other.startX))
-                  return false;
-            if(Float.floatToIntBits(startY)!=Float.floatToIntBits(other.startY))
-                  return false;
-            return true;
+            if(colors!=null
+                        ? !Arrays.equals(
+                                    colors,
+                                    other.colors
+                        )
+                        : other.colors!=null) return false;
+            if(Float.floatToIntBits(endX)!=Float.floatToIntBits(other.endX)) return false;
+            if(Float.floatToIntBits(endY)!=Float.floatToIntBits(other.endY)) return false;
+            if(Float.floatToIntBits(startX)!=Float.floatToIntBits(other.startX)) return false;
+            return Float.floatToIntBits(startY)==Float.floatToIntBits(other.startY);
       }
 
       @Override public int hashCode()
