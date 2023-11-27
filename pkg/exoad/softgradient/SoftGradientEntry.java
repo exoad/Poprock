@@ -10,9 +10,11 @@ import pkg.exoad.softgradient.core.SharedConstants;
 import pkg.exoad.softgradient.core.events.EventPool;
 import pkg.exoad.softgradient.core.events.GradientEventPayload;
 import pkg.exoad.softgradient.core.services.AssetsService;
+import pkg.exoad.softgradient.core.services.ColorService;
 import pkg.exoad.softgradient.core.ui.UIAppMainDelegate;
 import pkg.exoad.softgradient.core.ui.UIWindow;
 
+import javax.swing.plaf.ColorUIResource;
 class SoftGradientEntry
 {
 
@@ -62,6 +64,14 @@ class SoftGradientEntry
             UIManager.put(
                         "Button.arc",
                         10
+            );
+            UIManager.put(
+                        "ScrollBar.thumb",
+                        new ColorUIResource(ColorService.hexToColor(SharedConstants.LAF_POPROCK_PRIMARY_1))
+            );
+            UIManager.put(
+                        "ScrollBar.showButtons",
+                        false
             );
             try
             {

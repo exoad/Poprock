@@ -28,10 +28,4 @@ public class UILabelDelegate
             rootDelegate.setForeground(color);
             return this;
       }
-
-      public UILabelDelegate withBackgroundColor(Color color)
-      {
-            rootDelegate.setBackground(color);
-            return this;
-      }
 }

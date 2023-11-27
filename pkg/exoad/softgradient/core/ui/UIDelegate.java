@@ -3,6 +3,8 @@ package pkg.exoad.softgradient.core.ui;
 import javax.swing.JComponent;
 import javax.swing.BorderFactory;
 
+import java.awt.Color;
+
 public class UIDelegate< T extends JComponent >
 {
       protected T rootDelegate;
@@ -34,5 +36,11 @@ public class UIDelegate< T extends JComponent >
                         padding,
                         padding
             );
+      }
+
+      public UIDelegate< T > withBackgroundColor(Color color)
+      {
+            rootDelegate.setBackground(color);
+            return this;
       }
 }

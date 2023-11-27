@@ -1,15 +1,16 @@
 package pkg.exoad.softgradient.core.ui;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Color;
+import javax.swing.BoxLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import pkg.exoad.softgradient.core.SharedConstants;
-import pkg.exoad.softgradient.core.debug.UIDebugPanelFakeDelegate;
 import pkg.exoad.softgradient.core.events.EventPool;
 import pkg.exoad.softgradient.core.events.GradientEventPayload;
 import pkg.exoad.softgradient.core.services.ColorService;
@@ -39,17 +40,17 @@ class UIControllerDisplayChild
                   setLayout(new BorderLayout());
                   add(
                               UILabelDelegate.make(name)
-                                             .withBackgroundColor(
-                                                         ColorService.hexToColor(
-                                                                     SharedConstants.LAF_POPROCK_PRIMARY_1
-                                                         )
-                                             )
                                              .withForegroundColor(
                                                          ColorService.hexToColor(
                                                                      SharedConstants.LAF_POPROCK_BG_FG
                                                          )
                                              )
                                              .withPadding(4)
+                                             .withBackgroundColor(
+                                                         ColorService.hexToColor(
+                                                                     SharedConstants.LAF_POPROCK_PRIMARY_1
+                                                         )
+                                             )
                                              .asComponent(),
                               BorderLayout.NORTH
                   );
@@ -57,18 +58,44 @@ class UIControllerDisplayChild
                               delegate.asComponent(),
                               BorderLayout.CENTER
                   );
-
+                  setAlignmentX(Component.LEFT_ALIGNMENT);
+                  setAlignmentY(Component.TOP_ALIGNMENT);
+                  setAutoscrolls(true);
+                  setMaximumSize(
+                              new Dimension(
+                                          Integer.MAX_VALUE,
+                                          getPreferredSize().height
+                              )
+                  );
+                  setDoubleBuffered(true);
             }
       }
 
       private JScrollPane scrollPane;
+      private JPanel scrollContentPane;
       private JPanel bottomButtonsPanel;
+
+      private synchronized void insertNewBlock(InnerControllerBlock block)
+      {
+            scrollContentPane.add(block);
+            scrollContentPane.revalidate();
+            scrollContentPane.repaint();
+      }
 
       public UIControllerDisplayChild()
       {
             setBorder(BorderFactory.createEmptyBorder());
-            scrollPane=new JScrollPane();
+            scrollContentPane=new JPanel(true);
+            scrollContentPane.setLayout(
+                        new BoxLayout(
+                                    scrollContentPane,
+                                    BoxLayout.Y_AXIS
+                        )
+            );
+            scrollPane=new JScrollPane(scrollContentPane);
             scrollPane.setBorder(BorderFactory.createEmptyBorder());
+            scrollPane.getVerticalScrollBar()
+                      .setUnitIncrement(SharedConstants.CONTROLLER_SCROLLBAR_UNIT_INCREMENT);
             setLayout(new BorderLayout());
             add(
                         scrollPane,
@@ -82,27 +109,27 @@ class UIControllerDisplayChild
                                                                       0
                                                           )
                                               )
-
                                               .withComponent(
                                                           UIButtonDelegate.make()
                                                                           .withText("New")
-                                                                          .withBackgroundColor(
-                                                                                      ColorService.hexToColor(
-                                                                                                  SharedConstants.LAF_POPROCK_PRIMARY_2
-                                                                                      )
-                                                                          )
                                                                           .withAction(
                                                                                       ()->EventPool.dispatchEvent(
                                                                                                   GradientEventPayload.class,
                                                                                                   GradientEventPayload.EMPTY
                                                                                       )
                                                                           )
+                                                                          .withBackgroundColor(
+                                                                                      ColorService.hexToColor(
+                                                                                                  SharedConstants.LAF_POPROCK_PRIMARY_2
+                                                                                      )
+                                                                          )
+
                                               )
                                               .withComponent(
                                                           UIButtonDelegate.make()
                                                                           .withText("TEST")
                                                                           .withAction(()-> {
-                                                                                scrollPane.add(
+                                                                                insertNewBlock(
                                                                                             InnerControllerBlock.make(
                                                                                                         "Amogus",
                                                                                                         UIButtonDelegate.make()
