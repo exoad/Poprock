@@ -67,5 +67,8 @@ public final class UIAppMainDelegate
                                                 extends
                                                 JPanel
       {
+            public GradientDisplayChild()
+            {
+            }
       }
 }
