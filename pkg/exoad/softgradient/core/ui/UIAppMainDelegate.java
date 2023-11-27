@@ -1,7 +1,9 @@
 package pkg.exoad.softgradient.core.ui;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
@@ -9,7 +11,6 @@ import javax.swing.JSplitPane;
 import pkg.exoad.softgradient.core.ColorObj;
 import pkg.exoad.softgradient.core.GradientColor;
 import pkg.exoad.softgradient.core.SharedConstants;
-import pkg.exoad.softgradient.core.debug.UIDebugPanelDelegate;
 import pkg.exoad.softgradient.core.events.EventPool;
 import pkg.exoad.softgradient.core.events.GradientEventPayload;
 
@@ -24,17 +25,13 @@ public final class UIAppMainDelegate
             rootDelegate.setDividerLocation(0.5);
             rootDelegate.setResizeWeight(0.0);
             rootDelegate.setContinuousLayout(true);
-            UIDebugPanelDelegate left=new UIDebugPanelDelegate(
-                        Color.RED
-            );
-            left.setPreferredSize(
-                        new java.awt.Dimension(
-                                    SharedConstants.WINDOW_WIDTH/2,
-                                    SharedConstants.WINDOW_HEIGHT
-                        )
-            );
+
             rootDelegate.setLeftComponent(
-                        left
+                        UIPadding.wrapAllSides(
+                                    new GradientDisplayChild(),
+                                    SharedConstants.GRADIENT_WINDOW_PADDING
+                        )
+                                 .asComponent()
             );
             rootDelegate.setRightComponent(
                         UIPanelDelegate.make()
@@ -45,10 +42,17 @@ public final class UIAppMainDelegate
                                                                    .withAction(
                                                                                ()->EventPool.dispatchEvent(
                                                                                            GradientEventPayload.class,
-                                                                                           new GradientColor(
-                                                                                                       ColorObj.randomColorObj(),
-                                                                                                       1f,
-                                                                                                       0.5f
+                                                                                           new GradientEventPayload(
+                                                                                                       new GradientColor[] {
+                                                                                                                            new GradientColor(
+                                                                                                                                        ColorObj.randomColorObj(),
+                                                                                                                                        1.0f
+                                                                                                                            )
+                                                                                                       },
+                                                                                                       0.0f,
+                                                                                                       0.0f,
+                                                                                                       1.0f,
+                                                                                                       1.0f
                                                                                            )
                                                                                )
                                                                    )
@@ -69,6 +73,55 @@ public final class UIAppMainDelegate
       {
             public GradientDisplayChild()
             {
+                  EventPool.attachListener(
+                              GradientEventPayload.class,
+                              this::repaint
+                  );
+            }
+
+            @Override public void paintComponent(Graphics g)
+            {
+                  super.paintComponent(g);
+                  Graphics2D g2=(Graphics2D)g;
+                  g2.setRenderingHint(
+                              RenderingHints.KEY_ANTIALIASING,
+                              RenderingHints.VALUE_ANTIALIAS_ON
+                  );
+                  if(EventPool.getPayload(GradientEventPayload.class)!=null)
+                  {
+                        GradientEventPayload e=(GradientEventPayload)EventPool.getPayload(GradientEventPayload.class);
+                        g.setColor(
+                                    e.colors()[0].color()
+                                                 .asAwt()
+                        );
+                        g.fillRoundRect(
+                                    (getWidth()-Math.min(
+                                                getWidth(),
+                                                getHeight()
+                                    ))/2,
+                                    (getHeight()-Math.min(
+                                                getWidth(),
+                                                getHeight()
+                                    ))/2,
+                                    Math.min(
+                                                getWidth(),
+                                                getHeight()
+                                    ),
+                                    Math.min(
+                                                getWidth(),
+                                                getHeight()
+                                    ),
+                                    (int)(Math.min(
+                                                getWidth(),
+                                                getHeight()
+                                    )*SharedConstants.ROUND_RECT_ARC),
+                                    (int)(Math.min(
+                                                getWidth(),
+                                                getHeight()
+                                    )*SharedConstants.ROUND_RECT_ARC)
+                        );
+                  }
+                  g.dispose();
             }
       }
 }

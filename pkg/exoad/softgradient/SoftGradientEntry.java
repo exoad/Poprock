@@ -3,8 +3,9 @@ package pkg.exoad.softgradient;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import com.formdev.flatlaf.intellijthemes.FlatCarbonIJTheme;
+import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatArcDarkIJTheme;
 
+import pkg.exoad.softgradient.core.AssetsFetcher;
 import pkg.exoad.softgradient.core.ColorObj;
 import pkg.exoad.softgradient.core.SharedConstants;
 import pkg.exoad.softgradient.core.events.EventPool;
@@ -12,8 +13,9 @@ import pkg.exoad.softgradient.core.events.GradientEventPayload;
 import pkg.exoad.softgradient.core.ui.UIAppMainDelegate;
 import pkg.exoad.softgradient.core.ui.UIWindow;
 
-public class SoftGradientEntry
+class SoftGradientEntry
 {
+
       static
       {
             System.setProperty(
@@ -64,9 +66,7 @@ public class SoftGradientEntry
 
             try
             {
-                  UIManager.setLookAndFeel(
-                              new FlatCarbonIJTheme()
-                  );
+                  UIManager.setLookAndFeel(new FlatArcDarkIJTheme());
             } catch(UnsupportedLookAndFeelException e)
             {
                   e.printStackTrace();
@@ -92,6 +92,7 @@ public class SoftGradientEntry
                                 SharedConstants.WINDOW_WIDTH,
                                 SharedConstants.WINDOW_HEIGHT
                     )
+                    .withIcon(AssetsFetcher.fetchImageIcon("assets/app-icon.png"))
                     .withMinSize(
                                 SharedConstants.WINDOW_WIDTH,
                                 SharedConstants.WINDOW_HEIGHT

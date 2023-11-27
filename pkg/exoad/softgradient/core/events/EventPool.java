@@ -36,7 +36,17 @@ public final class EventPool
             );
       }
 
-      public static void dispatchEvent(Class< ? extends EventPayload > id,Object payload)
+      public static Object getPayload(Class< ? extends EventPayload > id)
+      {
+            if(payloads.containsKey(id))
+                  return payloads.get(id)
+                                 .second();
+            else throw new RuntimeException(
+                        "Payload fetch failed: No such event exists with the given id: "+id.getCanonicalName()
+            );
+      }
+
+      public static < T extends EventPayload > void dispatchEvent(Class< T > id,T payload)
       {
             if(payload==null)
                   throw new RuntimeException(

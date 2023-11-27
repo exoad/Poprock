@@ -1,6 +1,11 @@
 package pkg.exoad.softgradient.core;
 
-public final record GradientColor(ColorObj color,float coverage,float startingOpacity)
-{
+import java.awt.Color;
 
+public final record GradientColor(ColorObj color,float fraction)
+{
+      public Color asAwt()
+      {
+            return color.asAwt();
+      }
 }
