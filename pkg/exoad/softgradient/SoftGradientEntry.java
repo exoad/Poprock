@@ -3,7 +3,7 @@ package pkg.exoad.softgradient;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatArcDarkIJTheme;
+import com.formdev.flatlaf.intellijthemes.FlatHighContrastIJTheme;
 
 import pkg.exoad.softgradient.core.AssetsFetcher;
 import pkg.exoad.softgradient.core.ColorObj;
@@ -11,6 +11,7 @@ import pkg.exoad.softgradient.core.SharedConstants;
 import pkg.exoad.softgradient.core.events.EventPool;
 import pkg.exoad.softgradient.core.events.GradientEventPayload;
 import pkg.exoad.softgradient.core.ui.UIAppMainDelegate;
+import pkg.exoad.softgradient.core.ui.UIPadding;
 import pkg.exoad.softgradient.core.ui.UIWindow;
 
 class SoftGradientEntry
@@ -44,10 +45,6 @@ class SoftGradientEntry
                         true
             );
             UIManager.put(
-                        "SplitPaneDivider.gripDotCount",
-                        4
-            );
-            UIManager.put(
                         "Component.focusedBorderColor",
                         ColorObj.TRANSPARENT
             );
@@ -63,10 +60,13 @@ class SoftGradientEntry
                         "TabbedPane.showTabSeparators",
                         true
             );
-
+            UIManager.put(
+                        "Button.arc",
+                        10
+            );
             try
             {
-                  UIManager.setLookAndFeel(new FlatArcDarkIJTheme());
+                  UIManager.setLookAndFeel(new FlatHighContrastIJTheme());
             } catch(UnsupportedLookAndFeelException e)
             {
                   e.printStackTrace();
@@ -97,7 +97,12 @@ class SoftGradientEntry
                                 SharedConstants.WINDOW_WIDTH,
                                 SharedConstants.WINDOW_HEIGHT
                     )
-                    .withMainDelegate(new UIAppMainDelegate())
+                    .withMainDelegate(
+                                UIPadding.wrapAllSides(
+                                            new UIAppMainDelegate().asComponent(),
+                                            SharedConstants.GRADIENT_WINDOW_PADDING
+                                )
+                    )
                     .run();
       }
 }

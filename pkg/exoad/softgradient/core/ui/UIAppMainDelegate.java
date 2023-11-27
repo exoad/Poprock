@@ -4,12 +4,14 @@ import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.FlowLayout;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 
-import pkg.exoad.softgradient.core.ColorObj;
-import pkg.exoad.softgradient.core.GradientColor;
+import pkg.exoad.softgradient.core.BasicService;
 import pkg.exoad.softgradient.core.SharedConstants;
 import pkg.exoad.softgradient.core.events.EventPool;
 import pkg.exoad.softgradient.core.events.GradientEventPayload;
@@ -25,46 +27,69 @@ public final class UIAppMainDelegate
             rootDelegate.setDividerLocation(0.5);
             rootDelegate.setResizeWeight(0.0);
             rootDelegate.setContinuousLayout(true);
-
-            rootDelegate.setLeftComponent(
-                        UIPadding.wrapAllSides(
-                                    new GradientDisplayChild(),
-                                    SharedConstants.GRADIENT_WINDOW_PADDING
-                        )
-                                 .asComponent()
-            );
-            rootDelegate.setRightComponent(
-                        UIPanelDelegate.make()
-                                       .withLayout(new BorderLayout())
-                                       .withComponent(
-                                                   UIButtonDelegate.make()
-                                                                   .withText("Random Color")
-                                                                   .withAction(
-                                                                               ()->EventPool.dispatchEvent(
-                                                                                           GradientEventPayload.class,
-                                                                                           new GradientEventPayload(
-                                                                                                       new GradientColor[] {
-                                                                                                                            new GradientColor(
-                                                                                                                                        ColorObj.randomColorObj(),
-                                                                                                                                        1.0f
-                                                                                                                            )
-                                                                                                       },
-                                                                                                       0.0f,
-                                                                                                       0.0f,
-                                                                                                       1.0f,
-                                                                                                       1.0f
-                                                                                           )
-                                                                               )
-                                                                   )
-                                       )
-                                       .asComponent()
-            );
+            rootDelegate.setLeftComponent(new GradientDisplayChild());
+            rootDelegate.setRightComponent(new ControllerDisplayChild());
 
             rootDelegate.getLeftComponent()
                         .setMinimumSize(
                                     rootDelegate.getLeftComponent()
                                                 .getPreferredSize()
                         );
+      }
+
+      private static class ControllerDisplayChild
+                                                  extends
+                                                  JPanel
+      {
+            private JScrollPane scrollPane;
+            private JPanel bottomButtonsPanel;
+
+            public ControllerDisplayChild()
+            {
+                  setBorder(BorderFactory.createEmptyBorder());
+                  scrollPane=new JScrollPane();
+                  scrollPane.setBorder(BorderFactory.createEmptyBorder());
+                  setLayout(new BorderLayout());
+                  add(
+                              scrollPane,
+                              BorderLayout.CENTER
+                  );
+                  bottomButtonsPanel=UIPanelDelegate.make()
+                                                    .withLayout(
+                                                                new FlowLayout(
+                                                                            FlowLayout.RIGHT,
+                                                                            6,
+                                                                            0
+                                                                )
+                                                    )
+
+                                                    .withComponent(
+                                                                UIButtonDelegate.make()
+                                                                                .withText("New")
+                                                                                .withBackgroundColor(
+                                                                                            BasicService.hexToColor(
+                                                                                                        SharedConstants.LAF_POPROCK_PRIMARY_2
+                                                                                            )
+                                                                                )
+                                                                                .withAction(
+                                                                                            ()->EventPool.dispatchEvent(
+                                                                                                        GradientEventPayload.class,
+                                                                                                        GradientEventPayload.EMPTY
+                                                                                            )
+                                                                                )
+                                                    )
+                                                    .withComponent(
+                                                                UIButtonDelegate.make()
+                                                                                .withText("Render")
+                                                                // TODO: Add action
+                                                    )
+                                                    .asComponent();
+                  add(
+                              bottomButtonsPanel,
+                              BorderLayout.SOUTH
+                  );
+
+            }
       }
 
       private static class GradientDisplayChild
@@ -87,7 +112,12 @@ public final class UIAppMainDelegate
                               RenderingHints.KEY_ANTIALIASING,
                               RenderingHints.VALUE_ANTIALIAS_ON
                   );
-                  if(EventPool.getPayload(GradientEventPayload.class)!=null)
+                  if(EventPool.getPayload(GradientEventPayload.class)!=null&&!EventPool.getPayload(
+                              GradientEventPayload.class
+                  )
+                                                                                       .equals(
+                                                                                                   GradientEventPayload.EMPTY
+                                                                                       ))
                   {
                         GradientEventPayload e=(GradientEventPayload)EventPool.getPayload(GradientEventPayload.class);
                         g.setColor(
@@ -119,6 +149,16 @@ public final class UIAppMainDelegate
                                                 getWidth(),
                                                 getHeight()
                                     )*SharedConstants.ROUND_RECT_ARC)
+                        );
+                  }
+                  else
+                  {
+                        g.setColor(BasicService.hexToColor(SharedConstants.LAF_POPROCK_BG_FG));
+                        g.fillRect(
+                                    0,
+                                    0,
+                                    getWidth(),
+                                    getHeight()
                         );
                   }
                   g.dispose();

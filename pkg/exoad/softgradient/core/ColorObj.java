@@ -105,6 +105,18 @@ public class ColorObj
             return color;
       }
 
+      public static ColorObj generate(float saturation,float brightness)
+      {
+            float hue=SharedConstants.RNG.nextFloat();
+            return new ColorObj(
+                        Color.getHSBColor(
+                                    hue*360,
+                                    saturation,
+                                    brightness
+                        )
+            );
+      }
+
       public static ColorObj randomColorObj()
       {
             return new ColorObj(

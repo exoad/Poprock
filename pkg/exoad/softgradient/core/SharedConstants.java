@@ -14,5 +14,10 @@ public final class SharedConstants
       public static final int GRADIENT_WINDOW_PADDING=10;
       public static final float ROUND_RECT_ARC=0.02f;
 
+      public static final String LAF_POPROCK_PRIMARY_1="#ff2667";
+      public static final String LAF_POPROCK_PRIMARY_2="#17ff6c";
+      public static final String LAF_POPROCK_PRIMARY_3="#fab916";
+      public static final String LAF_POPROCK_BG_FG="#000000";
+
       public static final Random RNG=new Random();
 }
