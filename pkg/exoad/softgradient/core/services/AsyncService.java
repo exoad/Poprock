@@ -1,4 +1,4 @@
-package pkg.exoad.softgradient.core;
+package pkg.exoad.softgradient.core.services;
 
 import java.util.Timer;
 import java.util.concurrent.ExecutorService;

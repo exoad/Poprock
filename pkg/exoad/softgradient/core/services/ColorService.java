@@ -1,21 +1,11 @@
-package pkg.exoad.softgradient.core;
+package pkg.exoad.softgradient.core.services;
 
 import java.awt.Color;
-import java.util.Collection;
 
-public final class BasicService
+public final class ColorService
 {
-      private BasicService()
+      private ColorService()
       {
-      }
-
-      public static boolean containsClass(Collection< Class< ? > > classes,Class< ? > clazz)
-      {
-            for(Class< ? > c : classes)
-                  if(c.getCanonicalName()
-                      .equals(clazz.getCanonicalName()))
-                        return true;
-            return false;
       }
 
       public static Color hexToColor(String hex)
@@ -42,6 +32,15 @@ public final class BasicService
                                     ),
                                     16
                         )
+            );
+      }
+
+      public static Color invertColor(Color r)
+      {
+            return new Color(
+                        255-r.getRed(),
+                        255-r.getGreen(),
+                        255-r.getBlue()
             );
       }
 }

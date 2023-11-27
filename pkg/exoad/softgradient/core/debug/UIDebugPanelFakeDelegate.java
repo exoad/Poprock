@@ -5,13 +5,13 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
-public class UIDebugPanelDelegate
+public class UIDebugPanelFakeDelegate
                                   extends
                                   JPanel
 {
       private Color color;
 
-      public UIDebugPanelDelegate(Color c)
+      public UIDebugPanelFakeDelegate(Color c)
       {
             this.color=c;
       }

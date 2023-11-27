@@ -1,4 +1,4 @@
-package pkg.exoad.softgradient.core;
+package pkg.exoad.softgradient.core.services;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -9,7 +9,7 @@ import java.util.WeakHashMap;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
-public class AssetsFetcher
+public class AssetsService
 {
       private static WeakHashMap< String, Object > cache;
 
@@ -28,7 +28,7 @@ public class AssetsFetcher
             ImageIcon res;
             try
             {
-                  res=new ImageIcon(Objects.requireNonNull(AssetsFetcher.class.getResource(path)));
+                  res=new ImageIcon(Objects.requireNonNull(AssetsService.class.getResource(path)));
             } catch(NullPointerException e)
             {
                   res=new ImageIcon(path);
@@ -48,7 +48,7 @@ public class AssetsFetcher
             BufferedImage res;
             try
             {
-                  res=ImageIO.read(Objects.requireNonNull(AssetsFetcher.class.getResource(path)));
+                  res=ImageIO.read(Objects.requireNonNull(AssetsService.class.getResource(path)));
             } catch(IOException e)
             {
                   try

@@ -4,8 +4,8 @@ import java.awt.Color;
 
 import javax.swing.JButton;
 
-import pkg.exoad.softgradient.core.BasicService;
 import pkg.exoad.softgradient.core.SharedConstants;
+import pkg.exoad.softgradient.core.services.ColorService;
 
 public final class UIButtonDelegate
                                     extends
@@ -21,8 +21,8 @@ public final class UIButtonDelegate
             rootDelegate=new JButton();
             rootDelegate.setFocusPainted(false);
             rootDelegate.setBorderPainted(false);
-            withBackgroundColor(BasicService.hexToColor(SharedConstants.LAF_POPROCK_PRIMARY_1)).withForegroundColor(
-                        BasicService.hexToColor(SharedConstants.LAF_POPROCK_BG_FG)
+            withBackgroundColor(ColorService.hexToColor(SharedConstants.LAF_POPROCK_PRIMARY_1)).withForegroundColor(
+                        ColorService.hexToColor(SharedConstants.LAF_POPROCK_BG_FG)
             );
       }
 

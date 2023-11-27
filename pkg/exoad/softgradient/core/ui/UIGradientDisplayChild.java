@@ -6,10 +6,10 @@ import java.awt.RenderingHints;
 
 import javax.swing.JPanel;
 
-import pkg.exoad.softgradient.core.BasicService;
 import pkg.exoad.softgradient.core.SharedConstants;
 import pkg.exoad.softgradient.core.events.EventPool;
 import pkg.exoad.softgradient.core.events.GradientEventPayload;
+import pkg.exoad.softgradient.core.services.ColorService;
 
 class UIGradientDisplayChild
                              extends
@@ -72,7 +72,7 @@ class UIGradientDisplayChild
             }
             else
             {
-                  g.setColor(BasicService.hexToColor(SharedConstants.LAF_POPROCK_BG_FG));
+                  g.setColor(ColorService.hexToColor(SharedConstants.LAF_POPROCK_BG_FG));
                   g.fillRect(
                               0,
                               0,

@@ -5,13 +5,12 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 import com.formdev.flatlaf.intellijthemes.FlatHighContrastIJTheme;
 
-import pkg.exoad.softgradient.core.AssetsFetcher;
 import pkg.exoad.softgradient.core.ColorObj;
 import pkg.exoad.softgradient.core.SharedConstants;
 import pkg.exoad.softgradient.core.events.EventPool;
 import pkg.exoad.softgradient.core.events.GradientEventPayload;
+import pkg.exoad.softgradient.core.services.AssetsService;
 import pkg.exoad.softgradient.core.ui.UIAppMainDelegate;
-import pkg.exoad.softgradient.core.ui.UIPadding;
 import pkg.exoad.softgradient.core.ui.UIWindow;
 
 class SoftGradientEntry
@@ -92,17 +91,12 @@ class SoftGradientEntry
                                 SharedConstants.WINDOW_WIDTH,
                                 SharedConstants.WINDOW_HEIGHT
                     )
-                    .withIcon(AssetsFetcher.fetchImageIcon("assets/app-icon.png"))
+                    .withIcon(AssetsService.fetchImageIcon("assets/app-icon.png"))
                     .withMinSize(
                                 SharedConstants.WINDOW_WIDTH,
                                 SharedConstants.WINDOW_HEIGHT
                     )
-                    .withMainDelegate(
-                                UIPadding.wrapAllSides(
-                                            new UIAppMainDelegate().asComponent(),
-                                            SharedConstants.GRADIENT_WINDOW_PADDING
-                                )
-                    )
+                    .withMainDelegate(new UIAppMainDelegate().withPadding(SharedConstants.GRADIENT_WINDOW_PADDING))
                     .run();
       }
 }
