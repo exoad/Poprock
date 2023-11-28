@@ -4,8 +4,6 @@ import java.awt.LayoutManager;
 
 import javax.swing.JPanel;
 
-import pkg.exoad.softgradient.core.SharedConstants;
-
 import java.awt.*;
 import java.util.Optional;
 import java.util.function.Supplier;
@@ -29,19 +27,9 @@ public final class UIPanelDelegate
             {
                   @Override public void paintComponent(Graphics g)
                   {
-                        if(SharedConstants.LAYOUT_DEBUG_MODE)
-                        {
-                              g.setColor(Color.pink);
-                              g.fillRect(
-                                          0,
-                                          0,
-                                          getPreferredSize().width,
-                                          getPreferredSize().height
-                              );
-                        }
+                        super.paintComponent(g);
                         if(paintDelegate!=null)
                               paintDelegate.accept((Graphics2D)g);
-                        super.paintComponent(g);
                         g.dispose();
                   }
             };

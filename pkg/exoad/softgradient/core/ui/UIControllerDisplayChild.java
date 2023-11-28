@@ -21,7 +21,6 @@ class UIControllerDisplayChild
       private JScrollPane scrollPane;
       private JPanel bottomButtonsPanel;
 
-
       public UIControllerDisplayChild()
       {
             setBorder(BorderFactory.createEmptyBorder());

@@ -67,10 +67,6 @@ class SoftGradientEntry
                         "ScrollBar.thumb",
                         new ColorUIResource(ColorService.hexToColor(SharedConstants.LAF_POPROCK_PRIMARY_1))
             );
-            UIManager.put(
-                        "ScrollBar.showButtons",
-                        false
-            );
             try
             {
                   UIManager.setLookAndFeel(new FlatHighContrastIJTheme());
@@ -104,7 +100,7 @@ class SoftGradientEntry
                                 SharedConstants.WINDOW_WIDTH,
                                 SharedConstants.WINDOW_HEIGHT
                     )
-                    .withMainDelegate(new UIAppMainDelegate().withPadding(SharedConstants.GRADIENT_WINDOW_PADDING))
+                    .withMainDelegate(new UIAppMainDelegate())
                     .run();
       }
 }

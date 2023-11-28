@@ -1,6 +1,9 @@
 package pkg.exoad.softgradient.core.ui;
 
 import javax.swing.JComponent;
+
+import java.awt.Dimension;
+
 import javax.swing.BorderFactory;
 
 public class UIDelegate< T extends JComponent >
@@ -34,5 +37,16 @@ public class UIDelegate< T extends JComponent >
                         padding,
                         padding
             );
+      }
+
+      public UIDelegate< T > withPreferredSize(int width,int height)
+      {
+            rootDelegate.setPreferredSize(
+                        new Dimension(
+                                    width,
+                                    height
+                        )
+            );
+            return this;
       }
 }
