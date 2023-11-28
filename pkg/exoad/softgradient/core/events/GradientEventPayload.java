@@ -2,6 +2,7 @@ package pkg.exoad.softgradient.core.events;
 
 import java.util.Arrays;
 
+import pkg.exoad.softgradient.core.ColorObj;
 import pkg.exoad.softgradient.core.GradientColor;
 
 public final record GradientEventPayload(GradientColor[] colors,float startX,float startY,float endX,float endY)
@@ -16,6 +17,20 @@ public final record GradientEventPayload(GradientColor[] colors,float startX,flo
                   -1,
                   -1
       );
+
+      public static GradientEventPayload makeRandomColor()
+      {
+            return new GradientEventPayload(
+                        new GradientColor[] {new GradientColor(
+                                    ColorObj.randomColorObj(),
+                                    1f
+                        )},
+                        0,
+                        0,
+                        1f,
+                        1f
+            );
+      }
 
       @Override public boolean equals(Object obj)
       {
@@ -50,7 +65,8 @@ public final record GradientEventPayload(GradientColor[] colors,float startX,flo
 
       @Override public String toString()
       {
-            return "GradientEventPayload [colors="+colors+", startX="+startX+", startY="+startY+", endX="+endX+", endY="
+            return "GradientEventPayload [colors="+Arrays.toString(colors)+", startX="+startX+", startY="+startY
+                        +", endX="+endX+", endY="
                         +endY+"]";
       }
 }

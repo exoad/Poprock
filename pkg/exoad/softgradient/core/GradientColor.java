@@ -8,4 +8,13 @@ public final record GradientColor(ColorObj color,float fraction)
       {
             return color.asAwt();
       }
+
+      @Override public String toString()
+      {
+            return String.format(
+                        "ColorObj{color=%s,fraction=%f}",
+                        color,
+                        fraction
+            );
+      }
 }

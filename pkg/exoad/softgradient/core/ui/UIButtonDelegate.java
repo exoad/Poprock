@@ -21,9 +21,14 @@ public final class UIButtonDelegate
             rootDelegate=new JButton();
             rootDelegate.setFocusPainted(false);
             rootDelegate.setBorderPainted(false);
-            withBackgroundColor(ColorService.hexToColor(SharedConstants.LAF_POPROCK_PRIMARY_1));
             withForegroundColor(
-                        ColorService.hexToColor(SharedConstants.LAF_POPROCK_BG_FG)
+                        ColorService.hexToColor(
+                                    SharedConstants.LAF_POPROCK_BG_FG
+                        )
+            ).withBackgroundColor(
+                        ColorService.hexToColor(
+                                    SharedConstants.LAF_POPROCK_PRIMARY_1
+                        )
             );
       }
 
@@ -36,6 +41,12 @@ public final class UIButtonDelegate
       public UIButtonDelegate withForegroundColor(Color color)
       {
             rootDelegate.setForeground(color);
+            return this;
+      }
+
+      public UIButtonDelegate withBackgroundColor(Color color)
+      {
+            rootDelegate.setBackground(color);
             return this;
       }
 

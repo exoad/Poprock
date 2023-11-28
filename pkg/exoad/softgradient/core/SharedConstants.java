@@ -8,6 +8,9 @@ public final class SharedConstants
       {
       }
 
+      public static final boolean DEV_MODE=true;
+      public static final boolean LAYOUT_DEBUG_MODE=true;
+
       public static final int WINDOW_WIDTH=875;
       public static final int WINDOW_HEIGHT=550;
 

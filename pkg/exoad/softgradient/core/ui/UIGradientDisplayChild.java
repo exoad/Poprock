@@ -31,12 +31,8 @@ class UIGradientDisplayChild
                         RenderingHints.KEY_ANTIALIASING,
                         RenderingHints.VALUE_ANTIALIAS_ON
             );
-            if(EventPool.getPayload(GradientEventPayload.class)!=null&&!EventPool.getPayload(
-                        GradientEventPayload.class
-            )
-                                                                                 .equals(
-                                                                                             GradientEventPayload.EMPTY
-                                                                                 ))
+            if(EventPool.getPayload(GradientEventPayload.class)!=null&&!EventPool.getPayload(GradientEventPayload.class)
+                                                                                 .equals(GradientEventPayload.EMPTY))
             {
                   GradientEventPayload e=(GradientEventPayload)EventPool.getPayload(GradientEventPayload.class);
                   g.setColor(

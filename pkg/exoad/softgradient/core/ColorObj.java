@@ -126,4 +126,9 @@ public class ColorObj
             );
       }
 
+      @Override public String toString()
+      {
+            return "ColorObj{r="+color.getRed()+",g="+color.getGreen()+",b="+color.getBlue()+",a="+color.getAlpha()+"}";
+      }
+
 }

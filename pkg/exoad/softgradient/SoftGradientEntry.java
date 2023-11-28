@@ -17,7 +17,6 @@ import pkg.exoad.softgradient.core.ui.UIWindow;
 import javax.swing.plaf.ColorUIResource;
 class SoftGradientEntry
 {
-
       static
       {
             System.setProperty(
@@ -32,7 +31,6 @@ class SoftGradientEntry
                         "flatlaf.menuBarEmbedded",
                         "true"
             );
-
             UIManager.put(
                         "ScrollBar.background",
                         ColorObj.TRANSPARENT
@@ -91,7 +89,7 @@ class SoftGradientEntry
             EventPool.attachListener(
                         GradientEventPayload.class,
                         ()-> {
-                              System.out.println("Event Dispatched");
+                              System.out.println("Event Dispatched: "+EventPool.getPayload(GradientEventPayload.class));
                         }
             );
 

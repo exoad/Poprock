@@ -15,7 +15,6 @@ public final class UIAppMainDelegate
             rootDelegate.setContinuousLayout(true);
             rootDelegate.setLeftComponent(new UIGradientDisplayChild());
             rootDelegate.setRightComponent(new UIControllerDisplayChild());
-
             rootDelegate.getLeftComponent()
                         .setMinimumSize(
                                     rootDelegate.getLeftComponent()
