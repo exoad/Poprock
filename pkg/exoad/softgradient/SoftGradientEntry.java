@@ -88,7 +88,6 @@ class SoftGradientEntry
                               System.out.println("Event Dispatched: "+EventPool.getPayload(GradientEventPayload.class));
                         }
             );
-
             UIWindow.make()
                     .withTitle("SoftGradient ~ exoad")
                     .withSize(
@@ -100,7 +99,9 @@ class SoftGradientEntry
                                 SharedConstants.WINDOW_WIDTH,
                                 SharedConstants.WINDOW_HEIGHT
                     )
-                    .withMainDelegate(new UIAppMainDelegate())
+                    .withMainDelegate(
+                                new UIAppMainDelegate().withPadding(SharedConstants.GRADIENT_WINDOW_PADDING)
+                    )
                     .run();
       }
 }

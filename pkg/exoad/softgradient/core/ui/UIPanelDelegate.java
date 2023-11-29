@@ -3,10 +3,9 @@ package pkg.exoad.softgradient.core.ui;
 import java.awt.LayoutManager;
 
 import javax.swing.JPanel;
-
-import java.awt.*;
-import java.util.Optional;
-import java.util.function.Supplier;
+import javax.swing.BoxLayout;
+import java.awt.Graphics2D;
+import java.awt.Graphics;
 import java.util.function.Consumer;
 
 public final class UIPanelDelegate
@@ -14,12 +13,13 @@ public final class UIPanelDelegate
                                    UIDelegate< JPanel >
 {
 
+      private Consumer< Graphics2D > earlyPaintDelegate;
+      private Consumer< Graphics2D > latePaintDelegate;
+
       public static UIPanelDelegate make()
       {
             return new UIPanelDelegate();
       }
-
-      private Consumer< Graphics2D > paintDelegate;
 
       private UIPanelDelegate()
       {
@@ -27,24 +27,41 @@ public final class UIPanelDelegate
             {
                   @Override public void paintComponent(Graphics g)
                   {
+                        if(earlyPaintDelegate!=null)
+                              earlyPaintDelegate.accept((Graphics2D)g);
                         super.paintComponent(g);
-                        if(paintDelegate!=null)
-                              paintDelegate.accept((Graphics2D)g);
-                        g.dispose();
+                        if(latePaintDelegate!=null)
+                              latePaintDelegate.accept((Graphics2D)g);
                   }
             };
+      }
 
+      public UIPanelDelegate withBoxLayout(int axis)
+      {
+            rootDelegate.setLayout(
+                        new BoxLayout(
+                                    rootDelegate,
+                                    axis
+                        )
+            );
+            return this;
+      }
+
+      public UIPanelDelegate withLatePaintDelegate(Consumer< Graphics2D > paintDelegate)
+      {
+            this.latePaintDelegate=paintDelegate;
+            return this;
+      }
+
+      public UIPanelDelegate withEarlyPaintDelegate(Consumer< Graphics2D > paintDelegate)
+      {
+            this.earlyPaintDelegate=paintDelegate;
+            return this;
       }
 
       public UIPanelDelegate withLayout(LayoutManager layout)
       {
             rootDelegate.setLayout(layout);
-            return this;
-      }
-
-      public UIPanelDelegate withPaintDelegate(Consumer< Graphics2D > paintDelegate)
-      {
-            this.paintDelegate=paintDelegate;
             return this;
       }
 
@@ -63,10 +80,10 @@ public final class UIPanelDelegate
             return this;
       }
 
-      public UIPanelDelegate withComponentBuilder(Supplier< Optional< UIDelegate< ? > > > components)
+      public UIPanelDelegate withComponentIf(boolean condition,UIDelegate< ? > component)
       {
-            components.get()
-                      .ifPresent(c->rootDelegate.add(c.asComponent()));
+            if(condition)
+                  rootDelegate.add(component.asComponent());
             return this;
       }
 }
