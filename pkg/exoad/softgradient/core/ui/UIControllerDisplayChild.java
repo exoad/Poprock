@@ -1,6 +1,7 @@
 package pkg.exoad.softgradient.core.ui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Component;
 import javax.swing.BoxLayout;
@@ -138,10 +139,11 @@ class UIControllerDisplayChild
                                                                                 insertNewBlock(
                                                                                             InnerControllerBlock.make(
                                                                                                         "Amogus",
-                                                                                                        UIButtonDelegate.make()
-                                                                                                                        .withText(
-                                                                                                                                    "Yes"
-                                                                                                                        )
+                                                                                                        new UIControllerDelegateChilds.WindowSetupChildBlock().withBorder(
+                                                                                                                    UIHelper.makeLinedBorder(
+                                                                                                                                Color.white
+                                                                                                                    )
+                                                                                                        )
                                                                                             )
                                                                                 );
                                                                           })
