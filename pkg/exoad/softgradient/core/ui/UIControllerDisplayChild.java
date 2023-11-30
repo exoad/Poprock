@@ -4,16 +4,20 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Component;
-import javax.swing.BoxLayout;
+import java.awt.RenderingHints;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 
 import pkg.exoad.softgradient.core.SharedConstants;
 import pkg.exoad.softgradient.core.events.EventPool;
 import pkg.exoad.softgradient.core.events.GradientEventPayload;
 import pkg.exoad.softgradient.core.services.ColorService;
+import pkg.exoad.softgradient.core.ui.UIControllerDelegateChilds.UIControllerDelegate;
+import pkg.exoad.softgradient.core.ui.UIDelegate.Alignment;
+import pkg.exoad.softgradient.core.ui.UIPanelDelegate.BoxLayoutAlignment;
 
 class UIControllerDisplayChild
                                extends
@@ -23,33 +27,40 @@ class UIControllerDisplayChild
                                                       extends
                                                       JPanel
       {
-            public static InnerControllerBlock make(String name,UIDelegate< ? > delegate)
+            public static InnerControllerBlock make(IControllerDelegate delegate)
             {
                   return new InnerControllerBlock(
-                              name,
+                              delegate.getHeaderName(),
                               delegate
                   );
             }
 
-            private InnerControllerBlock(String name,UIDelegate< ? > delegate)
+            private InnerControllerBlock(String name,UIBasicDelegate< ? > delegate)
             {
-                  setBorder(BorderFactory.createEmptyBorder());
+                  setBorder(UIHelper.makeEmptyBorder());
                   setLayout(new BorderLayout());
                   add(
-
                               UIPanelDelegate.make()
-                                             .withEarlyPaintDelegate(
+                                             .withBoxLayout(BoxLayoutAlignment.Y_AXIS)
+                                             .withLatePaintDelegate(
                                                          g-> {
+                                                               g.setRenderingHint(
+                                                                           RenderingHints.KEY_ANTIALIASING,
+                                                                           RenderingHints.VALUE_ANTIALIAS_ON
+                                                               );
                                                                g.setColor(
                                                                            ColorService.hexToColor(
                                                                                        SharedConstants.LAF_POPROCK_PRIMARY_1
                                                                            )
                                                                );
-                                                               g.fillRect(
-                                                                           0,
-                                                                           0,
-                                                                           getPreferredSize().width,
-                                                                           getPreferredSize().height
+                                                               g.fillRoundRect(
+                                                                           SharedConstants.CONTROLLER_BLOCKS_PADDING,
+                                                                           SharedConstants.CONTROLLER_BLOCKS_PADDING,
+                                                                           getWidth()-SharedConstants.CONTROLLER_BLOCKS_PADDING,
+                                                                           getHeight()-SharedConstants.CONTROLLER_BLOCKS_PADDING,
+                                                                           6,
+                                                                           6
+
                                                                );
                                                          }
                                              )
@@ -57,19 +68,23 @@ class UIControllerDisplayChild
                                                          UILabelDelegate.make(name)
                                                                         .withForegroundColor(
                                                                                     ColorService.hexToColor(
-                                                                                                SharedConstants.LAF_POPROCK_PRIMARY_1
+                                                                                                SharedConstants.LAF_POPROCK_BG_FG
                                                                                     )
                                                                         )
                                                                         .withPadding(4)
+                                                                        .withTransparency(true)
+                                                                        .withAlignmentX(Alignment.LEFT)
+                                             )
+                                             .withComponent(delegate)
+                                             .withPadding(
+                                                         SharedConstants.CONTROLLER_BLOCKS_PADDING-2,
+                                                         SharedConstants.CONTROLLER_BLOCKS_PADDING+5,
+                                                         SharedConstants.CONTROLLER_BLOCKS_PADDING-5,
+                                                         SharedConstants.CONTROLLER_BLOCKS_PADDING+5
                                              )
                                              .asComponent(),
-                              BorderLayout.NORTH
-                  );
-                  add(
-                              delegate.asComponent(),
                               BorderLayout.CENTER
                   );
-
             }
       }
 
@@ -95,12 +110,13 @@ class UIControllerDisplayChild
       public UIControllerDisplayChild()
       {
             blocksPanel=UIPanelDelegate.make()
-                                       .withBoxLayout(BoxLayout.Y_AXIS)
+                                       .withBoxLayout(BoxLayoutAlignment.Y_AXIS)
                                        .asComponent();
             setBorder(BorderFactory.createEmptyBorder());
             scrollPane=new JScrollPane(blocksPanel);
             scrollPane.getVerticalScrollBar()
                       .setUnitIncrement(SharedConstants.CONTROLLER_SCROLLBAR_UNIT_INCREMENT);
+            scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
             scrollPane.setBorder(BorderFactory.createEmptyBorder());
             setLayout(new BorderLayout());
             add(
@@ -115,7 +131,6 @@ class UIControllerDisplayChild
                                                                       0
                                                           )
                                               )
-
                                               .withComponent(
                                                           UIButtonDelegate.make()
                                                                           .withText("New")
@@ -138,7 +153,6 @@ class UIControllerDisplayChild
                                                                           .withAction(()-> {
                                                                                 insertNewBlock(
                                                                                             InnerControllerBlock.make(
-                                                                                                        "Amogus",
                                                                                                         new UIControllerDelegateChilds.WindowSetupChildBlock().withBorder(
                                                                                                                     UIHelper.makeLinedBorder(
                                                                                                                                 Color.white
@@ -147,7 +161,6 @@ class UIControllerDisplayChild
                                                                                             )
                                                                                 );
                                                                           })
-                                                          // TODO: Add action
                                               )
                                               .withComponentIf(
                                                           SharedConstants.DEV_MODE,
@@ -167,6 +180,7 @@ class UIControllerDisplayChild
                                                                                       )
                                                                           )
                                               )
+                                              .withTransparency(true)
                                               .asComponent();
             add(
                         bottomButtonsPanel,

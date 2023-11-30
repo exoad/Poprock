@@ -3,16 +3,25 @@ package pkg.exoad.softgradient.core.ui;
 import javax.swing.JComponent;
 import javax.swing.border.Border;
 
+import pkg.exoad.softgradient.core.ColorObj;
+
 import java.awt.Dimension;
 import java.awt.Component;
 
 import javax.swing.BorderFactory;
 
 public class UIDelegate< T extends JComponent >
+                       implements
+                       UIBasicDelegate< T >
 {
+      public interface UIStrutContainedDelegate< T >
+      {
+            T withStrut(int strut);
+      }
+
       protected T rootDelegate;
 
-      public final T asComponent()
+      @Override public T asComponent()
       {
             assert rootDelegate!=null;
             return rootDelegate;
@@ -39,6 +48,14 @@ public class UIDelegate< T extends JComponent >
       protected void setRootDelegate(T e)
       {
             rootDelegate=e;
+      }
+
+      public UIDelegate< T > withTransparency(boolean transparency)
+      {
+            if(transparency)
+                  rootDelegate.setBackground(ColorObj.TRANSPARENT.asAwt());
+            rootDelegate.setOpaque(transparency);
+            return this;
       }
 
       public UIDelegate< T > withAlignmentX(Alignment alignment)

@@ -26,4 +26,9 @@ public final class UIHelper
                         thickness
             );
       }
+
+      public static Border makeEmptyBorder()
+      {
+            return BorderFactory.createEmptyBorder();
+      }
 }
