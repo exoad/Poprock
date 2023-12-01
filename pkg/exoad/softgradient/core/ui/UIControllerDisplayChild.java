@@ -12,6 +12,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
 import pkg.exoad.softgradient.core.SharedConstants;
+import pkg.exoad.softgradient.core.events.ControllerChildDelegatesEventPayload;
 import pkg.exoad.softgradient.core.events.EventPool;
 import pkg.exoad.softgradient.core.events.GradientEventPayload;
 import pkg.exoad.softgradient.core.services.ColorService;
@@ -116,6 +117,10 @@ class UIControllerDisplayChild
 
       public UIControllerDisplayChild()
       {
+            // init all listeners for the eventpool registry["1"]
+            EventPool.OBJECTS.get(1).attachListener(ControllerChildDelegatesEventPayload.class, ()->{
+                  EventPool.OBJECTS.get(1).getPayload(ControllerChildDelegatesEventPayload.class);
+            });
             blocksPanel=UIPanelDelegate.make()
                                        .withBoxLayout(BoxLayoutAlignment.Y_AXIS)
                                        .asComponent();

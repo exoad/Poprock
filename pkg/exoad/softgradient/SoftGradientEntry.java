@@ -84,13 +84,12 @@ class SoftGradientEntry
             // Pool_ID "1" -> Default color pipeline pool
             // Pool_ID "2" -> Registration for all UIControllerChildDelegates (shenanigans)
             EventPool.registerEventPool(1);
-            EventPool.registerEventPool(2);
             EventPool.OBJECTS.get(1)
                              .registerEvent(
                                          GradientEventPayload.class,
                                          null
                              );
-            EventPool.OBJECTS.get(2)
+            EventPool.OBJECTS.get(1)
                              .registerEvent(
                                          ControllerChildDelegatesEventPayload.class,
                                          null

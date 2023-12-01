@@ -35,13 +35,14 @@ public final class EventPool
 
       public void attachListener(Class< ? extends EventPayload > id,Runnable r)
       {
-            if(payloads.containsKey(id))
-                  payloads.get(id)
-                          .first()
-                          .add(r);
-            else throw new RuntimeException(
+            THROW_NOW_IF(
+                        !payloads.containsKey(id),
                         "Listener Attach failed: No such event exists with the given id: "+id.getCanonicalName()
             );
+            // check performed by DebugService, no need to assure additional tcs
+            payloads.get(id)
+                    .first()
+                    .add(r);
       }
 
       public void registerEvent(Class< ? extends EventPayload > id,Object payload)
@@ -57,17 +58,25 @@ public final class EventPool
 
       public Object getPayload(Class< ? extends EventPayload > id)
       {
-            if(payloads.containsKey(id))
-                  return payloads.get(id)
-                                 .second();
-            else throw new RuntimeException(
+            THROW_NOW_IF(
+                        !payloads.containsKey(id),
                         "Payload fetch failed: No such event exists with the given id: "+id.getCanonicalName()
             );
+            // check assured by DebugService
+            return payloads.get(id)
+                           .second();
       }
 
-      public < T extends EventPayload > void ping(Class< T > id)
+      // should be called sparingly please!!
+      public final synchronized < T extends EventPayload > void ping(Class< T > id)
       {
-
+            THROW_NOW_IF(
+                        !payloads.containsKey(id),
+                        "Payload fetch failed: No such event exists with the given id: "+id.getCanonicalName()
+            );
+            payloads.get(id)
+                    .first()
+                    .forEach(Runnable::run);
       }
 
       public < T extends EventPayload > void dispatchEvent(Class< T > id,T payload)
@@ -80,7 +89,7 @@ public final class EventPool
                         !payloads.containsKey(id),
                         "Dispatch failed: No such event exists with the given id: "+id.getCanonicalName()
             );
-            // we dont need another check, if the debuggable_mixin can handle the error correctly 
+            // we dont need another check, if the debuggable_mixin can handle the error correctly
             payloads.get(id)
                     .second(payload);
             payloads.get(id)

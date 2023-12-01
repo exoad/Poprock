@@ -16,6 +16,16 @@ public final class UIControllerDelegateChilds
                                             UIBasicDelegate< JPanel >
       {
             public String getHeaderName();
+
+            public default String getPopupName()
+            {
+                  return getHeaderName();
+            }
+
+            public default String getBasicDescription()
+            {
+                  return getCanonicallyNamedThis();
+            }
       }
 
       private UIControllerDelegateChilds()
@@ -25,12 +35,13 @@ public final class UIControllerDelegateChilds
       static
       {
             // TODO: fix this part for the single child event pool used here
-            EventPool.OBJECTS.get(2)
+            EventPool.OBJECTS.get(1)
                              .dispatchEvent(
                                          ControllerChildDelegatesEventPayload.class,
                                          new ControllerChildDelegatesEventPayload(
                                                      List.of(
                                                                  new UIControllerDelegate[] {
+                                                                                             // exports all avaliable children delegates
                                                                                              new WindowSetupChildBlock()
                                                                  }
                                                      )
