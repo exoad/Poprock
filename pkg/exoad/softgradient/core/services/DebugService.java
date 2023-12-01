@@ -6,6 +6,14 @@ public final class DebugService
       {
       }
 
+      public static synchronized void throwNow(String message)
+      {
+            throwIf(
+                        true,
+                        message
+            );
+      }
+
       public static synchronized void throwIf(boolean condition,String message)
       {
             if(condition)

@@ -4,17 +4,36 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import pkg.exoad.softgradient.core.Pair;
+import pkg.exoad.softgradient.core.services.DebugService;
+import pkg.exoad.softgradient.core.services.mixins.DebuggableMixin;
 
 public final class EventPool
+                             implements
+                             DebuggableMixin
 {
-      private EventPool()
+      protected EventPool()
       {
       }
 
-      // Key: Identifier, Value: Pair of ArrayList of Listeners and the payload
-      static HashMap< Class< ? extends EventPayload >, Pair< ArrayList< Runnable >, Object > > payloads=new HashMap<>();
+      public static final HashMap< Integer, EventPool > OBJECTS=new HashMap<>();
 
-      public static void attachListener(Class< ? extends EventPayload > id,Runnable r)
+      public static long registerEventPool(int id)
+      {
+            DebugService.throwIf(
+                        OBJECTS.containsKey(id),
+                        "Failed to register event "+id+" because it already exists in the pool!"
+            );
+            OBJECTS.put(
+                        id,
+                        new EventPool()
+            );
+            return id;
+      }
+
+      // Key: Identifier, Value: Pair of ArrayList of Listeners and the payload
+      HashMap< Class< ? extends EventPayload >, Pair< ArrayList< Runnable >, Object > > payloads=new HashMap<>();
+
+      public void attachListener(Class< ? extends EventPayload > id,Runnable r)
       {
             if(payloads.containsKey(id))
                   payloads.get(id)
@@ -25,7 +44,7 @@ public final class EventPool
             );
       }
 
-      public static void registerEvent(Class< ? extends EventPayload > id,Object payload)
+      public void registerEvent(Class< ? extends EventPayload > id,Object payload)
       {
             payloads.put(
                         id,
@@ -36,7 +55,7 @@ public final class EventPool
             );
       }
 
-      public static Object getPayload(Class< ? extends EventPayload > id)
+      public Object getPayload(Class< ? extends EventPayload > id)
       {
             if(payloads.containsKey(id))
                   return payloads.get(id)
@@ -46,24 +65,28 @@ public final class EventPool
             );
       }
 
-      public static < T extends EventPayload > void dispatchEvent(Class< T > id,T payload)
+      public < T extends EventPayload > void ping(Class< T > id)
       {
-            if(payload==null)
-                  throw new RuntimeException(
-                              "Dispatch failed: Payload cannot be null"
-                  );
-            if(payloads.containsKey(id))
-            {
-                  payloads.get(id)
-                          .second(payload);
-                  payloads.get(id)
-                          .first()
-                          .forEach(
-                                      Runnable::run
-                          );
-            }
-            else throw new RuntimeException(
+
+      }
+
+      public < T extends EventPayload > void dispatchEvent(Class< T > id,T payload)
+      {
+            THROW_NOW_IF(
+                        payload==null,
+                        "Dispatch failed: Payload cannot be null"
+            );
+            THROW_NOW_IF(
+                        !payloads.containsKey(id),
                         "Dispatch failed: No such event exists with the given id: "+id.getCanonicalName()
             );
+            // we dont need another check, if the debuggable_mixin can handle the error correctly 
+            payloads.get(id)
+                    .second(payload);
+            payloads.get(id)
+                    .first()
+                    .forEach(
+                                Runnable::run
+                    );
       }
 }

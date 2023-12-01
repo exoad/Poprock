@@ -1,10 +1,13 @@
 package pkg.exoad.softgradient.core.ui;
 
+import java.util.List;
+
 import javax.swing.JPanel;
 
 import pkg.exoad.softgradient.core.SharedConstants;
+import pkg.exoad.softgradient.core.events.ControllerChildDelegatesEventPayload;
+import pkg.exoad.softgradient.core.events.EventPool;
 import pkg.exoad.softgradient.core.services.ColorService;
-import pkg.exoad.softgradient.core.ui.UIPanelDelegate.BoxLayoutAlignment;
 
 public final class UIControllerDelegateChilds
 {
@@ -19,6 +22,22 @@ public final class UIControllerDelegateChilds
       {
       }
 
+      static
+      {
+            // TODO: fix this part for the single child event pool used here
+            EventPool.OBJECTS.get(2)
+                             .dispatchEvent(
+                                         ControllerChildDelegatesEventPayload.class,
+                                         new ControllerChildDelegatesEventPayload(
+                                                     List.of(
+                                                                 new UIControllerDelegate[] {
+                                                                                             new WindowSetupChildBlock()
+                                                                 }
+                                                     )
+                                         )
+                             );
+      }
+
       public static final class WindowSetupChildBlock
                                                       extends
                                                       UIDelegate< JPanel >
@@ -30,7 +49,6 @@ public final class UIControllerDelegateChilds
             {
                   super();
                   rootDelegate=UIPanelDelegate.make()
-                                              .withBoxLayout(BoxLayoutAlignment.Y_AXIS)
                                               .withComponent(
                                                           UIPanelDelegate.UIHorizontalPanelDelegate.make()
                                                                                                    .withLeftComponent(

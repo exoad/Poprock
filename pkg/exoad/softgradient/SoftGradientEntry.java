@@ -7,6 +7,7 @@ import com.formdev.flatlaf.intellijthemes.FlatHighContrastIJTheme;
 
 import pkg.exoad.softgradient.core.ColorObj;
 import pkg.exoad.softgradient.core.SharedConstants;
+import pkg.exoad.softgradient.core.events.ControllerChildDelegatesEventPayload;
 import pkg.exoad.softgradient.core.events.EventPool;
 import pkg.exoad.softgradient.core.events.GradientEventPayload;
 import pkg.exoad.softgradient.core.services.AssetsService;
@@ -78,16 +79,34 @@ class SoftGradientEntry
 
       public static void main(String[] args)
       {
-            EventPool.registerEvent(
-                        GradientEventPayload.class,
-                        null
-            );
-            EventPool.attachListener(
-                        GradientEventPayload.class,
-                        ()-> {
-                              System.out.println("Event Dispatched: "+EventPool.getPayload(GradientEventPayload.class));
-                        }
-            );
+            // EVENT POOL REGISTRATION
+            //
+            // Pool_ID "1" -> Default color pipeline pool
+            // Pool_ID "2" -> Registration for all UIControllerChildDelegates (shenanigans)
+            EventPool.registerEventPool(1);
+            EventPool.registerEventPool(2);
+            EventPool.OBJECTS.get(1)
+                             .registerEvent(
+                                         GradientEventPayload.class,
+                                         null
+                             );
+            EventPool.OBJECTS.get(2)
+                             .registerEvent(
+                                         ControllerChildDelegatesEventPayload.class,
+                                         null
+                             );
+            EventPool.OBJECTS.get(1)
+                             .attachListener(
+                                         GradientEventPayload.class,
+                                         ()-> {
+                                               System.out.println(
+                                                           "Event Dispatched: "+EventPool.OBJECTS.get(1)
+                                                                                                 .getPayload(
+                                                                                                             GradientEventPayload.class
+                                                                                                 )
+                                               );
+                                         }
+                             );
             UIWindow.make()
                     .withTitle("SoftGradient ~ exoad")
                     .withSize(

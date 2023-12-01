@@ -15,6 +15,7 @@ import pkg.exoad.softgradient.core.SharedConstants;
 import pkg.exoad.softgradient.core.events.EventPool;
 import pkg.exoad.softgradient.core.events.GradientEventPayload;
 import pkg.exoad.softgradient.core.services.ColorService;
+import pkg.exoad.softgradient.core.services.DebugService;
 import pkg.exoad.softgradient.core.ui.UIControllerDelegateChilds.UIControllerDelegate;
 import pkg.exoad.softgradient.core.ui.UIDelegate.Alignment;
 import pkg.exoad.softgradient.core.ui.UIPanelDelegate.BoxLayoutAlignment;
@@ -26,13 +27,19 @@ class UIControllerDisplayChild
       private static final class InnerControllerBlock
                                                       extends
                                                       JPanel
+
       {
-            public static InnerControllerBlock make(IControllerDelegate delegate)
+            public static InnerControllerBlock make(UIDelegate< ? > delegate)
             {
-                  return new InnerControllerBlock(
-                              delegate.getHeaderName(),
-                              delegate
+                  if(delegate instanceof UIControllerDelegate e)
+                        return new InnerControllerBlock(
+                                    e.getHeaderName(),
+                                    e
+                        );
+                  DebugService.throwNow(
+                              "delegate for 'make' of InnerControllerBlock received a none instance of UIControllerDelegate!"
                   );
+                  return null;
             }
 
             private InnerControllerBlock(String name,UIBasicDelegate< ? > delegate)
@@ -140,10 +147,11 @@ class UIControllerDisplayChild
                                                                                       )
                                                                           )
                                                                           .withAction(
-                                                                                      ()->EventPool.dispatchEvent(
-                                                                                                  GradientEventPayload.class,
-                                                                                                  GradientEventPayload.EMPTY
-                                                                                      )
+                                                                                      ()->EventPool.OBJECTS.get(1)
+                                                                                                           .dispatchEvent(
+                                                                                                                       GradientEventPayload.class,
+                                                                                                                       GradientEventPayload.EMPTY
+                                                                                                           )
                                                                           )
                                               )
                                               .withComponentIf(
@@ -169,10 +177,11 @@ class UIControllerDisplayChild
                                                                                       "RandomColor"
                                                                           )
                                                                           .withAction(
-                                                                                      ()->EventPool.dispatchEvent(
-                                                                                                  GradientEventPayload.class,
-                                                                                                  GradientEventPayload.makeRandomColor()
-                                                                                      )
+                                                                                      ()->EventPool.OBJECTS.get(1)
+                                                                                                           .dispatchEvent(
+                                                                                                                       GradientEventPayload.class,
+                                                                                                                       GradientEventPayload.makeRandomColor()
+                                                                                                           )
                                                                           )
                                                                           .withBackgroundColor(
                                                                                       ColorService.hexToColor(

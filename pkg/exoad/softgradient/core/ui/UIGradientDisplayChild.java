@@ -15,12 +15,14 @@ class UIGradientDisplayChild
                              extends
                              JPanel
 {
+
       public UIGradientDisplayChild()
       {
-            EventPool.attachListener(
-                        GradientEventPayload.class,
-                        this::repaint
-            );
+            EventPool.OBJECTS.get(1)
+                             .attachListener(
+                                         GradientEventPayload.class,
+                                         this::repaint
+                             );
       }
 
       @Override public void paintComponent(Graphics g)
@@ -31,10 +33,17 @@ class UIGradientDisplayChild
                         RenderingHints.KEY_ANTIALIASING,
                         RenderingHints.VALUE_ANTIALIAS_ON
             );
-            if(EventPool.getPayload(GradientEventPayload.class)!=null&&!EventPool.getPayload(GradientEventPayload.class)
-                                                                                 .equals(GradientEventPayload.EMPTY))
+            if(EventPool.OBJECTS.get(1)
+                                .getPayload(GradientEventPayload.class)!=null&&!EventPool.OBJECTS.get(1)
+                                                                                                 .getPayload(
+                                                                                                             GradientEventPayload.class
+                                                                                                 )
+                                                                                                 .equals(
+                                                                                                             GradientEventPayload.EMPTY
+                                                                                                 ))
             {
-                  GradientEventPayload e=(GradientEventPayload)EventPool.getPayload(GradientEventPayload.class);
+                  GradientEventPayload e=(GradientEventPayload)EventPool.OBJECTS.get(1)
+                                                                                .getPayload(GradientEventPayload.class);
                   g.setColor(
                               e.colors()[0].color()
                                            .asAwt()
