@@ -1,6 +1,8 @@
 package pkg.exoad.softgradient.core.services;
 
 import java.util.Collection;
+import java.util.Objects;
+import java.util.function.Consumer;
 
 public final class BasicService
 {
@@ -15,5 +17,21 @@ public final class BasicService
                       .equals(clazz.getCanonicalName()))
                         return true;
             return false;
+      }
+
+      public static void requireAllNonNull(Object... objects)
+      {
+            for(Object r : objects)
+                  Objects.requireNonNull(r);
+      }
+
+      public static Runnable emptyRunnable()
+      {
+            return ()-> {};
+      }
+
+      public static Consumer< ? > emptyConsumer()
+      {
+            return e-> {};
       }
 }

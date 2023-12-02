@@ -4,6 +4,9 @@ import javax.swing.JComponent;
 import javax.swing.border.Border;
 
 import pkg.exoad.softgradient.core.ColorObj;
+import pkg.exoad.softgradient.core.Offset;
+import pkg.exoad.softgradient.core.Size;
+import pkg.exoad.softgradient.core.services.AwtMixerService;
 
 import java.awt.Dimension;
 import java.awt.Component;
@@ -14,6 +17,20 @@ public class UIDelegate< T extends JComponent >
                        implements
                        UIBasicDelegate< T >
 {
+      public final record DelegateProperties(
+                  Size prefSize,Size size,Size minSize,Size maxSize,Offset origin,boolean visibility
+      )
+      {
+
+      }
+
+      public static < A extends JComponent > UIDelegate< A > makeWith(A component)
+      {
+            UIDelegate< A > delegate=new UIDelegate<>();
+            delegate.setRootDelegate(component);
+            return delegate;
+      }
+
       public interface UIStrutContainedDelegate< T >
       {
             T withStrut(int strut);
@@ -45,9 +62,32 @@ public class UIDelegate< T extends JComponent >
             }
       }
 
+      public DelegateProperties exposeProperties()
+      {
+            return new DelegateProperties(
+                        AwtMixerService.convertDimensionClass(rootDelegate.getPreferredSize()),
+                        AwtMixerService.convertDimensionClass(rootDelegate.getSize()),
+                        AwtMixerService.convertDimensionClass(rootDelegate.getMinimumSize()),
+                        AwtMixerService.convertDimensionClass(rootDelegate.getMaximumSize()),
+                        AwtMixerService.convertPointClass(rootDelegate.getLocation()),
+                        rootDelegate.isVisible()
+            );
+      }
+
       protected void setRootDelegate(T e)
       {
             rootDelegate=e;
+      }
+
+      public void setVisibility(boolean visibility)
+      {
+            rootDelegate.setVisible(visibility);
+      }
+
+      public UIDelegate< T > withVisibility(boolean visibility)
+      {
+            setVisibility(visibility);
+            return this;
       }
 
       public UIDelegate< T > withTransparency(boolean transparency)

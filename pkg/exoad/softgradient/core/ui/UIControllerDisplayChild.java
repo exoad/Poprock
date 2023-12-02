@@ -8,13 +8,16 @@ import java.awt.RenderingHints;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
+import pkg.exoad.softgradient.core.Offset;
 import pkg.exoad.softgradient.core.SharedConstants;
 import pkg.exoad.softgradient.core.events.ControllerChildDelegatesEventPayload;
 import pkg.exoad.softgradient.core.events.EventPool;
 import pkg.exoad.softgradient.core.events.GradientEventPayload;
+import pkg.exoad.softgradient.core.services.BasicService;
 import pkg.exoad.softgradient.core.services.ColorService;
 import pkg.exoad.softgradient.core.services.DebugService;
 import pkg.exoad.softgradient.core.ui.UIControllerDelegateChilds.UIControllerDelegate;
@@ -81,7 +84,7 @@ class UIControllerDisplayChild
                                                                         )
                                                                         .withPadding(4)
                                                                         .withTransparency(true)
-                                                                        .withAlignmentX(Alignment.LEFT)
+                                                                        .withAlignmentY(Alignment.LEFT)
                                              )
                                              .withComponent(delegate)
                                              .withPadding(
@@ -118,14 +121,22 @@ class UIControllerDisplayChild
       public UIControllerDisplayChild()
       {
             // init all listeners for the eventpool registry["1"]
-            EventPool.OBJECTS.get(1).attachListener(ControllerChildDelegatesEventPayload.class, ()->{
-                  EventPool.OBJECTS.get(1).getPayload(ControllerChildDelegatesEventPayload.class);
-            });
+            EventPool.OBJECTS.get(1)
+                             .attachListener(
+                                         ControllerChildDelegatesEventPayload.class,
+                                         ()-> {
+                                               EventPool.OBJECTS.get(1)
+                                                                .getPayload(ControllerChildDelegatesEventPayload.class);
+                                         }
+                             );
             blocksPanel=UIPanelDelegate.make()
                                        .withBoxLayout(BoxLayoutAlignment.Y_AXIS)
                                        .asComponent();
             setBorder(BorderFactory.createEmptyBorder());
             scrollPane=new JScrollPane(blocksPanel);
+            scrollPane.setViewportBorder(
+                        UIHelper.makeLinedBorder(ColorService.hexToColor(SharedConstants.LAF_POPROCK_PRIMARY_2))
+            );
             scrollPane.getVerticalScrollBar()
                       .setUnitIncrement(SharedConstants.CONTROLLER_SCROLLBAR_UNIT_INCREMENT);
             scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -144,20 +155,47 @@ class UIControllerDisplayChild
                                                           )
                                               )
                                               .withComponent(
-                                                          UIButtonDelegate.make()
-                                                                          .withText("New")
-                                                                          .withBackgroundColor(
-                                                                                      ColorService.hexToColor(
-                                                                                                  SharedConstants.LAF_POPROCK_PRIMARY_2
-                                                                                      )
-                                                                          )
-                                                                          .withAction(
-                                                                                      ()->EventPool.OBJECTS.get(1)
-                                                                                                           .dispatchEvent(
-                                                                                                                       GradientEventPayload.class,
-                                                                                                                       GradientEventPayload.EMPTY
-                                                                                                           )
-                                                                          )
+                                                          UIBuilderDelegate.make(()-> {
+                                                                UIButtonDelegate button=UIButtonDelegate.make()
+                                                                                                        .withText("New")
+                                                                                                        .withBackgroundColor(
+                                                                                                                    ColorService.hexToColor(
+                                                                                                                                SharedConstants.LAF_POPROCK_PRIMARY_2
+                                                                                                                    )
+                                                                                                        )
+                                                                                                        .withAction(
+                                                                                                                    ()->EventPool.OBJECTS.get(
+                                                                                                                                1
+                                                                                                                    )
+                                                                                                                                         .dispatchEvent(
+                                                                                                                                                     GradientEventPayload.class,
+                                                                                                                                                     GradientEventPayload.EMPTY
+                                                                                                                                         )
+                                                                                                        );
+                                                                UIDelegate< JPopupMenu > popupMenu=UIHelper.makePopupMenu(
+                                                                            new UIPopupItemChilds.PopupConfiguration(
+                                                                                        "Add New Logic",
+                                                                                        true,
+                                                                                        button.asComponent()
+                                                                            ),
+                                                                            new UIPopupItemChilds.SimplePopupDelegate(
+                                                                                        "Test#1",
+                                                                                        BasicService.emptyRunnable()
+                                                                            ),
+                                                                            new UIPopupItemChilds.SimplePopupDelegate(
+                                                                                        "Test#2",
+                                                                                        BasicService.emptyRunnable()
+                                                                            )
+                                                                );
+                                                                button.withAction(
+                                                                            ()->UIPopupItemChilds.showPopupMenuDelegate(
+                                                                                        popupMenu,
+                                                                                        Offset.ZERO
+                                                                            )
+                                                                );
+                                                                return button;
+                                                          })
+
                                               )
                                               .withComponentIf(
                                                           SharedConstants.DEV_MODE,
