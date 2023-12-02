@@ -6,26 +6,73 @@ public final class DebugService
       {
       }
 
+      private static RuntimeException modifyThrowable(
+            RuntimeException throwable
+      )
+      {
+            throwable
+                  .setStackTrace(
+                        new StackTraceElement[]{
+                                                new StackTraceElement(
+                                                      throwable
+                                                            .getStackTrace()[0]
+                                                                  .getClassName()+"...",
+                                                      throwable
+                                                            .getStackTrace()[0]
+                                                                  .getMethodName(),
+                                                      ":",
+                                                      throwable
+                                                            .getStackTrace()[0]
+                                                                  .getLineNumber()
+                                                ),
+                                                new StackTraceElement(
+                                                      throwable
+                                                            .getStackTrace()[throwable
+                                                                  .getStackTrace().length-1]
+                                                                        .getClassName()+"...",
+                                                      throwable
+                                                            .getStackTrace()[throwable
+                                                                  .getStackTrace().length-1]
+                                                                        .getMethodName(),
+                                                      ":",
+                                                      throwable
+                                                            .getStackTrace()[throwable
+                                                                  .getStackTrace().length-1]
+                                                                        .getLineNumber()
+                                                )
+                        }
+                  );
+            return throwable;
+      }
+
       public static synchronized void throwNow(String message)
       {
             throwIf(
                   true,
-                  message
+                  "\n\t[!]\t"+message
             );
       }
 
       public static synchronized void throwIf(boolean condition,String message)
       {
             if(condition)
-                  throw new RuntimeException(message);
+                  throw modifyThrowable(
+                        new RuntimeException(
+                              "\n\t[!]\t"+message
+                        )
+                  );
       }
 
-      public static synchronized void throwIf(boolean condition,String message,Throwable cause)
+      public static synchronized void throwIf(
+            boolean condition,String message,Throwable cause
+      )
       {
             if(condition)
-                  throw new RuntimeException(
-                        message,
-                        cause
+                  throw modifyThrowable(
+                        new RuntimeException(
+                              "\n\t[!]\t"+message,
+                              cause
+                        )
                   );
       }
 }

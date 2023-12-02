@@ -76,13 +76,15 @@ public final class UIControllerDelegateChilds
                                                             )
                                                 )
                                     )
-                                    .withRightComponent(
-                                          UITextFieldDelegate
-                                                .make()
-                                                .withChangeListener(
-                                                      System.out::println
-                                                )
-                                    )
+                                    /*------------------------------------- /
+                                    / .withRightComponent(                  /
+                                    /       UITextFieldDelegate             /
+                                    /             .make()                   /
+                                    /             .withChangeListener(      /
+                                    /                   System.out::println /
+                                    /             )                         /
+                                    / )                                     /
+                                    /--------------------------------------*/
                                     .withStrut(10)
                                     .withTransparency(
                                           true
@@ -100,9 +102,7 @@ public final class UIControllerDelegateChilds
                                     .make()
                                     .withLeftComponent(
                                           UILabelDelegate
-                                                .make(
-                                                      "Frame Height (Y)"
-                                                )
+                                                .make("Frame Height (Y)")
                                                 .withForegroundColor(
                                                       ColorService
                                                             .hexToColor(
@@ -110,13 +110,15 @@ public final class UIControllerDelegateChilds
                                                             )
                                                 )
                                     )
-                                    .withRightComponent(
-                                          UITextFieldDelegate
-                                                .make()
-                                                .withChangeListener(
-                                                      System.out::println
-                                                )
-                                    )
+                                    /*------------------------------------- /
+                                    / .withRightComponent(                  /
+                                    /       UITextFieldDelegate             /
+                                    /             .make()                   /
+                                    /             .withChangeListener(      /
+                                    /                   System.out::println /
+                                    /             )                         /
+                                    / )                                     /
+                                    /--------------------------------------*/
                                     .withStrut(10)
                                     .withTransparency(
                                           true

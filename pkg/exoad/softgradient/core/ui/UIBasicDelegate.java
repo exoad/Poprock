@@ -9,4 +9,16 @@ public interface UIBasicDelegate<T extends JComponent>
                                 SelfReportingMixin
 {
       public T asComponent();
+
+      public default void refresh()
+      {
+            asComponent()
+                  .repaint();
+      }
+
+      public default void hardRefresh()
+      {
+            asComponent()
+                  .revalidate();
+      }
 }
