@@ -16,8 +16,8 @@ public final record Size(int width,int height)
       public java.awt.Dimension asAwt()
       {
             return new java.awt.Dimension(
-                        width,
-                        height
+                  width,
+                  height
             );
       }
 }

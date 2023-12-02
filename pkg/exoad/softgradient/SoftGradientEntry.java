@@ -20,60 +20,77 @@ class SoftGradientEntry
 {
       static
       {
-            System.setProperty(
+            System
+                  .setProperty(
                         "sun.java2d.opengl",
                         "True"
-            );
-            System.setProperty(
+                  );
+            System
+                  .setProperty(
                         "flatlaf.useWindowDecorations",
                         "true"
-            );
-            System.setProperty(
+                  );
+            System
+                  .setProperty(
                         "flatlaf.menuBarEmbedded",
                         "true"
-            );
-            UIManager.put(
+                  );
+            UIManager
+                  .put(
                         "ScrollBar.background",
                         ColorObj.TRANSPARENT
-            );
-            UIManager.put(
+                  );
+            UIManager
+                  .put(
                         "ScrollBar.showButtons",
                         false
-            );
-            UIManager.put(
+                  );
+            UIManager
+                  .put(
                         "JScrollPane.smoothScrolling",
                         true
-            );
-            UIManager.put(
+                  );
+            UIManager
+                  .put(
                         "Component.focusedBorderColor",
                         ColorObj.TRANSPARENT
-            );
-            UIManager.put(
+                  );
+            UIManager
+                  .put(
                         "Component.focusColor",
                         ColorObj.TRANSPARENT
-            );
-            UIManager.put(
+                  );
+            UIManager
+                  .put(
                         "TabbedPane.tabSeparatorsFullHeight",
                         false
-            );
-            UIManager.put(
+                  );
+            UIManager
+                  .put(
                         "TabbedPane.showTabSeparators",
                         true
-            );
-            UIManager.put(
+                  );
+            UIManager
+                  .put(
                         "Button.arc",
                         10
-            );
-            UIManager.put(
+                  );
+            UIManager
+                  .put(
                         "ScrollBar.thumb",
-                        new ColorUIResource(ColorService.hexToColor(SharedConstants.LAF_POPROCK_PRIMARY_1))
-            );
+                        new ColorUIResource(
+                              ColorService
+                                    .hexToColor(SharedConstants.LAF_POPROCK_PRIMARY_1)
+                        )
+                  );
             try
             {
-                  UIManager.setLookAndFeel(new FlatHighContrastIJTheme());
-            } catch(UnsupportedLookAndFeelException e)
+                  UIManager
+                        .setLookAndFeel(new FlatHighContrastIJTheme());
+            }catch(UnsupportedLookAndFeelException e)
             {
-                  e.printStackTrace();
+                  e
+                        .printStackTrace();
             }
       }
 
@@ -83,43 +100,53 @@ class SoftGradientEntry
             //
             // Pool_ID "1" -> Default color pipeline pool
             // Pool_ID "2" -> Registration for all UIControllerChildDelegates (shenanigans)
-            EventPool.registerEventPool(1);
-            EventPool.OBJECTS.get(1)
-                             .registerEvent(
-                                         GradientEventPayload.class,
-                                         null
-                             );
-            EventPool.OBJECTS.get(1)
-                             .registerEvent(
-                                         ControllerChildDelegatesEventPayload.class,
-                                         null
-                             );
-            EventPool.OBJECTS.get(1)
-                             .attachListener(
-                                         GradientEventPayload.class,
-                                         ()-> {
-                                               System.out.println(
-                                                           "Event Dispatched: "+EventPool.OBJECTS.get(1)
-                                                                                                 .getPayload(
-                                                                                                             GradientEventPayload.class
-                                                                                                 )
-                                               );
-                                         }
-                             );
-            UIWindow.make()
-                    .withTitle("SoftGradient ~ exoad")
-                    .withSize(
-                                SharedConstants.WINDOW_WIDTH,
-                                SharedConstants.WINDOW_HEIGHT
-                    )
-                    .withIcon(AssetsService.fetchImageIcon("assets/app-icon.png"))
-                    .withMinSize(
-                                SharedConstants.WINDOW_WIDTH,
-                                SharedConstants.WINDOW_HEIGHT
-                    )
-                    .withMainDelegate(
-                                new UIAppMainDelegate().withPadding(SharedConstants.GRADIENT_WINDOW_PADDING)
-                    )
-                    .run();
+            EventPool
+                  .registerEventPool(1);
+            EventPool.OBJECTS
+                  .get(1)
+                  .registerEvent(
+                        GradientEventPayload.class,
+                        null
+                  );
+            EventPool.OBJECTS
+                  .get(1)
+                  .registerEvent(
+                        ControllerChildDelegatesEventPayload.class,
+                        null
+                  );
+            EventPool.OBJECTS
+                  .get(1)
+                  .attachListener(
+                        GradientEventPayload.class,
+                        ()->System.out
+                              .println(
+                                    "Event Dispatched: "+EventPool.OBJECTS
+                                          .get(1)
+                                          .getPayload(
+                                                GradientEventPayload.class
+                                          )
+                              )
+
+                  );
+            UIWindow
+                  .make()
+                  .withTitle("SoftGradient ~ exoad")
+                  .withSize(
+                        SharedConstants.WINDOW_WIDTH,
+                        SharedConstants.WINDOW_HEIGHT
+                  )
+                  .withIcon(
+                        AssetsService
+                              .fetchImageIcon("assets/app-icon.png")
+                  )
+                  .withMinSize(
+                        SharedConstants.WINDOW_WIDTH,
+                        SharedConstants.WINDOW_HEIGHT
+                  )
+                  .withMainDelegate(
+                        new UIAppMainDelegate()
+                              .withPadding(SharedConstants.GRADIENT_WINDOW_PADDING)
+                  )
+                  .run();
       }
 }

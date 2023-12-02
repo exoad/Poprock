@@ -9,8 +9,8 @@ public final class DebugService
       public static synchronized void throwNow(String message)
       {
             throwIf(
-                        true,
-                        message
+                  true,
+                  message
             );
       }
 
@@ -24,8 +24,8 @@ public final class DebugService
       {
             if(condition)
                   throw new RuntimeException(
-                              message,
-                              cause
+                        message,
+                        cause
                   );
       }
 }

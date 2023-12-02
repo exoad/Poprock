@@ -18,73 +18,94 @@ class UIGradientDisplayChild
 
       public UIGradientDisplayChild()
       {
-            EventPool.OBJECTS.get(1)
-                             .attachListener(
-                                         GradientEventPayload.class,
-                                         this::repaint
-                             );
+            EventPool.OBJECTS
+                  .get(1)
+                  .attachListener(
+                        GradientEventPayload.class,
+                        this::repaint
+                  );
       }
 
       @Override public void paintComponent(Graphics g)
       {
             super.paintComponent(g);
             Graphics2D g2=(Graphics2D)g;
-            g2.setRenderingHint(
+            g2
+                  .setRenderingHint(
                         RenderingHints.KEY_ANTIALIASING,
                         RenderingHints.VALUE_ANTIALIAS_ON
-            );
-            if(EventPool.OBJECTS.get(1)
-                                .getPayload(GradientEventPayload.class)!=null&&!EventPool.OBJECTS.get(1)
-                                                                                                 .getPayload(
-                                                                                                             GradientEventPayload.class
-                                                                                                 )
-                                                                                                 .equals(
-                                                                                                             GradientEventPayload.EMPTY
-                                                                                                 ))
+                  );
+            if(EventPool.OBJECTS
+                  .get(1)
+                  .getPayload(GradientEventPayload.class)!=null&&!EventPool.OBJECTS
+                        .get(1)
+                        .getPayload(
+                              GradientEventPayload.class
+                        )
+                        .equals(
+                              GradientEventPayload.EMPTY
+                        ))
             {
-                  GradientEventPayload e=(GradientEventPayload)EventPool.OBJECTS.get(1)
-                                                                                .getPayload(GradientEventPayload.class);
-                  g.setColor(
-                              e.colors()[0].color()
-                                           .asAwt()
-                  );
-                  g.fillRoundRect(
-                              (getWidth()-Math.min(
+                  GradientEventPayload e=(GradientEventPayload)EventPool.OBJECTS
+                        .get(1)
+                        .getPayload(GradientEventPayload.class);
+                  g
+                        .setColor(
+                              e
+                                    .colors()[0]
+                                          .color()
+                                          .asAwt()
+                        );
+                  g
+                        .fillRoundRect(
+                              (getWidth()-Math
+                                    .min(
                                           getWidth(),
                                           getHeight()
-                              ))/2,
-                              (getHeight()-Math.min(
+                                    ))/2,
+                              (getHeight()-Math
+                                    .min(
                                           getWidth(),
                                           getHeight()
-                              ))/2,
-                              Math.min(
+                                    ))/2,
+                              Math
+                                    .min(
                                           getWidth(),
                                           getHeight()
-                              ),
-                              Math.min(
+                                    ),
+                              Math
+                                    .min(
                                           getWidth(),
                                           getHeight()
-                              ),
-                              (int)(Math.min(
+                                    ),
+                              (int)(Math
+                                    .min(
                                           getWidth(),
                                           getHeight()
-                              )*SharedConstants.ROUND_RECT_ARC),
-                              (int)(Math.min(
+                                    )*SharedConstants.ROUND_RECT_ARC),
+                              (int)(Math
+                                    .min(
                                           getWidth(),
                                           getHeight()
-                              )*SharedConstants.ROUND_RECT_ARC)
-                  );
+                                    )*SharedConstants.ROUND_RECT_ARC)
+                        );
             }
             else
             {
-                  g.setColor(ColorService.hexToColor(SharedConstants.LAF_POPROCK_BG_FG));
-                  g.fillRect(
+                  g
+                        .setColor(
+                              ColorService
+                                    .hexToColor(SharedConstants.LAF_POPROCK_BG_FG)
+                        );
+                  g
+                        .fillRect(
                               0,
                               0,
                               getWidth(),
                               getHeight()
-                  );
+                        );
             }
-            g.dispose();
+            g
+                  .dispose();
       }
 }

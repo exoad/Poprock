@@ -4,25 +4,26 @@ import java.util.function.Supplier;
 
 import javax.swing.JComponent;
 
-public class UIBuilderDelegate< T extends JComponent >
+public class UIBuilderDelegate<T extends JComponent>
                               extends
-                              UIDelegate< T >
+                              UIDelegate<T>
 {
-      public static < B extends JComponent > UIBuilderDelegate< B > make(Supplier< UIDelegate< B > > component)
+      public static <B extends JComponent> UIBuilderDelegate<B> make(Supplier<UIDelegate<B>> component)
       {
             return new UIBuilderDelegate<>(component);
       }
 
-      private Supplier< UIDelegate< T > > builder;
+      private Supplier<UIDelegate<T>> builder;
 
-      private UIBuilderDelegate(Supplier< UIDelegate< T > > builder)
+      private UIBuilderDelegate(Supplier<UIDelegate<T>> builder)
       {
             this.builder=builder;
       }
 
       @Override public T asComponent()
       {
-            return builder.get()
-                          .asComponent();
+            return builder
+                  .get()
+                  .asComponent();
       }
 }

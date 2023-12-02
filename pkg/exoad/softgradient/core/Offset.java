@@ -5,22 +5,23 @@ public final record Offset(float dx,float dy)
       public static Offset make(float dx,float dy)
       {
             return new Offset(
-                        dx,
-                        dy
+                  dx,
+                  dy
             );
       }
 
       public static final Offset ZERO=new Offset(
-                  0,
-                  0
+            0,
+            0
       );
 
       public float distanceOf(Offset another)
       {
-            return (float)Math.hypot(
+            return (float)Math
+                  .hypot(
                         another.dx-dx,
                         another.dy-dy
-            );
+                  );
       }
 
       public int x()
@@ -36,8 +37,8 @@ public final record Offset(float dx,float dy)
       public java.awt.Point asAwt()
       {
             return new java.awt.Point(
-                        x(),
-                        y()
+                  x(),
+                  y()
             );
       }
 }

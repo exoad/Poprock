@@ -1,4 +1,4 @@
-package pkg.exoad.softgradient.core.debug;
+package pkg.exoad.softgradient.core;
 
 public final class Null
 {

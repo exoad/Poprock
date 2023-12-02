@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class UILabelDelegate
                              extends
-                             UIDelegate< JLabel >
+                             UIDelegate<JLabel>
 {
       public static UILabelDelegate make(String text)
       {
@@ -19,13 +19,15 @@ public class UILabelDelegate
 
       public UILabelDelegate withText(String text)
       {
-            rootDelegate.setText(text);
+            rootDelegate
+                  .setText(text);
             return this;
       }
 
       public UILabelDelegate withForegroundColor(Color color)
       {
-            rootDelegate.setForeground(color);
+            rootDelegate
+                  .setForeground(color);
             return this;
       }
 }

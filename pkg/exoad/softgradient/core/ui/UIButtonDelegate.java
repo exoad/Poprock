@@ -9,7 +9,7 @@ import pkg.exoad.softgradient.core.services.ColorService;
 
 public final class UIButtonDelegate
                                     extends
-                                    UIDelegate< JButton >
+                                    UIDelegate<JButton>
 {
       public static UIButtonDelegate make()
       {
@@ -19,58 +19,74 @@ public final class UIButtonDelegate
       private UIButtonDelegate()
       {
             rootDelegate=new JButton();
-            rootDelegate.setFocusPainted(false);
-            rootDelegate.setBorderPainted(false);
-            withBackgroundColor(ColorService.hexToColor(SharedConstants.LAF_POPROCK_PRIMARY_1)).withForegroundColor(
-                        ColorService.hexToColor(SharedConstants.LAF_POPROCK_BG_FG)
-            );
+            rootDelegate
+                  .setFocusPainted(false);
+            rootDelegate
+                  .setBorderPainted(false);
+            withBackgroundColor(
+                  ColorService
+                        .hexToColor(SharedConstants.LAF_POPROCK_PRIMARY_1)
+            )
+                  .withForegroundColor(
+                        ColorService
+                              .hexToColor(SharedConstants.LAF_POPROCK_BG_FG)
+                  );
       }
 
       public UIButtonDelegate withText(String text)
       {
-            rootDelegate.setText(text);
+            rootDelegate
+                  .setText(text);
             return this;
       }
 
       public UIButtonDelegate withBackgroundColor(int r,int g,int b)
       {
-            rootDelegate.setBackground(
+            rootDelegate
+                  .setBackground(
                         new Color(
-                                    r,
-                                    g,
-                                    b
+                              r,
+                              g,
+                              b
                         )
-            );
+                  );
             return this;
       }
 
       public UIButtonDelegate withBackgroundColor(Color color)
       {
-            rootDelegate.setBackground(color);
+            rootDelegate
+                  .setBackground(color);
             return this;
       }
 
       public UIButtonDelegate withForegroundColor(int r,int g,int b)
       {
-            rootDelegate.setForeground(
+            rootDelegate
+                  .setForeground(
                         new Color(
-                                    r,
-                                    g,
-                                    b
+                              r,
+                              g,
+                              b
                         )
-            );
+                  );
             return this;
       }
 
       public UIButtonDelegate withForegroundColor(Color color)
       {
-            rootDelegate.setForeground(color);
+            rootDelegate
+                  .setForeground(color);
             return this;
       }
 
       public UIButtonDelegate withAction(Runnable action)
       {
-            rootDelegate.addActionListener(e->action.run());
+            rootDelegate
+                  .addActionListener(
+                        e->action
+                              .run()
+                  );
             return this;
       }
 }

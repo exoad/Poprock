@@ -34,8 +34,8 @@ public class UIWindow
       public UIWindow withSize(int width,int height)
       {
             Dimension dim=new Dimension(
-                        width,
-                        height
+                  width,
+                  height
             );
             setPreferredSize(dim);
             setSize(dim);
@@ -44,24 +44,30 @@ public class UIWindow
 
       public UIWindow withIcon(ImageIcon icon)
       {
-            setIconImage(icon.getImage());
+            setIconImage(
+                  icon
+                        .getImage()
+            );
             return this;
       }
 
       public UIWindow withMinSize(int width,int height)
       {
             setMinimumSize(
-                        new Dimension(
-                                    width,
-                                    height
-                        )
+                  new Dimension(
+                        width,
+                        height
+                  )
             );
             return this;
       }
 
-      public UIWindow withMainDelegate(UIDelegate< ? > delegate)
+      public UIWindow withMainDelegate(UIDelegate<?> delegate)
       {
-            setContentPane(delegate.asComponent());
+            setContentPane(
+                  delegate
+                        .asComponent()
+            );
             return this;
       }
 

@@ -17,18 +17,18 @@ import java.util.function.Consumer;
 
 public final class UIPanelDelegate
                                    extends
-                                   UIDelegate< JPanel >
+                                   UIDelegate<JPanel>
 {
 
       public static final class UIHorizontalPanelDelegate
                                                           extends
-                                                          UIDelegate< JPanel >
+                                                          UIDelegate<JPanel>
                                                           implements
-                                                          UIDelegate.UIStrutContainedDelegate< UIHorizontalPanelDelegate >
+                                                          UIDelegate.UIStrutContainedDelegate<UIHorizontalPanelDelegate>
       {
             int strutSize=0;
-            private UIDelegate< ? > leftSide;
-            private UIDelegate< ? > rightSide;
+            private UIDelegate<?> leftSide;
+            private UIDelegate<?> rightSide;
 
             public static UIHorizontalPanelDelegate make()
             {
@@ -37,18 +37,19 @@ public final class UIPanelDelegate
 
             private UIHorizontalPanelDelegate()
             {
-                  rootDelegate=UIPanelDelegate.make()
-                                              .withBoxLayout(BoxLayoutAlignment.X_AXIS)
-                                              .asComponent();
+                  rootDelegate=UIPanelDelegate
+                        .make()
+                        .withBoxLayout(BoxLayoutAlignment.X_AXIS)
+                        .asComponent();
             }
 
-            public UIHorizontalPanelDelegate withRightComponent(UIDelegate< ? > rightSide)
+            public UIHorizontalPanelDelegate withRightComponent(UIDelegate<?> rightSide)
             {
                   this.rightSide=rightSide;
                   return this;
             }
 
-            public UIHorizontalPanelDelegate withLeftComponent(UIDelegate< ? > leftSide)
+            public UIHorizontalPanelDelegate withLeftComponent(UIDelegate<?> leftSide)
             {
                   this.leftSide=leftSide;
                   return this;
@@ -56,40 +57,56 @@ public final class UIPanelDelegate
 
             public UIHorizontalPanelDelegate withBackgroundColor(Color color)
             {
-                  rootDelegate.setBackground(color);
+                  rootDelegate
+                        .setBackground(color);
                   return this;
             }
 
             @Override public JPanel asComponent()
             {
-                  DebugService.throwIf(
+                  DebugService
+                        .throwIf(
                               leftSide==null,
                               "HorizontalPanelDelegate["+hashCode()+"] received a NULL leftSide component!"
-                  );
-                  DebugService.throwIf(
+                        );
+                  DebugService
+                        .throwIf(
                               rightSide==null,
                               "HorizontalPanelDelegate["+hashCode()+"] received a NULL rightSide component!"
-                  );
-                  rootDelegate.add(leftSide.asComponent());
+                        );
+                  rootDelegate
+                        .add(
+                              leftSide
+                                    .asComponent()
+                        );
                   if(strutSize>=0)
-                        rootDelegate.add(Box.createHorizontalStrut(strutSize));
-                  rootDelegate.add(rightSide.asComponent());
+                        rootDelegate
+                              .add(
+                                    Box
+                                          .createHorizontalStrut(strutSize)
+                              );
+                  rootDelegate
+                        .add(
+                              rightSide
+                                    .asComponent()
+                        );
                   return super.asComponent();
             }
 
             @Override public UIHorizontalPanelDelegate withStrut(int strut)
             {
-                  DebugService.throwIf(
+                  DebugService
+                        .throwIf(
                               strut<0,
                               getNamedThis()+" received a strutSize<0"
-                  );
+                        );
                   this.strutSize=strut;
                   return this;
             }
       }
 
-      private Consumer< Graphics2D > earlyPaintDelegate;
-      private Consumer< Graphics2D > latePaintDelegate;
+      private Consumer<Graphics2D> earlyPaintDelegate;
+      private Consumer<Graphics2D> latePaintDelegate;
 
       public static UIPanelDelegate make()
       {
@@ -103,10 +120,12 @@ public final class UIPanelDelegate
                   @Override public void paintComponent(Graphics g)
                   {
                         if(earlyPaintDelegate!=null)
-                              earlyPaintDelegate.accept((Graphics2D)g);
+                              earlyPaintDelegate
+                                    .accept((Graphics2D)g);
                         super.paintComponent(g);
                         if(latePaintDelegate!=null)
-                              latePaintDelegate.accept((Graphics2D)g);
+                              latePaintDelegate
+                                    .accept((Graphics2D)g);
                   }
             };
       }
@@ -151,22 +170,23 @@ public final class UIPanelDelegate
 
       public UIPanelDelegate withBoxLayout(BoxLayoutAlignment axis)
       {
-            rootDelegate.setLayout(
+            rootDelegate
+                  .setLayout(
                         new BoxLayout(
-                                    rootDelegate,
-                                    axis.axis
+                              rootDelegate,
+                              axis.axis
                         )
-            );
+                  );
             return this;
       }
 
-      public UIPanelDelegate withLatePaintDelegate(Consumer< Graphics2D > paintDelegate)
+      public UIPanelDelegate withLatePaintDelegate(Consumer<Graphics2D> paintDelegate)
       {
             this.latePaintDelegate=paintDelegate;
             return this;
       }
 
-      public UIPanelDelegate withEarlyPaintDelegate(Consumer< Graphics2D > paintDelegate)
+      public UIPanelDelegate withEarlyPaintDelegate(Consumer<Graphics2D> paintDelegate)
       {
             this.earlyPaintDelegate=paintDelegate;
             return this;
@@ -174,58 +194,71 @@ public final class UIPanelDelegate
 
       public UIPanelDelegate withLayout(LayoutManager layout)
       {
-            rootDelegate.setLayout(layout);
+            rootDelegate
+                  .setLayout(layout);
             return this;
       }
 
       public UIPanelDelegate withGridLayout(int rows,int cols)
       {
             return withLayout(
-                        new GridLayout(
-                                    rows,
-                                    cols
-                        )
+                  new GridLayout(
+                        rows,
+                        cols
+                  )
             );
       }
 
       public UIPanelDelegate withFlowLayout(FlowLayoutAlignment alignment,int hgap,int vgap)
       {
-            DebugService.throwIf(
+            DebugService
+                  .throwIf(
                         hgap<0,
                         getNamedThis()+" received hgap<0 for withFlowLayout"
-            );
-            DebugService.throwIf(
+                  );
+            DebugService
+                  .throwIf(
                         vgap<0,
                         getNamedThis()+" received hgap<0 for withFlowLayout"
-            );
+                  );
             return withLayout(
-                        new FlowLayout(
-                                    alignment.axis,
-                                    hgap,
-                                    vgap
-                        )
+                  new FlowLayout(
+                        alignment.axis,
+                        hgap,
+                        vgap
+                  )
             );
       }
 
-      public UIPanelDelegate withComponent(UIBasicDelegate< ? > components)
+      public UIPanelDelegate withComponent(UIBasicDelegate<?> components)
       {
-            rootDelegate.add(components.asComponent());
+            rootDelegate
+                  .add(
+                        components
+                              .asComponent()
+                  );
             return this;
       }
 
-      public UIPanelDelegate withComponent(UIBasicDelegate< ? > components,Object constraints)
+      public UIPanelDelegate withComponent(UIBasicDelegate<?> components,Object constraints)
       {
-            rootDelegate.add(
-                        components.asComponent(),
+            rootDelegate
+                  .add(
+                        components
+                              .asComponent(),
                         constraints
-            );
+                  );
             return this;
       }
 
-      public UIPanelDelegate withComponentIf(boolean condition,UIBasicDelegate< ? > component)
+      public UIPanelDelegate withComponentIf(boolean condition,UIBasicDelegate<?> component)
       {
             if(condition)
-                  rootDelegate.add(component.asComponent());
+                  rootDelegate
+                        .add(
+                              component
+                                    .asComponent()
+                        );
             return this;
       }
 }

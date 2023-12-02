@@ -9,7 +9,8 @@ public interface DebuggableMixin
 
       default void THROW_NOW(String message)
       {
-            DebugService.throwNow(getCanonicallyNamedThis()+": "+message);
+            DebugService
+                  .throwNow(getCanonicallyNamedThis()+": "+message);
       }
 
       default void THROW_NOW_IF(boolean condition,String message)

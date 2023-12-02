@@ -33,85 +33,104 @@ class UIControllerDisplayChild
                                                       JPanel
 
       {
-            public static InnerControllerBlock make(UIDelegate< ? > delegate)
+            public static InnerControllerBlock make(UIDelegate<?> delegate)
             {
                   if(delegate instanceof UIControllerDelegate e)
                         return new InnerControllerBlock(
-                                    e.getHeaderName(),
-                                    e
+                              e
+                                    .getHeaderName(),
+                              e
                         );
-                  DebugService.throwNow(
+                  DebugService
+                        .throwNow(
                               "delegate for 'make' of InnerControllerBlock received a none instance of UIControllerDelegate!"
-                  );
+                        );
                   return null;
             }
 
-            private InnerControllerBlock(String name,UIBasicDelegate< ? > delegate)
+            private InnerControllerBlock(String name,UIBasicDelegate<?> delegate)
             {
-                  setBorder(UIHelper.makeEmptyBorder());
+                  setBorder(
+                        UIHelper
+                              .makeEmptyBorder()
+                  );
                   setLayout(new BorderLayout());
                   add(
-                              UIPanelDelegate.make()
-                                             .withBoxLayout(BoxLayoutAlignment.Y_AXIS)
-                                             .withLatePaintDelegate(
-                                                         g-> {
-                                                               g.setRenderingHint(
-                                                                           RenderingHints.KEY_ANTIALIASING,
-                                                                           RenderingHints.VALUE_ANTIALIAS_ON
-                                                               );
-                                                               g.setColor(
-                                                                           ColorService.hexToColor(
-                                                                                       SharedConstants.LAF_POPROCK_PRIMARY_1
-                                                                           )
-                                                               );
-                                                               g.fillRoundRect(
-                                                                           SharedConstants.CONTROLLER_BLOCKS_PADDING,
-                                                                           SharedConstants.CONTROLLER_BLOCKS_PADDING,
-                                                                           getWidth()-SharedConstants.CONTROLLER_BLOCKS_PADDING,
-                                                                           getHeight()-SharedConstants.CONTROLLER_BLOCKS_PADDING,
-                                                                           6,
-                                                                           6
+                        UIPanelDelegate
+                              .make()
+                              .withBoxLayout(BoxLayoutAlignment.Y_AXIS)
+                              .withLatePaintDelegate(
+                                    g->{
+                                          g
+                                                .setRenderingHint(
+                                                      RenderingHints.KEY_ANTIALIASING,
+                                                      RenderingHints.VALUE_ANTIALIAS_ON
+                                                );
+                                          g
+                                                .setColor(
+                                                      ColorService
+                                                            .hexToColor(
+                                                                  SharedConstants.LAF_POPROCK_PRIMARY_1
+                                                            )
+                                                );
+                                          g
+                                                .fillRoundRect(
+                                                      SharedConstants.CONTROLLER_BLOCKS_PADDING,
+                                                      SharedConstants.CONTROLLER_BLOCKS_PADDING,
+                                                      getWidth()-SharedConstants.CONTROLLER_BLOCKS_PADDING,
+                                                      getHeight()-SharedConstants.CONTROLLER_BLOCKS_PADDING,
+                                                      6,
+                                                      6
 
-                                                               );
-                                                         }
-                                             )
-                                             .withComponent(
-                                                         UILabelDelegate.make(name)
-                                                                        .withForegroundColor(
-                                                                                    ColorService.hexToColor(
-                                                                                                SharedConstants.LAF_POPROCK_BG_FG
-                                                                                    )
-                                                                        )
-                                                                        .withPadding(4)
-                                                                        .withTransparency(true)
-                                                                        .withAlignmentY(Alignment.LEFT)
-                                             )
-                                             .withComponent(delegate)
-                                             .withPadding(
-                                                         SharedConstants.CONTROLLER_BLOCKS_PADDING-2,
-                                                         SharedConstants.CONTROLLER_BLOCKS_PADDING+5,
-                                                         SharedConstants.CONTROLLER_BLOCKS_PADDING-5,
-                                                         SharedConstants.CONTROLLER_BLOCKS_PADDING+5
-                                             )
-                                             .asComponent(),
-                              BorderLayout.CENTER
+                                                );
+                                    }
+                              )
+                              .withComponent(
+                                    UILabelDelegate
+                                          .make(name)
+                                          .withForegroundColor(
+                                                ColorService
+                                                      .hexToColor(
+                                                            SharedConstants.LAF_POPROCK_BG_FG
+                                                      )
+                                          )
+                                          .withPadding(4)
+                                          .withTransparency(true)
+                                          .withAlignmentY(Alignment.LEFT)
+                              )
+                              .withComponent(delegate)
+                              .withPadding(
+                                    SharedConstants.CONTROLLER_BLOCKS_PADDING-2,
+                                    SharedConstants.CONTROLLER_BLOCKS_PADDING+5,
+                                    SharedConstants.CONTROLLER_BLOCKS_PADDING-5,
+                                    SharedConstants.CONTROLLER_BLOCKS_PADDING+5
+                              )
+                              .asComponent(),
+                        BorderLayout.CENTER
                   );
             }
       }
 
       private void insertNewBlock(InnerControllerBlock block)
       {
-            block.setAlignmentX(Component.CENTER_ALIGNMENT);
-            block.setAlignmentY(Component.TOP_ALIGNMENT);
-            block.setMaximumSize(
+            block
+                  .setAlignmentX(Component.CENTER_ALIGNMENT);
+            block
+                  .setAlignmentY(Component.TOP_ALIGNMENT);
+            block
+                  .setMaximumSize(
                         new java.awt.Dimension(
-                                    Integer.MAX_VALUE,
-                                    block.getPreferredSize().height
+                              Integer.MAX_VALUE,
+                              block
+                                    .getPreferredSize().height
                         )
-            );
-            blocksPanel.add(block);
-            scrollPane.revalidate();
-            scrollPane.repaint();
+                  );
+            blocksPanel
+                  .add(block);
+            scrollPane
+                  .revalidate();
+            scrollPane
+                  .repaint();
       }
 
       private JPanel blocksPanel;
@@ -121,122 +140,158 @@ class UIControllerDisplayChild
       public UIControllerDisplayChild()
       {
             // init all listeners for the eventpool registry["1"]
-            EventPool.OBJECTS.get(1)
-                             .attachListener(
-                                         ControllerChildDelegatesEventPayload.class,
-                                         ()-> {
-                                               EventPool.OBJECTS.get(1)
-                                                                .getPayload(ControllerChildDelegatesEventPayload.class);
-                                         }
-                             );
-            blocksPanel=UIPanelDelegate.make()
-                                       .withBoxLayout(BoxLayoutAlignment.Y_AXIS)
-                                       .asComponent();
-            setBorder(BorderFactory.createEmptyBorder());
-            scrollPane=new JScrollPane(blocksPanel);
-            scrollPane.setViewportBorder(
-                        UIHelper.makeLinedBorder(ColorService.hexToColor(SharedConstants.LAF_POPROCK_PRIMARY_2))
+            EventPool.OBJECTS
+                  .get(1)
+                  .attachListener(
+                        ControllerChildDelegatesEventPayload.class,
+                        ()->{
+                              EventPool.OBJECTS
+                                    .get(1)
+                                    .getPayload(ControllerChildDelegatesEventPayload.class);
+                        }
+                  );
+            blocksPanel=UIPanelDelegate
+                  .make()
+                  .withBoxLayout(BoxLayoutAlignment.Y_AXIS)
+                  .asComponent();
+            setBorder(
+                  BorderFactory
+                        .createEmptyBorder()
             );
-            scrollPane.getVerticalScrollBar()
-                      .setUnitIncrement(SharedConstants.CONTROLLER_SCROLLBAR_UNIT_INCREMENT);
-            scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-            scrollPane.setBorder(BorderFactory.createEmptyBorder());
+            scrollPane=new JScrollPane(blocksPanel);
+            scrollPane
+                  .setViewportBorder(
+                        UIHelper
+                              .makeLinedBorder(
+                                    ColorService
+                                          .hexToColor(SharedConstants.LAF_POPROCK_PRIMARY_2)
+                              )
+                  );
+            scrollPane
+                  .getVerticalScrollBar()
+                  .setUnitIncrement(SharedConstants.CONTROLLER_SCROLLBAR_UNIT_INCREMENT);
+            scrollPane
+                  .setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+            scrollPane
+                  .setBorder(
+                        BorderFactory
+                              .createEmptyBorder()
+                  );
             setLayout(new BorderLayout());
             add(
-                        scrollPane,
-                        BorderLayout.CENTER
+                  scrollPane,
+                  BorderLayout.CENTER
             );
-            bottomButtonsPanel=UIPanelDelegate.make()
-                                              .withLayout(
-                                                          new FlowLayout(
-                                                                      FlowLayout.RIGHT,
-                                                                      6,
-                                                                      0
-                                                          )
-                                              )
-                                              .withComponent(
-                                                          UIBuilderDelegate.make(()-> {
-                                                                UIButtonDelegate button=UIButtonDelegate.make()
-                                                                                                        .withText("New")
-                                                                                                        .withBackgroundColor(
-                                                                                                                    ColorService.hexToColor(
-                                                                                                                                SharedConstants.LAF_POPROCK_PRIMARY_2
-                                                                                                                    )
-                                                                                                        )
-                                                                                                        .withAction(
-                                                                                                                    ()->EventPool.OBJECTS.get(
-                                                                                                                                1
-                                                                                                                    )
-                                                                                                                                         .dispatchEvent(
-                                                                                                                                                     GradientEventPayload.class,
-                                                                                                                                                     GradientEventPayload.EMPTY
-                                                                                                                                         )
-                                                                                                        );
-                                                                UIDelegate< JPopupMenu > popupMenu=UIHelper.makePopupMenu(
-                                                                            new UIPopupItemChilds.PopupConfiguration(
-                                                                                        "Add New Logic",
-                                                                                        true,
-                                                                                        button.asComponent()
-                                                                            ),
-                                                                            new UIPopupItemChilds.SimplePopupDelegate(
-                                                                                        "Test#1",
-                                                                                        BasicService.emptyRunnable()
-                                                                            ),
-                                                                            new UIPopupItemChilds.SimplePopupDelegate(
-                                                                                        "Test#2",
-                                                                                        BasicService.emptyRunnable()
-                                                                            )
-                                                                );
-                                                                button.withAction(
-                                                                            ()->UIPopupItemChilds.showPopupMenuDelegate(
-                                                                                        popupMenu,
-                                                                                        Offset.ZERO
-                                                                            )
-                                                                );
-                                                                return button;
-                                                          })
+            bottomButtonsPanel=UIPanelDelegate
+                  .make()
+                  .withLayout(
+                        new FlowLayout(
+                              FlowLayout.RIGHT,
+                              6,
+                              0
+                        )
+                  )
+                  .withComponent(
+                        UIBuilderDelegate
+                              .make(()->{
+                                    UIButtonDelegate button=UIButtonDelegate
+                                          .make()
+                                          .withText("New")
+                                          .withBackgroundColor(
+                                                ColorService
+                                                      .hexToColor(
+                                                            SharedConstants.LAF_POPROCK_PRIMARY_2
+                                                      )
+                                          )
+                                          .withAction(
+                                                ()->EventPool.OBJECTS
+                                                      .get(
+                                                            1
+                                                      )
+                                                      .dispatchEvent(
+                                                            GradientEventPayload.class,
+                                                            GradientEventPayload.EMPTY
+                                                      )
+                                          );
+                                    UIDelegate<JPopupMenu> popupMenu=UIHelper
+                                          .makePopupMenu(
+                                                new UIPopupItemChilds.PopupConfiguration(
+                                                      "Add New Logic",
+                                                      true,
+                                                      button
+                                                            .asComponent()
+                                                ),
+                                                new UIPopupItemChilds.SimplePopupDelegate(
+                                                      "Test#1",
+                                                      BasicService
+                                                            .emptyRunnable()
+                                                ),
+                                                new UIPopupItemChilds.SimplePopupDelegate(
+                                                      "Test#2",
+                                                      BasicService
+                                                            .emptyRunnable()
+                                                )
+                                          );
+                                    button
+                                          .withAction(
+                                                ()->UIPopupItemChilds
+                                                      .showPopupMenuDelegate(
+                                                            popupMenu,
+                                                            Offset.ZERO
+                                                      )
+                                          );
+                                    return button;
+                              })
 
-                                              )
-                                              .withComponentIf(
-                                                          SharedConstants.DEV_MODE,
-                                                          UIButtonDelegate.make()
-                                                                          .withText("TEST")
-                                                                          .withAction(()-> {
-                                                                                insertNewBlock(
-                                                                                            InnerControllerBlock.make(
-                                                                                                        new UIControllerDelegateChilds.WindowSetupChildBlock().withBorder(
-                                                                                                                    UIHelper.makeLinedBorder(
-                                                                                                                                Color.white
-                                                                                                                    )
-                                                                                                        )
-                                                                                            )
-                                                                                );
-                                                                          })
-                                              )
-                                              .withComponentIf(
-                                                          SharedConstants.DEV_MODE,
-                                                          UIButtonDelegate.make()
-                                                                          .withText(
-                                                                                      "RandomColor"
-                                                                          )
-                                                                          .withAction(
-                                                                                      ()->EventPool.OBJECTS.get(1)
-                                                                                                           .dispatchEvent(
-                                                                                                                       GradientEventPayload.class,
-                                                                                                                       GradientEventPayload.makeRandomColor()
-                                                                                                           )
-                                                                          )
-                                                                          .withBackgroundColor(
-                                                                                      ColorService.hexToColor(
-                                                                                                  SharedConstants.LAF_POPROCK_PRIMARY_2
-                                                                                      )
-                                                                          )
-                                              )
-                                              .withTransparency(true)
-                                              .asComponent();
+                  )
+                  .withComponentIf(
+                        SharedConstants.DEV_MODE,
+                        UIButtonDelegate
+                              .make()
+                              .withText("TEST")
+                              .withAction(()->{
+                                    insertNewBlock(
+                                          InnerControllerBlock
+                                                .make(
+                                                      new UIControllerDelegateChilds.WindowSetupChildBlock()
+                                                            .withBorder(
+                                                                  UIHelper
+                                                                        .makeLinedBorder(
+                                                                              Color.white
+                                                                        )
+                                                            )
+                                                )
+                                    );
+                              })
+                  )
+                  .withComponentIf(
+                        SharedConstants.DEV_MODE,
+                        UIButtonDelegate
+                              .make()
+                              .withText(
+                                    "RandomColor"
+                              )
+                              .withAction(
+                                    ()->EventPool.OBJECTS
+                                          .get(1)
+                                          .dispatchEvent(
+                                                GradientEventPayload.class,
+                                                GradientEventPayload
+                                                      .makeRandomColor()
+                                          )
+                              )
+                              .withBackgroundColor(
+                                    ColorService
+                                          .hexToColor(
+                                                SharedConstants.LAF_POPROCK_PRIMARY_2
+                                          )
+                              )
+                  )
+                  .withTransparency(true)
+                  .asComponent();
             add(
-                        bottomButtonsPanel,
-                        BorderLayout.SOUTH
+                  bottomButtonsPanel,
+                  BorderLayout.SOUTH
             );
 
       }

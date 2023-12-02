@@ -12,9 +12,11 @@ public final class AsyncService
 
       public static void runAsync(Runnable runnable)
       {
-            new Thread(runnable).start();
+            new Thread(runnable)
+                  .start();
       }
 
       public static final Timer WORKER1=new Timer("pkg.exoad-softgradient-worker#1");
-      public static final ExecutorService WORKER2=Executors.newWorkStealingPool();
+      public static final ExecutorService WORKER2=Executors
+            .newWorkStealingPool();
 }

@@ -15,16 +15,16 @@ public final class AwtMixerService
       public static Offset convertPointClass(Point point)
       {
             return new Offset(
-                        point.x,
-                        point.y
+                  point.x,
+                  point.y
             );
       }
 
       public static Size convertDimensionClass(Dimension dim)
       {
             return new Size(
-                        dim.width,
-                        dim.height
+                  dim.width,
+                  dim.height
             );
 
       }

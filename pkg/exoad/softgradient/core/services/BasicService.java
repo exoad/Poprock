@@ -10,28 +10,33 @@ public final class BasicService
       {
       }
 
-      public static boolean containsClass(Collection< Class< ? > > classes,Class< ? > clazz)
+      public static boolean containsClass(Collection<Class<?>> classes,Class<?> clazz)
       {
-            for(Class< ? > c : classes)
-                  if(c.getCanonicalName()
-                      .equals(clazz.getCanonicalName()))
+            for(Class<?> c: classes)
+                  if(c
+                        .getCanonicalName()
+                        .equals(
+                              clazz
+                                    .getCanonicalName()
+                        ))
                         return true;
             return false;
       }
 
       public static void requireAllNonNull(Object... objects)
       {
-            for(Object r : objects)
-                  Objects.requireNonNull(r);
+            for(Object r: objects)
+                  Objects
+                        .requireNonNull(r);
       }
 
       public static Runnable emptyRunnable()
       {
-            return ()-> {};
+            return ()->{};
       }
 
-      public static Consumer< ? > emptyConsumer()
+      public static Consumer<?> emptyConsumer()
       {
-            return e-> {};
+            return e->{};
       }
 }
