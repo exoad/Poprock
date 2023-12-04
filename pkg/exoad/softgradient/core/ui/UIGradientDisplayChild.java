@@ -37,7 +37,9 @@ class UIGradientDisplayChild
                   );
             if(EventPool.OBJECTS
                   .get(1)
-                  .getPayload(GradientEventPayload.class)!=null&&!EventPool.OBJECTS
+                  .getPayload(
+                        GradientEventPayload.class
+                  )!=null&&!EventPool.OBJECTS
                         .get(1)
                         .getPayload(
                               GradientEventPayload.class
@@ -95,7 +97,9 @@ class UIGradientDisplayChild
                   g
                         .setColor(
                               ColorService
-                                    .hexToColor(SharedConstants.LAF_POPROCK_BG_FG)
+                                    .hexToColor(
+                                          SharedConstants.LAF_POPROCK_BG_FG
+                                    )
                         );
                   g
                         .fillRect(

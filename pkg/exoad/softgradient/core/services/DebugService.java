@@ -1,5 +1,15 @@
 package pkg.exoad.softgradient.core.services;
 
+/**
+ * Debug Service - Utility class for handling various exceptions that can be
+ * thrown during the runtime of this program.
+ * <br/>
+ * Most of the things occuring here like throwing errors should only happen in
+ * development. This is especially the case because the hints provided are only
+ * able to.
+ *
+ * @author Jack Meng
+ */
 public final class DebugService
 {
       private DebugService()
@@ -12,7 +22,9 @@ public final class DebugService
       {
             throwable
                   .setStackTrace(
-                        new StackTraceElement[]{
+                        new StackTraceElement[]{ // this part should really be customized, but we can't cuz StackTraceElement.class is an immutable class!! D: big sad
+
+                                                // we only supply the beginning stack trace because this will be the most useful call because it identifies the invoking source
                                                 new StackTraceElement(
                                                       throwable
                                                             .getStackTrace()[0]
@@ -25,6 +37,7 @@ public final class DebugService
                                                             .getStackTrace()[0]
                                                                   .getLineNumber()
                                                 ),
+                                                // we only supply the ending stack trace because that could be useful to identify the root source
                                                 new StackTraceElement(
                                                       throwable
                                                             .getStackTrace()[throwable
@@ -45,6 +58,14 @@ public final class DebugService
             return throwable;
       }
 
+      /**
+       * Tells the debug service to prepare an exception right now because of an
+       * internal error. Also note this is a synchronized method meaning only
+       * ONE thread may call it at a time.
+       *
+       * @param message The error message. THIS SHOULD NOT BE AUTOMATICALLY
+       * GENERATED
+       */
       public static synchronized void throwNow(String message)
       {
             throwIf(
@@ -53,6 +74,14 @@ public final class DebugService
             );
       }
 
+      /**
+       * Tells the debug service to prepare an exception ONLY IF the condition
+       * passed returns TRUE
+       *
+       * @param condition The condition
+       * @param message The message. THIS SHOULD NOT BE AUTOMATICALLY GENERATED.
+       * [This is usually the hint given to a programmer]
+       */
       public static synchronized void throwIf(boolean condition,String message)
       {
             if(condition)
@@ -63,6 +92,17 @@ public final class DebugService
                   );
       }
 
+      /**
+       * Similar to {@link #throwIf(boolean, String)} but instead you can also
+       * pass a related
+       * cause of this exception.
+       *
+       * @param condition The condition
+       * @param message The message
+       * @param cause The related caused exception
+       *
+       * @see #throwIf(boolean, String)
+       */
       public static synchronized void throwIf(
             boolean condition,String message,Throwable cause
       )

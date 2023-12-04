@@ -2,6 +2,7 @@ package pkg.exoad.softgradient.core.ui;
 
 import java.awt.Color;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import pkg.exoad.softgradient.core.SharedConstants;
@@ -37,6 +38,12 @@ public final class UIButtonDelegate
       {
             rootDelegate
                   .setText(text);
+            return this;
+      }
+
+      public UIButtonDelegate withIcon(ImageIcon icon)
+      {
+            rootDelegate.setIcon(icon);
             return this;
       }
 

@@ -20,6 +20,7 @@ class SoftGradientEntry
 {
       static
       {
+            // do all pre-runtime property settings and checks before the main function is called
             System
                   .setProperty(
                         "sun.java2d.opengl",
@@ -80,7 +81,9 @@ class SoftGradientEntry
                         "ScrollBar.thumb",
                         new ColorUIResource(
                               ColorService
-                                    .hexToColor(SharedConstants.LAF_POPROCK_PRIMARY_1)
+                                    .hexToColor(
+                                          SharedConstants.LAF_POPROCK_PRIMARY_1
+                                    )
                         )
                   );
             try
@@ -144,8 +147,10 @@ class SoftGradientEntry
                         SharedConstants.WINDOW_HEIGHT
                   )
                   .withMainDelegate(
-                        new UIAppMainDelegate()
-                              .withPadding(SharedConstants.GRADIENT_WINDOW_PADDING)
+                        UIAppMainDelegate.OBJECT
+                              .withPadding(
+                                    SharedConstants.GRADIENT_WINDOW_PADDING
+                              )
                   )
                   .run();
       }
