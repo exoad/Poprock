@@ -26,7 +26,7 @@ TODO
 
 | Platform        	| Flavors             	| Performance 	| Support     	| Testing     	| Notes                    	|
 |-----------------	|---------------------	|-------------	|-------------	|-------------	|--------------------------	|
-| Linux           	| `6.1.62-1`          	| ⚫ - N/A    	| 🟢 - YES     	| 🔴 - NONE  	| 	|
+| Linux           	| `6.1.62-1`          	| ⚫ - N/A    	| 🟢 - YES     	| 🟢 - TESTED  	| 	Tested against Manjaro-KDE |
 | MacOS (OSX)     	|                     	| ⚫ - N/A     	| 🟢 - YES    	| 🔴 - NONE    	|                          	|
 | Windows (Win32) 	| `10`, `11`          	| 🟢 - OK     	| 🟢 - YES     	| 🟢 - TESTED    	|  Tested against Win11                   	|
 
