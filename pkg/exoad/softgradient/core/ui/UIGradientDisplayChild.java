@@ -18,8 +18,8 @@ class UIGradientDisplayChild
 
       public UIGradientDisplayChild()
       {
-            EventPool.OBJECTS
-                  .get(1)
+            EventPool
+                  .getPool(1)
                   .attachListener(
                         GradientEventPayload.class,
                         this::repaint
@@ -35,12 +35,12 @@ class UIGradientDisplayChild
                         RenderingHints.KEY_ANTIALIASING,
                         RenderingHints.VALUE_ANTIALIAS_ON
                   );
-            if(EventPool.OBJECTS
-                  .get(1)
+            if(EventPool
+                  .getPool(1)
                   .getPayload(
                         GradientEventPayload.class
-                  )!=null&&!EventPool.OBJECTS
-                        .get(1)
+                  )!=null&&!EventPool
+                        .getPool(1)
                         .getPayload(
                               GradientEventPayload.class
                         )
@@ -48,8 +48,8 @@ class UIGradientDisplayChild
                               GradientEventPayload.EMPTY
                         ))
             {
-                  GradientEventPayload e=(GradientEventPayload)EventPool.OBJECTS
-                        .get(1)
+                  GradientEventPayload e=(GradientEventPayload)EventPool
+                        .getPool(1)
                         .getPayload(GradientEventPayload.class);
                   g
                         .setColor(

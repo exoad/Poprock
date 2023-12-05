@@ -32,8 +32,8 @@ public final class UIControllerDelegateChilds
       static
       {
             // TODO: fix this part for the single child event pool used here
-            EventPool.OBJECTS
-                  .get(1)
+            EventPool
+                  .getPool(1)
                   .dispatchEvent(
                         ControllerChildDelegatesEventPayload.class,
                         new ControllerChildDelegatesEventPayload(

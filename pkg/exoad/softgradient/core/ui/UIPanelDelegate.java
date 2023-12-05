@@ -65,12 +65,12 @@ public final class UIPanelDelegate
             @Override public JPanel asComponent()
             {
                   DebugService
-                        .throwIf(
+                        .panicOn(
                               leftSide==null,
                               "HorizontalPanelDelegate["+hashCode()+"] received a NULL leftSide component!"
                         );
                   DebugService
-                        .throwIf(
+                        .panicOn(
                               rightSide==null,
                               "HorizontalPanelDelegate["+hashCode()+"] received a NULL rightSide component!"
                         );
@@ -96,7 +96,7 @@ public final class UIPanelDelegate
             @Override public UIHorizontalPanelDelegate withStrut(int strut)
             {
                   DebugService
-                        .throwIf(
+                        .panicOn(
                               strut<0,
                               getNamedThis()+" received a strutSize<0"
                         );
@@ -212,12 +212,12 @@ public final class UIPanelDelegate
       public UIPanelDelegate withFlowLayout(FlowLayoutAlignment alignment,int hgap,int vgap)
       {
             DebugService
-                  .throwIf(
+                  .panicOn(
                         hgap<0,
                         getNamedThis()+" received hgap<0 for withFlowLayout"
                   );
             DebugService
-                  .throwIf(
+                  .panicOn(
                         vgap<0,
                         getNamedThis()+" received hgap<0 for withFlowLayout"
                   );

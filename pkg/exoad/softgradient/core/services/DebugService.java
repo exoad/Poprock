@@ -68,7 +68,7 @@ public final class DebugService
        */
       public static synchronized void throwNow(String message)
       {
-            throwIf(
+            panicOn(
                   true,
                   "\n\t[!]\t"+message
             );
@@ -82,7 +82,7 @@ public final class DebugService
        * @param message The message. THIS SHOULD NOT BE AUTOMATICALLY GENERATED.
        * [This is usually the hint given to a programmer]
        */
-      public static synchronized void throwIf(boolean condition,String message)
+      public static synchronized void panicOn(boolean condition,String message)
       {
             if(condition)
                   throw modifyThrowable(
@@ -93,7 +93,7 @@ public final class DebugService
       }
 
       /**
-       * Similar to {@link #throwIf(boolean, String)} but instead you can also
+       * Similar to {@link #panicOn(boolean, String)} but instead you can also
        * pass a related
        * cause of this exception.
        *
@@ -101,9 +101,9 @@ public final class DebugService
        * @param message The message
        * @param cause The related caused exception
        *
-       * @see #throwIf(boolean, String)
+       * @see #panicOn(boolean, String)
        */
-      public static synchronized void throwIf(
+      public static synchronized void panicOn(
             boolean condition,String message,Throwable cause
       )
       {

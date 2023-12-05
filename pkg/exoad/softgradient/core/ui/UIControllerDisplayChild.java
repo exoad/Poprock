@@ -48,7 +48,9 @@ class UIControllerDisplayChild
                   return null;
             }
 
-            private InnerControllerBlock(String name,UIBasicDelegate<?> delegate)
+            private InnerControllerBlock(
+                  String name,UIBasicDelegate<?> delegate
+            )
             {
                   setBorder(
                         UIHelper
@@ -140,14 +142,16 @@ class UIControllerDisplayChild
       public UIControllerDisplayChild()
       {
             // init all listeners for the eventpool registry["1"]
-            EventPool.OBJECTS
-                  .get(1)
+            EventPool
+                  .getPool(1)
                   .attachListener(
                         ControllerChildDelegatesEventPayload.class,
                         ()->{
-                              EventPool.OBJECTS
-                                    .get(1)
-                                    .getPayload(ControllerChildDelegatesEventPayload.class);
+                              EventPool
+                                    .getPool(1)
+                                    .getPayload(
+                                          ControllerChildDelegatesEventPayload.class
+                                    );
                         }
                   );
             blocksPanel=UIPanelDelegate
@@ -164,14 +168,20 @@ class UIControllerDisplayChild
                         UIHelper
                               .makeLinedBorder(
                                     ColorService
-                                          .hexToColor(SharedConstants.LAF_POPROCK_PRIMARY_2)
+                                          .hexToColor(
+                                                SharedConstants.LAF_POPROCK_PRIMARY_2
+                                          )
                               )
                   );
             scrollPane
                   .getVerticalScrollBar()
-                  .setUnitIncrement(SharedConstants.CONTROLLER_SCROLLBAR_UNIT_INCREMENT);
+                  .setUnitIncrement(
+                        SharedConstants.CONTROLLER_SCROLLBAR_UNIT_INCREMENT
+                  );
             scrollPane
-                  .setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+                  .setVerticalScrollBarPolicy(
+                        ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS
+                  );
             scrollPane
                   .setBorder(
                         BorderFactory
@@ -204,8 +214,8 @@ class UIControllerDisplayChild
                                                       )
                                           )
                                           .withAction(
-                                                ()->EventPool.OBJECTS
-                                                      .get(
+                                                ()->EventPool
+                                                      .getPool(
                                                             1
                                                       )
                                                       .dispatchEvent(
@@ -272,8 +282,8 @@ class UIControllerDisplayChild
                                     "RandomColor"
                               )
                               .withAction(
-                                    ()->EventPool.OBJECTS
-                                          .get(1)
+                                    ()->EventPool
+                                          .getPool(1)
                                           .dispatchEvent(
                                                 GradientEventPayload.class,
                                                 GradientEventPayload

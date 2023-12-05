@@ -16,6 +16,13 @@ import pkg.exoad.softgradient.core.ui.UIAppMainDelegate;
 import pkg.exoad.softgradient.core.ui.UIWindow;
 
 import javax.swing.plaf.ColorUIResource;
+
+/**
+ * Main entry point into the SoftGradient application. Should not be called if
+ * you are using it as a library!
+ *
+ * @author Jack Meng
+ */
 class SoftGradientEntry
 {
       static
@@ -105,26 +112,26 @@ class SoftGradientEntry
             // Pool_ID "2" -> Registration for all UIControllerChildDelegates (shenanigans)
             EventPool
                   .registerEventPool(1);
-            EventPool.OBJECTS
-                  .get(1)
+            EventPool
+                  .getPool(1)
                   .registerEvent(
                         GradientEventPayload.class,
                         null
                   );
-            EventPool.OBJECTS
-                  .get(1)
+            EventPool
+                  .getPool(1)
                   .registerEvent(
                         ControllerChildDelegatesEventPayload.class,
                         null
                   );
-            EventPool.OBJECTS
-                  .get(1)
+            EventPool
+                  .getPool(1)
                   .attachListener(
                         GradientEventPayload.class,
                         ()->System.out
                               .println(
-                                    "Event Dispatched: "+EventPool.OBJECTS
-                                          .get(1)
+                                    "Event Dispatched: "+EventPool
+                                          .getPool(1)
                                           .getPayload(
                                                 GradientEventPayload.class
                                           )
