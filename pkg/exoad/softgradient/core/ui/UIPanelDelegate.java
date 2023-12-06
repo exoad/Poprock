@@ -23,8 +23,6 @@ public final class UIPanelDelegate
       public static final class UIHorizontalPanelDelegate
                                                           extends
                                                           UIDelegate<JPanel>
-                                                          implements
-                                                          UIDelegate.UIStrutContainedDelegate<UIHorizontalPanelDelegate>
       {
             int strutSize=0;
             private UIDelegate<?> leftSide;
@@ -43,13 +41,17 @@ public final class UIPanelDelegate
                         .asComponent();
             }
 
-            public UIHorizontalPanelDelegate withRightComponent(UIDelegate<?> rightSide)
+            public UIHorizontalPanelDelegate withRightComponent(
+                  UIDelegate<?> rightSide
+            )
             {
                   this.rightSide=rightSide;
                   return this;
             }
 
-            public UIHorizontalPanelDelegate withLeftComponent(UIDelegate<?> leftSide)
+            public UIHorizontalPanelDelegate withLeftComponent(
+                  UIDelegate<?> leftSide
+            )
             {
                   this.leftSide=leftSide;
                   return this;
@@ -93,7 +95,7 @@ public final class UIPanelDelegate
                   return super.asComponent();
             }
 
-            @Override public UIHorizontalPanelDelegate withStrut(int strut)
+            public UIHorizontalPanelDelegate withStrut(int strut)
             {
                   DebugService
                         .panicOn(
@@ -180,13 +182,17 @@ public final class UIPanelDelegate
             return this;
       }
 
-      public UIPanelDelegate withLatePaintDelegate(Consumer<Graphics2D> paintDelegate)
+      public UIPanelDelegate withLatePaintDelegate(
+            Consumer<Graphics2D> paintDelegate
+      )
       {
             this.latePaintDelegate=paintDelegate;
             return this;
       }
 
-      public UIPanelDelegate withEarlyPaintDelegate(Consumer<Graphics2D> paintDelegate)
+      public UIPanelDelegate withEarlyPaintDelegate(
+            Consumer<Graphics2D> paintDelegate
+      )
       {
             this.earlyPaintDelegate=paintDelegate;
             return this;
@@ -209,7 +215,9 @@ public final class UIPanelDelegate
             );
       }
 
-      public UIPanelDelegate withFlowLayout(FlowLayoutAlignment alignment,int hgap,int vgap)
+      public UIPanelDelegate withFlowLayout(
+            FlowLayoutAlignment alignment,int hgap,int vgap
+      )
       {
             DebugService
                   .panicOn(
@@ -240,7 +248,9 @@ public final class UIPanelDelegate
             return this;
       }
 
-      public UIPanelDelegate withComponent(UIBasicDelegate<?> components,Object constraints)
+      public UIPanelDelegate withComponent(
+            UIBasicDelegate<?> components,Object constraints
+      )
       {
             rootDelegate
                   .add(
@@ -251,7 +261,9 @@ public final class UIPanelDelegate
             return this;
       }
 
-      public UIPanelDelegate withComponentIf(boolean condition,UIBasicDelegate<?> component)
+      public UIPanelDelegate withComponentIf(
+            boolean condition,UIBasicDelegate<?> component
+      )
       {
             if(condition)
                   rootDelegate

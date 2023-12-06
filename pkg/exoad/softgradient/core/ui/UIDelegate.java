@@ -18,7 +18,8 @@ public class UIDelegate<T extends JComponent>
                        UIBasicDelegate<T>
 {
       public final record DelegateProperties(
-            Size prefSize,Size size,Size minSize,Size maxSize,Offset origin,boolean visibility
+            Size prefSize,Size size,Size minSize,Size maxSize,Offset origin,
+            boolean visibility,ColorObj bg,boolean opaqueness
       )
       {
 
@@ -30,11 +31,6 @@ public class UIDelegate<T extends JComponent>
             delegate
                   .setRootDelegate(component);
             return delegate;
-      }
-
-      public interface UIStrutContainedDelegate<T>
-      {
-            T withStrut(int strut);
       }
 
       protected T rootDelegate;
@@ -92,7 +88,13 @@ public class UIDelegate<T extends JComponent>
                                     .getLocation()
                         ),
                   rootDelegate
-                        .isVisible()
+                        .isVisible(),
+                  new ColorObj(
+                        rootDelegate
+                              .getBackground()
+                  ),
+                  rootDelegate
+                        .isOpaque()
             );
       }
 

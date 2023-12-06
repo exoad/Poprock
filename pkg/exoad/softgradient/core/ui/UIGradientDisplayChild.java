@@ -100,6 +100,7 @@ class UIGradientDisplayChild
                                     .hexToColor(
                                           SharedConstants.LAF_POPROCK_BG_FG
                                     )
+                                    .asAwt()
                         );
                   g
                         .fillRect(

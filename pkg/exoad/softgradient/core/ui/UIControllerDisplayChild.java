@@ -74,6 +74,7 @@ class UIControllerDisplayChild
                                                             .hexToColor(
                                                                   SharedConstants.LAF_POPROCK_PRIMARY_1
                                                             )
+                                                            .asAwt()
                                                 );
                                           g
                                                 .fillRoundRect(
@@ -171,6 +172,7 @@ class UIControllerDisplayChild
                                           .hexToColor(
                                                 SharedConstants.LAF_POPROCK_PRIMARY_2
                                           )
+                                          .asAwt()
                               )
                   );
             scrollPane

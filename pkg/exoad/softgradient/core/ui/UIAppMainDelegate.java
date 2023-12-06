@@ -1,6 +1,7 @@
 package pkg.exoad.softgradient.core.ui;
 
-import javax.swing.JSplitPane;
+import pkg.exoad.softgradient.core.ui.java.UXSplit;
+import pkg.exoad.softgradient.core.ui.java.UXSplit.SplitLocation;
 
 /**
  * The main content panel that holds all of the necessary information for
@@ -11,7 +12,7 @@ import javax.swing.JSplitPane;
  */
 public final class UIAppMainDelegate
                                      extends
-                                     UIDelegate<JSplitPane>
+                                     UIDelegate<UXSplit>
 {
 
       /**
@@ -24,7 +25,7 @@ public final class UIAppMainDelegate
       private UIAppMainDelegate()
       {
             // initialize this basic delegate with the required delegates
-            rootDelegate=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
+            rootDelegate=new UXSplit(SplitLocation.X_AXIS);
             rootDelegate
                   .setDividerLocation(0.5);
             rootDelegate

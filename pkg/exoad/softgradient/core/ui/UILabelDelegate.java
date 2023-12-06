@@ -1,11 +1,11 @@
 package pkg.exoad.softgradient.core.ui;
 
-import javax.swing.*;
-import java.awt.*;
+import pkg.exoad.softgradient.core.ColorObj;
+import pkg.exoad.softgradient.core.ui.java.UXLabel;
 
 public class UILabelDelegate
                              extends
-                             UIDelegate<JLabel>
+                             UIDelegate<UXLabel>
 {
       public static UILabelDelegate make(String text)
       {
@@ -14,7 +14,7 @@ public class UILabelDelegate
 
       private UILabelDelegate(String text)
       {
-            rootDelegate=new JLabel(text);
+            rootDelegate=new UXLabel(text);
       }
 
       public UILabelDelegate withText(String text)
@@ -24,10 +24,10 @@ public class UILabelDelegate
             return this;
       }
 
-      public UILabelDelegate withForegroundColor(Color color)
+      public UILabelDelegate withForegroundColor(ColorObj color)
       {
             rootDelegate
-                  .setForeground(color);
+                  .setFgColor(color);
             return this;
       }
 }

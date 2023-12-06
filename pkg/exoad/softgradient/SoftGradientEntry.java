@@ -91,6 +91,7 @@ class SoftGradientEntry
                                     .hexToColor(
                                           SharedConstants.LAF_POPROCK_PRIMARY_1
                                     )
+                                    .asAwt()
                         )
                   );
             try

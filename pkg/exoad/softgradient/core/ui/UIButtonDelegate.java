@@ -3,14 +3,15 @@ package pkg.exoad.softgradient.core.ui;
 import java.awt.Color;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 
+import pkg.exoad.softgradient.core.ColorObj;
 import pkg.exoad.softgradient.core.SharedConstants;
 import pkg.exoad.softgradient.core.services.ColorService;
+import pkg.exoad.softgradient.core.ui.java.UXButton;
 
 public final class UIButtonDelegate
                                     extends
-                                    UIDelegate<JButton>
+                                    UIDelegate<UXButton>
 {
       public static UIButtonDelegate make()
       {
@@ -19,7 +20,7 @@ public final class UIButtonDelegate
 
       private UIButtonDelegate()
       {
-            rootDelegate=new JButton();
+            rootDelegate=new UXButton();
             rootDelegate
                   .setFocusPainted(false);
             rootDelegate
@@ -43,7 +44,8 @@ public final class UIButtonDelegate
 
       public UIButtonDelegate withIcon(ImageIcon icon)
       {
-            rootDelegate.setIcon(icon);
+            rootDelegate
+                  .setIcon(icon);
             return this;
       }
 
@@ -60,10 +62,10 @@ public final class UIButtonDelegate
             return this;
       }
 
-      public UIButtonDelegate withBackgroundColor(Color color)
+      public UIButtonDelegate withBackgroundColor(ColorObj color)
       {
             rootDelegate
-                  .setBackground(color);
+                  .setBgColor(color);
             return this;
       }
 
@@ -80,10 +82,10 @@ public final class UIButtonDelegate
             return this;
       }
 
-      public UIButtonDelegate withForegroundColor(Color color)
+      public UIButtonDelegate withForegroundColor(ColorObj color)
       {
             rootDelegate
-                  .setForeground(color);
+                  .setFgColor(color);
             return this;
       }
 
