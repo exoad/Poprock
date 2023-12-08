@@ -1,6 +1,7 @@
 .vscode
 .idea
 *.class
+*.iml
 /out
 /bin
 /build
