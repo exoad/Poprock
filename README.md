@@ -5,7 +5,7 @@
 
 A simple tool to create various gradients of your liking with various color themes.
 
-**View the documentation [here](https://exoad.github.io/SoftGradient/)**
+**View the documentation [here](https://exoad.github.io/SoftGradient/)** (Currently only in Chinese)
 
 ## Table of contents
 
