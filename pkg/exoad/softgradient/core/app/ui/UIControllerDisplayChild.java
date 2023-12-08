@@ -1,4 +1,4 @@
-package pkg.exoad.softgradient.core.ui;
+package pkg.exoad.softgradient.core.app.ui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -14,13 +14,21 @@ import javax.swing.ScrollPaneConstants;
 
 import pkg.exoad.softgradient.core.Offset;
 import pkg.exoad.softgradient.core.SharedConstants;
-import pkg.exoad.softgradient.core.events.ControllerChildDelegatesEventPayload;
-import pkg.exoad.softgradient.core.events.EventPool;
-import pkg.exoad.softgradient.core.events.GradientEventPayload;
+import pkg.exoad.softgradient.core.app.ui.UIControllerDelegateChilds.UIControllerDelegate;
 import pkg.exoad.softgradient.core.services.BasicService;
 import pkg.exoad.softgradient.core.services.ColorService;
 import pkg.exoad.softgradient.core.services.DebugService;
-import pkg.exoad.softgradient.core.ui.UIControllerDelegateChilds.UIControllerDelegate;
+import pkg.exoad.softgradient.core.services.EventPoolService;
+import pkg.exoad.softgradient.core.services.payloads.ControllerChildDelegatesEventPayload;
+import pkg.exoad.softgradient.core.services.payloads.GradientEventPayload;
+import pkg.exoad.softgradient.core.ui.UIBasicDelegate;
+import pkg.exoad.softgradient.core.ui.UIBuilderDelegate;
+import pkg.exoad.softgradient.core.ui.UIButtonDelegate;
+import pkg.exoad.softgradient.core.ui.UIDelegate;
+import pkg.exoad.softgradient.core.ui.UIHelper;
+import pkg.exoad.softgradient.core.ui.UILabelDelegate;
+import pkg.exoad.softgradient.core.ui.UIPanelDelegate;
+import pkg.exoad.softgradient.core.ui.UIPopupItemChilds;
 import pkg.exoad.softgradient.core.ui.UIDelegate.Alignment;
 import pkg.exoad.softgradient.core.ui.UIPanelDelegate.BoxLayoutAlignment;
 
@@ -143,12 +151,12 @@ class UIControllerDisplayChild
       public UIControllerDisplayChild()
       {
             // init all listeners for the eventpool registry["1"]
-            EventPool
+            EventPoolService
                   .getPool(1)
                   .attachListener(
                         ControllerChildDelegatesEventPayload.class,
                         ()->{
-                              EventPool
+                              EventPoolService
                                     .getPool(1)
                                     .getPayload(
                                           ControllerChildDelegatesEventPayload.class
@@ -216,7 +224,7 @@ class UIControllerDisplayChild
                                                       )
                                           )
                                           .withAction(
-                                                ()->EventPool
+                                                ()->EventPoolService
                                                       .getPool(
                                                             1
                                                       )
@@ -284,7 +292,7 @@ class UIControllerDisplayChild
                                     "RandomColor"
                               )
                               .withAction(
-                                    ()->EventPool
+                                    ()->EventPoolService
                                           .getPool(1)
                                           .dispatchEvent(
                                                 GradientEventPayload.class,

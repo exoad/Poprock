@@ -1,20 +1,24 @@
-package pkg.exoad.softgradient.core.ui;
+package pkg.exoad.softgradient.core.app.ui;
 
 import java.util.List;
 
-import javax.swing.JPanel;
-
 import pkg.exoad.softgradient.core.SharedConstants;
-import pkg.exoad.softgradient.core.events.ControllerChildDelegatesEventPayload;
-import pkg.exoad.softgradient.core.events.EventPool;
 import pkg.exoad.softgradient.core.services.ColorService;
+import pkg.exoad.softgradient.core.services.EventPoolService;
+import pkg.exoad.softgradient.core.services.payloads.ControllerChildDelegatesEventPayload;
+import pkg.exoad.softgradient.core.ui.UIBasicDelegate;
+import pkg.exoad.softgradient.core.ui.UIDelegate;
+import pkg.exoad.softgradient.core.ui.UIHelper;
+import pkg.exoad.softgradient.core.ui.UILabelDelegate;
+import pkg.exoad.softgradient.core.ui.UIPanelDelegate;
 import pkg.exoad.softgradient.core.ui.UIPanelDelegate.BoxLayoutAlignment;
+import pkg.exoad.softgradient.core.ui.java.UXPanel;
 
 public final class UIControllerDelegateChilds
 {
       public interface UIControllerDelegate
                                             extends
-                                            UIBasicDelegate<JPanel>
+                                            UIBasicDelegate<UXPanel>
       {
             public String getHeaderName();
 
@@ -32,7 +36,7 @@ public final class UIControllerDelegateChilds
       static
       {
             // TODO: fix this part for the single child event pool used here
-            EventPool
+            EventPoolService
                   .getPool(1)
                   .dispatchEvent(
                         ControllerChildDelegatesEventPayload.class,
@@ -50,7 +54,7 @@ public final class UIControllerDelegateChilds
 
       public static final class WindowSetupChildBlock
                                                       extends
-                                                      UIDelegate<JPanel>
+                                                      UIDelegate<UXPanel>
                                                       implements
                                                       UIControllerDelegate
 

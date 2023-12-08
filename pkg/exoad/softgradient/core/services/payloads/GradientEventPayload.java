@@ -1,9 +1,10 @@
-package pkg.exoad.softgradient.core.events;
+package pkg.exoad.softgradient.core.services.payloads;
 
 import java.util.Arrays;
 
 import pkg.exoad.softgradient.core.ColorObj;
 import pkg.exoad.softgradient.core.GradientColor;
+import pkg.exoad.softgradient.core.services.EventPoolService.EventPayload;
 
 /**
  * An identifier payload for deploying Gradient Events to the SoftGradient
@@ -43,7 +44,7 @@ import pkg.exoad.softgradient.core.GradientColor;
  * </pre></blockquote>
  *
  * @see #EMPTY
- * @see pkg.exoad.softgradient.core.events.EventPool
+ * @see pkg.exoad.softgradient.core.services.EventPoolService
  *
  * @author Jack Meng
  */

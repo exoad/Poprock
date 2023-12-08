@@ -1,13 +1,21 @@
 package pkg.exoad.softgradient.core.services.mixins;
 
+/**
+ * A mixin that contains some helpful functions for getting a formatted name of
+ * the current object represented with its current runtime state.
+ *
+ * @author Jack Meng
+ *
+ * @see java.lang.Object#hashCode()
+ */
 public interface SelfReportingMixin
 {
-      default String getNamedThis()
+      @NotVirtual default String getNamedThis()
       { return this
             .getClass()
             .getName()+"["+hashCode()+"]"; }
 
-      default String getCanonicallyNamedThis()
+      @NotVirtual default String getCanonicallyNamedThis()
       { return this
             .getClass()
             .getCanonicalName()+"["+hashCode()+"]"; }

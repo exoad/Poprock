@@ -60,7 +60,7 @@ public final class AssetsService
        *                .make()
        *                .withIcon(AssetsService.fetchImageIcon("assets/icons/home_64x64.png"));
        * </pre></blockquote>
-       * 
+       *
        * @param path The internal baked-in path to search from
        *
        * @return The loaded ImageIcon.

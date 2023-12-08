@@ -1,5 +1,6 @@
-package pkg.exoad.softgradient.core.ui;
+package pkg.exoad.softgradient.core.app.ui;
 
+import pkg.exoad.softgradient.core.ui.UIDelegate;
 import pkg.exoad.softgradient.core.ui.java.UXSplit;
 import pkg.exoad.softgradient.core.ui.java.UXSplit.SplitLocation;
 
@@ -18,7 +19,7 @@ public final class UIAppMainDelegate
       /**
        * Singleton instance. We don't have to use the Singleton instance because
        * we are assured this will
-       * be utilized in {@link pkg.exoad.softgradient.SoftGradientEntry}
+       * be utilized in {@link pkg.exoad.softgradient.AppEntry}
        */
       public static final UIAppMainDelegate OBJECT=new UIAppMainDelegate();
 

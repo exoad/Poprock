@@ -1,4 +1,4 @@
-package pkg.exoad.softgradient.core.ui;
+package pkg.exoad.softgradient.core.app.ui;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -7,9 +7,9 @@ import java.awt.RenderingHints;
 import javax.swing.JPanel;
 
 import pkg.exoad.softgradient.core.SharedConstants;
-import pkg.exoad.softgradient.core.events.EventPool;
-import pkg.exoad.softgradient.core.events.GradientEventPayload;
 import pkg.exoad.softgradient.core.services.ColorService;
+import pkg.exoad.softgradient.core.services.EventPoolService;
+import pkg.exoad.softgradient.core.services.payloads.GradientEventPayload;
 
 class UIGradientDisplayChild
                              extends
@@ -18,7 +18,7 @@ class UIGradientDisplayChild
 
       public UIGradientDisplayChild()
       {
-            EventPool
+            EventPoolService
                   .getPool(1)
                   .attachListener(
                         GradientEventPayload.class,
@@ -35,11 +35,11 @@ class UIGradientDisplayChild
                         RenderingHints.KEY_ANTIALIASING,
                         RenderingHints.VALUE_ANTIALIAS_ON
                   );
-            if(EventPool
+            if(EventPoolService
                   .getPool(1)
                   .getPayload(
                         GradientEventPayload.class
-                  )!=null&&!EventPool
+                  )!=null&&!EventPoolService
                         .getPool(1)
                         .getPayload(
                               GradientEventPayload.class
@@ -48,7 +48,7 @@ class UIGradientDisplayChild
                               GradientEventPayload.EMPTY
                         ))
             {
-                  GradientEventPayload e=(GradientEventPayload)EventPool
+                  GradientEventPayload e=(GradientEventPayload)EventPoolService
                         .getPool(1)
                         .getPayload(GradientEventPayload.class);
                   g

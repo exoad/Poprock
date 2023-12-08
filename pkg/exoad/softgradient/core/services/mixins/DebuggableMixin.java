@@ -30,7 +30,7 @@ public interface DebuggableMixin
        *
        * @param message
        */
-      default void THROW_NOW(String message)
+      @NotVirtual default void THROW_NOW(String message)
       {
             DebugService
                   .throwNow(getCanonicallyNamedThis()+": "+message);
@@ -43,7 +43,7 @@ public interface DebuggableMixin
        * @param condition
        * @param message
        */
-      default void THROW_NOW_IF(boolean condition,String message)
+      @NotVirtual default void THROW_NOW_IF(boolean condition,String message)
       {
             if(condition)
                   THROW_NOW(message);

@@ -2,6 +2,11 @@ package pkg.exoad.softgradient.core;
 
 public final class Pair<A,B>
 {
+      public static <X,Z> Pair<X,Z> make(X first,Z second)
+      {
+            return new Pair<>(first,second);
+      }
+
       private A first;
       private B second;
 

@@ -1,4 +1,4 @@
-package pkg.exoad.softgradient;
+package pkg.exoad.softgradient.core.app;
 
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -7,12 +7,12 @@ import com.formdev.flatlaf.intellijthemes.FlatHighContrastIJTheme;
 
 import pkg.exoad.softgradient.core.ColorObj;
 import pkg.exoad.softgradient.core.SharedConstants;
-import pkg.exoad.softgradient.core.events.ControllerChildDelegatesEventPayload;
-import pkg.exoad.softgradient.core.events.EventPool;
-import pkg.exoad.softgradient.core.events.GradientEventPayload;
+import pkg.exoad.softgradient.core.app.ui.UIAppMainDelegate;
 import pkg.exoad.softgradient.core.services.AssetsService;
 import pkg.exoad.softgradient.core.services.ColorService;
-import pkg.exoad.softgradient.core.ui.UIAppMainDelegate;
+import pkg.exoad.softgradient.core.services.EventPoolService;
+import pkg.exoad.softgradient.core.services.payloads.ControllerChildDelegatesEventPayload;
+import pkg.exoad.softgradient.core.services.payloads.GradientEventPayload;
 import pkg.exoad.softgradient.core.ui.UIWindow;
 
 import javax.swing.plaf.ColorUIResource;
@@ -23,7 +23,7 @@ import javax.swing.plaf.ColorUIResource;
  *
  * @author Jack Meng
  */
-class SoftGradientEntry
+class AppEntry
 {
       static
       {
@@ -111,27 +111,27 @@ class SoftGradientEntry
             //
             // Pool_ID "1" -> Default color pipeline pool
             // Pool_ID "2" -> Registration for all UIControllerChildDelegates (shenanigans)
-            EventPool
+            EventPoolService
                   .registerEventPool(1);
-            EventPool
+            EventPoolService
                   .getPool(1)
                   .registerEvent(
                         GradientEventPayload.class,
                         null
                   );
-            EventPool
+            EventPoolService
                   .getPool(1)
                   .registerEvent(
                         ControllerChildDelegatesEventPayload.class,
                         null
                   );
-            EventPool
+            EventPoolService
                   .getPool(1)
                   .attachListener(
                         GradientEventPayload.class,
                         ()->System.out
                               .println(
-                                    "Event Dispatched: "+EventPool
+                                    "Event Dispatched: "+EventPoolService
                                           .getPool(1)
                                           .getPayload(
                                                 GradientEventPayload.class

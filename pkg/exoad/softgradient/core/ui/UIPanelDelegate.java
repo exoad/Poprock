@@ -2,10 +2,10 @@ package pkg.exoad.softgradient.core.ui;
 
 import java.awt.LayoutManager;
 
-import javax.swing.JPanel;
 import javax.swing.Box;
 
 import pkg.exoad.softgradient.core.services.DebugService;
+import pkg.exoad.softgradient.core.ui.java.UXPanel;
 
 import javax.swing.BoxLayout;
 import java.awt.Graphics2D;
@@ -17,12 +17,12 @@ import java.util.function.Consumer;
 
 public final class UIPanelDelegate
                                    extends
-                                   UIDelegate<JPanel>
+                                   UIDelegate<UXPanel>
 {
 
       public static final class UIHorizontalPanelDelegate
                                                           extends
-                                                          UIDelegate<JPanel>
+                                                          UIDelegate<UXPanel>
       {
             int strutSize=0;
             private UIDelegate<?> leftSide;
@@ -64,7 +64,7 @@ public final class UIPanelDelegate
                   return this;
             }
 
-            @Override public JPanel asComponent()
+            @Override public UXPanel asComponent()
             {
                   DebugService
                         .panicOn(
@@ -117,7 +117,7 @@ public final class UIPanelDelegate
 
       private UIPanelDelegate()
       {
-            rootDelegate=new JPanel()
+            rootDelegate=new UXPanel()
             {
                   @Override public void paintComponent(Graphics g)
                   {
