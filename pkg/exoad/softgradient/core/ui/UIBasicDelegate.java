@@ -1,6 +1,6 @@
 package pkg.exoad.softgradient.core.ui;
 
-import javax.swing.JComponent;
+import javax.swing.*;
 
 import pkg.exoad.softgradient.core.services.mixins.SelfReportingMixin;
 
@@ -10,15 +10,12 @@ import pkg.exoad.softgradient.core.services.mixins.SelfReportingMixin;
  * <p>
  * <h2>Delegation</h2>
  * In SoftGradient UI building, delegation stands for an express way to build UI
- * elements
- * with a framework like Java Swing/AWT. A user should only modify an element on
- * creation
- * and not use that same object elsewhere (similar to exposing that element in a
- * public {@code SharedConstants} class).
+ * elements with a framework like Java Swing/AWT. A user should only modify an
+ * element on creation and not use that same object elsewhere (similar to
+ * exposing that element in a public {@code SharedConstants} class).
  * <p>
  * In regular Java Swing or other imperative frameworks during UI building, you
- * will
- * end up with the following code:
+ * will end up with the following code:
  * <blockquote><pre>
  * Frame f=Frame();
  * f.width=300;
@@ -35,8 +32,7 @@ import pkg.exoad.softgradient.core.services.mixins.SelfReportingMixin;
  *
  * This can cause code to look very linear and very hard to debug. Instead,
  * SoftGradient tries to take it a reactive way to build applications but still
- * being
- * imperative whenever the programmer wants:
+ * being imperative whenever the programmer wants:
  *
  * <blockquote><pre>
  * UIButtonDelegate.make()
@@ -56,34 +52,34 @@ import pkg.exoad.softgradient.core.services.mixins.SelfReportingMixin;
  *
  * @author Jack Meng
  */
-public interface UIBasicDelegate<T extends JComponent>
-                                extends
-                                SelfReportingMixin
+@SwingContainer public interface UIBasicDelegate<T extends JComponent>
+	extends
+	SelfReportingMixin
 {
-      /**
-       * Converts to a Swing Lightweight component form
-       *
-       * @return
-       */
-      public T asComponent();
-
-      /**
-       * Calls the underlying {@link javax.swing.JComponent#repaint()} for
-       * graphical management
-       */
-      public default void refresh()
-      {
-            asComponent()
-                  .repaint();
-      }
-
-      /**
-       * Calls the underlying {@link javax.swing.JComponent#revalidate()} for
-       * layout management
-       */
-      public default void hardRefresh()
-      {
-            asComponent()
-                  .revalidate();
-      }
+	/**
+	 * Converts to a Swing Lightweight component form
+	 *
+	 * @return
+	 */
+	public T asComponent();
+	
+	/**
+	 * Calls the underlying {@link javax.swing.JComponent#repaint()} for
+	 * graphical management
+	 */
+	public default void refresh()
+	{
+		asComponent()
+			.repaint();
+	}
+	
+	/**
+	 * Calls the underlying {@link javax.swing.JComponent#revalidate()} for
+	 * layout management
+	 */
+	public default void hardRefresh()
+	{
+		asComponent()
+			.revalidate();
+	}
 }

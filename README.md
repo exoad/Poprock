@@ -8,7 +8,7 @@ A simple tool to create various gradients of your liking with various color them
 **View the documentation [here](https://exoad.github.io/SoftGradient/)** (Currently only in Chinese)
 
 ## Table of contents
-
+F
 ## Building
 
 **Please make sure you are using Java SE 11+.** Preferably 17.

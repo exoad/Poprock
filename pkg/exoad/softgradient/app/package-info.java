@@ -6,11 +6,11 @@
  * outside as a "library" piece.
  * <p>
  * If you are trying to run the app, you must use the {@code main(String[])}
- * found in {@link pkg.exoad.softgradient.core.app.AppEntry#main(String[])}
+ * found in {@link pkg.exoad.softgradient.app.AppEntry#main(String[])}
  *
  * @author Jack Meng
  *
- * @see pkg.exoad.softgradient.core.app
- * @see pkg.exoad.softgradient.core.app.ui
+ * @see pkg.exoad.softgradient.app
+ * @see pkg.exoad.softgradient.app.ui
  */
-package pkg.exoad.softgradient.core.app;
+package pkg.exoad.softgradient.app;

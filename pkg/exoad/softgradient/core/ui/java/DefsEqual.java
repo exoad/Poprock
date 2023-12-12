@@ -7,12 +7,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Documented @Retention(
-   RetentionPolicy.SOURCE
+	RetentionPolicy.SOURCE
 ) @Target(
-   {ElementType.TYPE}
+	{ElementType.TYPE}
 ) public @interface DefsEqual
 {
-   String target();
-
-   Class<?>[] reference();
+	String target();
+	
+	Class<?>[] reference();
 }

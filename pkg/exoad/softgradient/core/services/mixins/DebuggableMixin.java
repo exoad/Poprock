@@ -1,5 +1,6 @@
 package pkg.exoad.softgradient.core.services.mixins;
 
+import pkg.exoad.softgradient.core.annotations.NotVirtual;
 import pkg.exoad.softgradient.core.services.DebugService;
 
 /**
@@ -21,31 +22,31 @@ import pkg.exoad.softgradient.core.services.DebugService;
  * @author Jack Meng
  */
 public interface DebuggableMixin
-                                 extends
-                                 SelfReportingMixin // really shouldn't this for mixins
+	extends
+	SelfReportingMixin // really shouldn't this for mixins
 {
-
-      /**
-       * @see pkg.exoad.softgradient.core.services.DebugService#throwNow(String)
-       *
-       * @param message
-       */
-      @NotVirtual default void THROW_NOW(String message)
-      {
-            DebugService
-                  .throwNow(getCanonicallyNamedThis()+": "+message);
-      }
-
-      /**
-       * @see pkg.exoad.softgradient.core.services.DebugService#panicOn(boolean,
-       * String)
-       *
-       * @param condition
-       * @param message
-       */
-      @NotVirtual default void THROW_NOW_IF(boolean condition,String message)
-      {
-            if(condition)
-                  THROW_NOW(message);
-      }
+	
+	/**
+	 * @param message
+	 *
+	 * @see pkg.exoad.softgradient.core.services.DebugService#throwNow(String)
+	 */
+	@NotVirtual default void THROW_NOW(String message)
+	{
+		DebugService
+			.throwNow(getCanonicallyNamedThis()+": "+message);
+	}
+	
+	/**
+	 * @param condition
+	 * @param message
+	 *
+	 * @see pkg.exoad.softgradient.core.services.DebugService#panicOn(boolean,
+	 * String)
+	 */
+	@NotVirtual default void THROW_NOW_IF(boolean condition,String message)
+	{
+		if(condition)
+			THROW_NOW(message);
+	}
 }

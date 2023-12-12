@@ -6,10 +6,10 @@ import pkg.exoad.softgradient.core.ColorObj;
 
 public interface UXComponent<T extends JComponent>
 {
-
-   T expose();
-
-   void setFgColor(ColorObj colorObj);
-
-   void setBgColor(ColorObj colorObj);
+	
+	T expose();
+	
+	void setFgColor(ColorObj colorObj);
+	
+	void setBgColor(ColorObj colorObj);
 }

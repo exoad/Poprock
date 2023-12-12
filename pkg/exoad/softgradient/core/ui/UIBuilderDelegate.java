@@ -28,31 +28,30 @@ import javax.swing.JComponent;
  * {@code UIOtherDelegate}'s make, but most of the time this is not the case
  *
  * @author Jack Meng
- *
  * @see pkg.exoad.softgradient.core.ui.UIBasicDelegate
  */
 public class UIBuilderDelegate<T extends JComponent>
-                              extends
-                              UIDelegate<T>
+	extends
+	UIDelegate<T>
 {
-      public static <B extends JComponent> UIBuilderDelegate<B> make(
-            Supplier<UIDelegate<B>> component
-      )
-      {
-            return new UIBuilderDelegate<>(component);
-      }
-
-      private Supplier<UIDelegate<T>> builder;
-
-      private UIBuilderDelegate(Supplier<UIDelegate<T>> builder)
-      {
-            this.builder=builder;
-      }
-
-      @Override public T asComponent()
-      {
-            return builder
-                  .get()
-                  .asComponent();
-      }
+	public static <B extends JComponent> UIBuilderDelegate<B> make(
+		Supplier<UIDelegate<B>> component
+	)
+	{
+		return new UIBuilderDelegate<>(component);
+	}
+	
+	private Supplier<UIDelegate<T>> builder;
+	
+	private UIBuilderDelegate(Supplier<UIDelegate<T>> builder)
+	{
+		this.builder=builder;
+	}
+	
+	@Override public T asComponent()
+	{
+		return builder
+			.get()
+			.asComponent();
+	}
 }

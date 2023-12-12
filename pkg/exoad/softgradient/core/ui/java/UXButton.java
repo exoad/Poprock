@@ -6,24 +6,24 @@ import javax.swing.JPanel;
 import pkg.exoad.softgradient.core.ColorObj;
 
 @DefsEqual(
-   target="Button_Type", reference={JButton.class,JPanel.class}
+	target="Button_Type", reference={JButton.class,JPanel.class}
 ) public class UXButton
-                        extends
-                        JButton
+	extends
+	JButton
 {
-   public void setBgColor(ColorObj color)
-   {
-      super.setBackground(
-         color
-            .asAwt()
-      );
-   }
-
-   public void setFgColor(ColorObj color)
-   {
-      super.setForeground(
-         color
-            .asAwt()
-      );
-   }
+	public void setBgColor(ColorObj color)
+	{
+		super.setBackground(
+			color
+				.asAwt()
+		);
+	}
+	
+	public void setFgColor(ColorObj color)
+	{
+		super.setForeground(
+			color
+				.asAwt()
+		);
+	}
 }

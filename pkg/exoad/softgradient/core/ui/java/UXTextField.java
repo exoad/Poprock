@@ -7,12 +7,12 @@ import javax.swing.JTextPane;
 import javax.swing.text.JTextComponent;
 
 @DefsEqual(
-   target="TextField_Type", reference={JTextField.class,JTextArea.class,
-                                       JTextComponent.class,JTextPane.class,
-                                       JPanel.class}
+	target="TextField_Type", reference={JTextField.class,JTextArea.class,
+										JTextComponent.class,JTextPane.class,
+										JPanel.class}
 ) public class UXTextField
-                           extends
-                           JTextField
+	extends
+	JTextField
 {
 
 }
