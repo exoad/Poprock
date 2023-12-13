@@ -288,7 +288,7 @@ public final class RegistryServices
 			return makeConfig(rootName,0.75F,null);
 		}
 		
-		@Override public Optional<Class<? extends RegistryEntry>> inferTyping()
+		@Override public Optional<Collection<Class<? extends RegistryEntry>>> inferTyping()
 		{
 			return Optional.empty();
 		}
