@@ -1,6 +1,8 @@
 package pkg.exoad.softgradient.core.services;
 
 import pkg.exoad.softgradient.core.annotations.ProgramInvoked;
+
+import java.io.PrintStream;
 /**
  * Debug Service - Utility class for handling various exceptions that can be
  * thrown during the runtime of this program. <br/> Most of the things occuring
@@ -13,6 +15,28 @@ public final class DebugService
 {
 	private DebugService()
 	{
+	}
+	
+	private static volatile PrintStream out;
+	
+	public static PrintStream getOut()
+	{
+		if(out==null)
+			setOut(new PrintStream(System.out));
+		return out;
+	}
+	
+	public static synchronized void setOut(PrintStream p)
+	{
+		out=p;
+	}
+	
+	public static void logWarning(Object msg)
+	{
+		/*
+		 TODO: Improve on this part
+		 */
+		getOut().println(msg.toString());
 	}
 	
 	private static RuntimeException modifyThrowable(

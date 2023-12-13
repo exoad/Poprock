@@ -1,8 +1,10 @@
-pkg.exoad.softgradient.core
 pkg.exoad.softgradient.app
+pkg.exoad.softgradient.app.events.payloads
 pkg.exoad.softgradient.app.ui
+pkg.exoad.softgradient.app.util
+pkg.exoad.softgradient.core
+pkg.exoad.softgradient.core.annotations
 pkg.exoad.softgradient.core.services
 pkg.exoad.softgradient.core.services.mixins
-pkg.exoad.softgradient.core.services.payloads
 pkg.exoad.softgradient.core.ui
 pkg.exoad.softgradient.core.ui.java

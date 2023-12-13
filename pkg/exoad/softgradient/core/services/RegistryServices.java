@@ -1,11 +1,14 @@
 package pkg.exoad.softgradient.core.services;
 
-import pkg.exoad.softgradient.core.ITypeInferencing;
-import pkg.exoad.softgradient.core.Pair;
+import pkg.exoad.softgradient.core.*;
+import pkg.exoad.softgradient.core.annotations.NotVirtual;
+import pkg.exoad.softgradient.core.services.mixins.DebuggableAllRequiredNamedFieldsMixin;
 import pkg.exoad.softgradient.core.services.mixins.DebuggableMixin;
 import pkg.exoad.softgradient.core.services.mixins.NamedObjMixin;
 
+import java.io.Serializable;
 import java.util.*;
+import java.util.function.Consumer;
 
 public final class RegistryServices
 {
@@ -14,22 +17,134 @@ public final class RegistryServices
 	
 	public abstract static class BaseRegistry
 		implements
-		ITypeInferencing<Class<? extends RegistryEntry>>
+		ITypeInferencing<Collection<Class<? extends RegistryEntry>>>
 	{
 		abstract RegistryEntry acquireEntry(String name);
 		
 		abstract void setEntry(
-			String name,/*covariant
-		 */ RegistryEntry entry
+			String name,
+			/*covariant*/ RegistryEntry entry
 		);
 		
 		public Object acquireEntryValue(String name)
 		{
 			return acquireEntry(name).currentValue;
 		}
+		
+		/**
+		 * An internal iterable instance (should not be exposed by reflection)
+		 *
+		 * @param e Consumer
+		 */
+		protected abstract void forEach(Consumer<Object> e);
+		
+		@NotVirtual @Override
+		public Optional<Collection<Class<? extends RegistryEntry>>> inferTyping()
+		{
+			HashSet<Class<? extends RegistryEntry>> e=new HashSet<>();
+			forEach(x->{
+				if(x instanceof RegistryEntry r)
+					e.add(r.getClass());
+				else
+					DebugService.logWarning("An invalid entry: "+(((x.hashCode()/31)<<2)&0xFF)+" was found with a confounding type: "+x
+						.getClass()
+						.getCanonicalName()+". Expected: "+RegistryEntry.class.getCanonicalName()+" or lower")
+					;
+			});
+			return e.isEmpty()?Optional.empty():Optional.of(e);
+		}
+	}
+	
+	/**
+	 * Construction method to begin the method chaining pattern for creating a
+	 * RegistryEntry
+	 *
+	 * @return A new registry entry factory
+	 *
+	 * @see RegistryEntryFactory
+	 */
+	public static RegistryEntryFactory makeEntry()
+	{
+		return new RegistryEntryFactory();
+	}
+	
+	/**
+	 * <strong>RegistryEntry Factory</strong>
+	 * <p>
+	 * This class helps to construct a RegistryEntry using method chaining. It
+	 * provides all of the necessary fields and construction functionality to
+	 * make a working Registry Entry.
+	 * </p>
+	 *
+	 * <strong>To use this class, you must call
+	 * {@link RegistryServices#makeEntry()}!</strong>
+	 *
+	 * @author Jack Meng
+	 * @see RegistryEntry
+	 * @see RegistryServices#makeEntry()
+	 */
+	public static final class RegistryEntryFactory
+		implements
+		ICollatable<RegistryEntry>,
+		DebuggableAllRequiredNamedFieldsMixin
+	{
+		
+		private Functor11<Boolean,Object> check;
+		private Functor01<Object> setValueFilter;
+		private Object defaultValueCheck;
+		private String canonicalName;
+		
+		private RegistryEntryFactory(){}
+		
+		public RegistryEntryFactory withCheck(Functor11<Boolean,Object> check)
+		{
+			this.check=check;
+			return this;
+		}
+		
+		public RegistryEntryFactory withCanonicalName(String name)
+		{
+			this.canonicalName=name;
+			return this;
+		}
+		
+		public RegistryEntryFactory withSetValueFilter(Functor01<Object> filter)
+		{
+			this.setValueFilter=filter;
+			return this;
+		}
+		
+		public RegistryEntryFactory withDefaultValue(
+			Object defaultCheck
+		)
+		{
+			this.defaultValueCheck=defaultCheck;
+			return this;
+		}
+		
+		@Override public RegistryEntry collate()
+		{
+			ASSERT(check);
+			ASSERT(setValueFilter);
+			ASSERT(defaultValueCheck);
+			ASSERT(canonicalName);
+			return new RegistryEntry()
+			{
+				@Override public String getCanonicalName()
+				{
+					return canonicalName;
+				}
+				
+				@Override public <T> boolean check(T r)
+				{
+					return check.call(r);
+				}
+			};
+		}
 	}
 	
 	public abstract static class RegistryEntry
+		implements Serializable
 	{
 		private Object currentValue;
 		
@@ -64,7 +179,7 @@ public final class RegistryServices
 		
 		/**
 		 * Retrieves the current value held by this current registry entry.
-		 *
+		 * <p>
 		 * <strong>This most likely does not have to be overriden!</strong>
 		 *
 		 * @return The current value held
@@ -92,7 +207,7 @@ public final class RegistryServices
 	
 	/**
 	 * Registers a registry as "Ephemeral".
-	 *
+	 * <p>
 	 * If this function panics, it is 99% a source issue.
 	 *
 	 * @param id The id alloted to this registry in the cache pool. THIS MUST BE
@@ -239,6 +354,13 @@ public final class RegistryServices
 		@Override void setEntry(final String name,final RegistryEntry entry)
 		{
 		
+		}
+		
+		@Override protected void forEach(final Consumer<Object> e)
+		{
+			leaves
+				.keySet()
+				.forEach(e);
 		}
 	}
 }

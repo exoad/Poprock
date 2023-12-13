@@ -125,20 +125,6 @@ public class AppEntry
 				ControllerChildDelegatesEventPayload.class,
 				null
 			);
-		EventPoolService
-			.getPool(1)
-			.attachListener(
-				GradientEventPayload.class,
-				()->System.out
-					.println(
-						"Event Dispatched: "+EventPoolService
-							.getPool(1)
-							.getPayload(
-								GradientEventPayload.class
-							)
-					)
-			
-			);
 		UIWindow
 			.make()
 			.withTitle("SoftGradient ~ exoad")
