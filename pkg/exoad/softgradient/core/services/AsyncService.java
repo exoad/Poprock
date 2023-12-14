@@ -1,6 +1,9 @@
 package pkg.exoad.softgradient.core.services;
 
+import pkg.exoad.softgradient.core.annotations.ServiceClass;
+
 import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -10,6 +13,7 @@ import java.util.concurrent.Executors;
  *
  * @author Jack Meng
  */
+@ServiceClass(requiresArming=false)
 public final class AsyncService
 {
 	private AsyncService()
@@ -41,6 +45,20 @@ public final class AsyncService
 		WORKER1=new Timer(
 			"pkg.exoad-softgradient-worker#1"
 		);
+	}
+	
+	public static void runPeriodicTask(
+		long period,long initialDelay,
+		Runnable task
+	)
+	{
+		WORKER1.scheduleAtFixedRate(new TimerTask()
+		{
+			@Override public void run()
+			{
+				task.run();
+			}
+		},initialDelay,period);
 	}
 	
 	/**

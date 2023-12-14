@@ -1,6 +1,7 @@
 package pkg.exoad.softgradient.core.services;
 
 import pkg.exoad.softgradient.core.Pair;
+import pkg.exoad.softgradient.core.annotations.ServiceClass;
 
 import java.util.Collection;
 import java.util.Objects;
@@ -20,6 +21,7 @@ import java.util.function.Consumer;
  *
  * @author Jack Meng
  */
+@ServiceClass(requiresArming=false)
 public final class BasicService
 {
 	private BasicService()

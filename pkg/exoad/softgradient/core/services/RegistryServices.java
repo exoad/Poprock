@@ -2,6 +2,7 @@ package pkg.exoad.softgradient.core.services;
 
 import pkg.exoad.softgradient.core.*;
 import pkg.exoad.softgradient.core.annotations.NotVirtual;
+import pkg.exoad.softgradient.core.annotations.ServiceClass;
 import pkg.exoad.softgradient.core.services.mixins.DebuggableAllRequiredNamedFieldsMixin;
 import pkg.exoad.softgradient.core.services.mixins.DebuggableMixin;
 import pkg.exoad.softgradient.core.services.mixins.NamedObjMixin;
@@ -10,10 +11,24 @@ import java.io.Serializable;
 import java.util.*;
 import java.util.function.Consumer;
 
+@ServiceClass(requiresArming=true)
 public final class RegistryServices
 {
 	private RegistryServices()
 	{}
+	
+	private static boolean armed=false;
+	
+	public static synchronized void armService()
+	{
+		if(!armed) armed=true;
+	}
+	
+	public static void runOnArmed(Runnable r)
+	{
+		if(armed) r.run();
+		
+	}
 	
 	public abstract static class BaseRegistry
 		implements
@@ -46,9 +61,12 @@ public final class RegistryServices
 				if(x instanceof RegistryEntry r)
 					e.add(r.getClass());
 				else
-					DebugService.logWarning("An invalid entry: "+(((x.hashCode()/31)<<2)&0xFF)+" was found with a confounding type: "+x
-						.getClass()
-						.getCanonicalName()+". Expected: "+RegistryEntry.class.getCanonicalName()+" or lower")
+					DebugService.log(
+						DebugService.LogLevel.WARN,
+						"An invalid entry: "+(((x.hashCode()/31)<<2)&0xFF)+" was found with a confounding type: "+x
+							.getClass()
+							.getCanonicalName()+". Expected: "+RegistryEntry.class.getCanonicalName()+" or lower"
+					)
 					;
 			});
 			return e.isEmpty()?Optional.empty():Optional.of(e);
@@ -88,7 +106,6 @@ public final class RegistryServices
 		ICollatable<RegistryEntry>,
 		DebuggableAllRequiredNamedFieldsMixin
 	{
-		
 		private Functor11<Boolean,Object> check;
 		private Functor01<Object> setValueFilter;
 		private Object defaultValueCheck;
@@ -204,6 +221,9 @@ public final class RegistryServices
 	 * (Singleton pattern)
 	 */
 	private static final HashMap<Integer,EphemeralRegistry> OBJECTS=new HashMap<>();
+	
+	private static final HashMap<Integer,BroadcastingRegistry> OBJECTS1=
+		new HashMap<>();
 	
 	/**
 	 * Registers a registry as "Ephemeral".

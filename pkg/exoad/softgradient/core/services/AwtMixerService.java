@@ -2,6 +2,7 @@ package pkg.exoad.softgradient.core.services;
 
 import pkg.exoad.softgradient.core.Offset;
 import pkg.exoad.softgradient.core.Size;
+import pkg.exoad.softgradient.core.annotations.ServiceClass;
 
 import java.awt.Point;
 import java.awt.Dimension;
@@ -15,6 +16,7 @@ import java.awt.Dimension;
  *
  * @author Jack Meng
  */
+@ServiceClass(requiresArming=false)
 public final class AwtMixerService
 {
 	private AwtMixerService()
