@@ -57,6 +57,24 @@ public final class BasicService
 	}
 	
 	/**
+	 * A macro call for {@link java.lang.String#contains(CharSequence)} where
+	 * you might want check against multiple sequences.
+	 *
+	 * @param str The target string to search in
+	 * @param chars The supplied sequences to search against
+	 *
+	 * @return true or false if any of the target sequences were found
+	 */
+	public static boolean strContains(String str,CharSequence... chars)
+	{
+		assert chars!=null;
+		for(CharSequence r: chars)
+			if(str.contains(r))
+				return true;
+		return false;
+	}
+	
+	/**
 	 * Checks if any values in a Pair are nulled values. Please note that this
 	 * function does not do additional checks after just {@link Pair#first()} or
 	 * {@link Pair#second()} for nullability!

@@ -27,7 +27,7 @@ public interface DebuggableMixin
 {
 	
 	/**
-	 * @param message
+	 * @param message hint for the error message
 	 *
 	 * @see pkg.exoad.softgradient.core.services.DebugService#throwNow(String)
 	 */
@@ -38,8 +38,8 @@ public interface DebuggableMixin
 	}
 	
 	/**
-	 * @param condition
-	 * @param message
+	 * @param condition When to panic only if this boolean is true
+	 * @param message hint for the error message
 	 *
 	 * @see pkg.exoad.softgradient.core.services.DebugService#panicOn(boolean,
 	 * String)
