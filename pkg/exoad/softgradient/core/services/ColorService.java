@@ -3,6 +3,7 @@ package pkg.exoad.softgradient.core.services;
 import java.awt.Color;
 
 import pkg.exoad.softgradient.core.ColorObj;
+import pkg.exoad.softgradient.core.annotations.ServiceClass;
 
 /**
  * Color Service - A utility class for providing basic operations on Colors.
@@ -12,6 +13,7 @@ import pkg.exoad.softgradient.core.ColorObj;
  * @see java.awt.Color
  * @see pkg.exoad.softgradient.core.ColorObj
  */
+@ServiceClass(requiresArming=false)
 public final class ColorService
 {
 	private ColorService()

@@ -1,8 +1,12 @@
 package pkg.exoad.softgradient.core.services;
 
 import pkg.exoad.softgradient.core.annotations.ProgramInvoked;
+import pkg.exoad.softgradient.core.annotations.ServiceClass;
 
 import java.io.PrintStream;
+import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 /**
  * Debug Service - Utility class for handling various exceptions that can be
  * thrown during the runtime of this program. <br/> Most of the things occuring
@@ -11,10 +15,49 @@ import java.io.PrintStream;
  *
  * @author Jack Meng
  */
+@ServiceClass(requiresArming=false)
 public final class DebugService
 {
 	private DebugService()
 	{
+	}
+	
+	/**
+	 * If you wish to edit this. The format defines the following tags:
+	 * <ul>
+	 *     <li><code>{1}</code> denotes the {@link LogLevel}</li>
+	 *     <li><code>{2}</code> denotes the time invoked in <code>mm/dd/yy
+	 *     HH:MM:SS</code> format
+	 *     </li>
+	 *     <li><code>{3}</code> denotes the part where the message of the
+	 *     log entry will be shown</li>
+	 * </ul>
+	 */
+	public static String logMessageFormat="[ {1} | {2} ] >> {3}";
+	
+	/**
+	 * If you wish to edit this, it must follow the format accepted by
+	 * {@link SimpleDateFormat}
+	 */
+	public static String logTimeStampFormat="mm/dd/YYYY HH:mm:ssss";
+	
+	public enum LogLevel
+	{
+		INFO("info"),
+		WARN("warn"),
+		NOTE("note");
+		
+		final String levelName;
+		
+		LogLevel(String l)
+		{
+			this.levelName=l;
+		}
+		
+		public String getLevelName()
+		{
+			return this.levelName;
+		}
 	}
 	
 	private static volatile PrintStream out;
@@ -31,12 +74,16 @@ public final class DebugService
 		out=p;
 	}
 	
-	public static void logWarning(Object msg)
+	public static void log(LogLevel level,Object msg)
 	{
-		/*
-		 TODO: Improve on this part
-		 */
-		getOut().println(msg.toString());
+		out.println(MessageFormat.format(
+			logMessageFormat,
+			level
+				.getLevelName()
+				.toUpperCase(),
+			new SimpleDateFormat(logTimeStampFormat).format(new Date(System.currentTimeMillis())),
+			msg.toString()
+		));
 	}
 	
 	private static RuntimeException modifyThrowable(
@@ -114,6 +161,20 @@ public final class DebugService
 					"\n\t[!]\t"+message
 				)
 			);
+	}
+	
+	/**
+	 * Instructs the service to kill the current program with a runtime
+	 * exception and another exception or throwable provided.
+	 *
+	 * @param e The other provided throwable
+	 */
+	public static synchronized void panicWith(Throwable e)
+	{
+		throw modifyThrowable(new RuntimeException(Thread
+													   .currentThread()
+													   .getName()+" panicked "+
+												   "on "+e.getMessage(),e));
 	}
 	
 	/**

@@ -10,9 +10,7 @@ import pkg.exoad.softgradient.core.ThemeConstants;
 import pkg.exoad.softgradient.app.events.payloads.ControllerChildDelegatesEventPayload;
 import pkg.exoad.softgradient.app.events.payloads.GradientEventPayload;
 import pkg.exoad.softgradient.app.ui.UIAppMainDelegate;
-import pkg.exoad.softgradient.core.services.AssetsService;
-import pkg.exoad.softgradient.core.services.ColorService;
-import pkg.exoad.softgradient.core.services.EventPoolService;
+import pkg.exoad.softgradient.core.services.*;
 import pkg.exoad.softgradient.core.ui.UIWindow;
 
 import javax.swing.plaf.ColorUIResource;
@@ -40,7 +38,7 @@ public class AppEntry
 			);
 		System
 			.setProperty(
-				"flatlaf.menuBarEmbedded",
+				"flatlaf.menuBarEmbeded",
 				"true"
 			);
 		UIManager
@@ -100,13 +98,13 @@ public class AppEntry
 				.setLookAndFeel(new FlatHighContrastIJTheme());
 		}catch(UnsupportedLookAndFeelException e)
 		{
-			e
-				.printStackTrace();
+			DebugService.panicWith(e);
 		}
 	}
 	
 	public static void main(String[] args)
 	{
+		RegistryServices.armService();
 		// EVENT POOL REGISTRATION
 		//
 		// Pool_ID "1" -> Default color pipeline pool

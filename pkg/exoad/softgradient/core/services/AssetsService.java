@@ -1,5 +1,7 @@
 package pkg.exoad.softgradient.core.services;
 
+import pkg.exoad.softgradient.core.annotations.ServiceClass;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -26,6 +28,7 @@ import javax.swing.ImageIcon;
  *
  * @author Jack Meng
  */
+@ServiceClass(requiresArming=false)
 public final class AssetsService
 {
 	private AssetsService()

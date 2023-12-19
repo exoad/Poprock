@@ -2,6 +2,7 @@ package pkg.exoad.softgradient.core.services;
 
 import pkg.exoad.softgradient.core.*;
 import pkg.exoad.softgradient.core.annotations.NotVirtual;
+import pkg.exoad.softgradient.core.annotations.ServiceClass;
 import pkg.exoad.softgradient.core.services.mixins.DebuggableAllRequiredNamedFieldsMixin;
 import pkg.exoad.softgradient.core.services.mixins.DebuggableMixin;
 import pkg.exoad.softgradient.core.services.mixins.NamedObjMixin;
@@ -10,10 +11,31 @@ import java.io.Serializable;
 import java.util.*;
 import java.util.function.Consumer;
 
+/**
+ * <h2>Regsitry Services</h2>
+ *
+ * A registry is just a place for global properties to be accessed.
+ *
+ * @author Jack Meng
+ */
+@ServiceClass(requiresArming=true)
 public final class RegistryServices
 {
 	private RegistryServices()
 	{}
+	
+	private static boolean armed=false;
+	
+	public static synchronized void armService()
+	{
+		if(!armed) armed=true;
+	}
+	
+	public static void runOnArmed(Runnable r)
+	{
+		if(armed) r.run();
+		
+	}
 	
 	public abstract static class BaseRegistry
 		implements
@@ -46,10 +68,12 @@ public final class RegistryServices
 				if(x instanceof RegistryEntry r)
 					e.add(r.getClass());
 				else
-					DebugService.logWarning("An invalid entry: "+(((x.hashCode()/31)<<2)&0xFF)+" was found with a confounding type: "+x
-						.getClass()
-						.getCanonicalName()+". Expected: "+RegistryEntry.class.getCanonicalName()+" or lower")
-					;
+					DebugService.log(
+						DebugService.LogLevel.WARN,
+						"An invalid entry: "+(((x.hashCode()/31)<<2)&0xFF)+" was found with a confounding type: "+x
+							.getClass()
+							.getCanonicalName()+". Expected: "+RegistryEntry.class.getCanonicalName()+" or lower"
+					);
 			});
 			return e.isEmpty()?Optional.empty():Optional.of(e);
 		}
@@ -83,16 +107,16 @@ public final class RegistryServices
 	 * @see RegistryEntry
 	 * @see RegistryServices#makeEntry()
 	 */
-	public static final class RegistryEntryFactory
+	public static sealed class RegistryEntryFactory
 		implements
 		ICollatable<RegistryEntry>,
 		DebuggableAllRequiredNamedFieldsMixin
+		permits
+		DescriptiveRegistryEntryFactory
 	{
-		
-		private Functor11<Boolean,Object> check;
-		private Functor01<Object> setValueFilter;
-		private Object defaultValueCheck;
-		private String canonicalName;
+		protected Functor11<Boolean,Object> check;
+		protected Object defaultValueCheck;
+		protected String canonicalName;
 		
 		private RegistryEntryFactory(){}
 		
@@ -108,12 +132,6 @@ public final class RegistryServices
 			return this;
 		}
 		
-		public RegistryEntryFactory withSetValueFilter(Functor01<Object> filter)
-		{
-			this.setValueFilter=filter;
-			return this;
-		}
-		
 		public RegistryEntryFactory withDefaultValue(
 			Object defaultCheck
 		)
@@ -122,12 +140,16 @@ public final class RegistryServices
 			return this;
 		}
 		
-		@Override public RegistryEntry collate()
+		protected void checkTargets()
 		{
 			ASSERT(check);
-			ASSERT(setValueFilter);
 			ASSERT(defaultValueCheck);
 			ASSERT(canonicalName);
+		}
+		
+		@Override public RegistryEntry collate()
+		{
+			checkTargets();
 			return new RegistryEntry()
 			{
 				@Override public String getCanonicalName()
@@ -139,6 +161,71 @@ public final class RegistryServices
 				{
 					return check.call(r);
 				}
+				
+				@Override public Optional<?> defaultValue()
+				{
+					return Optional.of(defaultValueCheck);
+				}
+				
+				@Override public void setCurrentValue(Object r)
+				{
+					if(check(r))
+						super.setCurrentValue(r);
+				}
+			};
+		}
+	}
+	
+	public abstract static class DescriptiveRegistryEntry
+		extends RegistryEntry
+		implements
+		Serializable
+	{
+		public abstract String description();
+	}
+	
+	public static final class DescriptiveRegistryEntryFactory
+		extends RegistryEntryFactory
+	{
+		protected String description;
+		
+		public DescriptiveRegistryEntryFactory withDescription(String str)
+		{
+			this.description=str;
+			return this;
+		}
+		
+		@Override public RegistryEntry collate()
+		{
+			super.checkTargets();
+			ASSERT(description);
+			return new DescriptiveRegistryEntry()
+			{
+				@Override public String description()
+				{
+					return description;
+				}
+				
+				@Override public String getCanonicalName()
+				{
+					return canonicalName;
+				}
+				
+				@Override public <T> boolean check(T r)
+				{
+					return check.call(r);
+				}
+				
+				@Override public Optional<?> defaultValue()
+				{
+					return Optional.of(defaultValueCheck);
+				}
+				
+				@Override public void setCurrentValue(Object r)
+				{
+					if(check(r))
+						super.setCurrentValue(r);
+				}
 			};
 		}
 	}
@@ -146,7 +233,7 @@ public final class RegistryServices
 	public abstract static class RegistryEntry
 		implements Serializable
 	{
-		private Object currentValue;
+		protected Object currentValue;
 		
 		/**
 		 * Most likely should be overriden as the default implement just
@@ -205,6 +292,9 @@ public final class RegistryServices
 	 */
 	private static final HashMap<Integer,EphemeralRegistry> OBJECTS=new HashMap<>();
 	
+	private static final HashMap<Integer,BroadcastingRegistry> OBJECTS1=
+		new HashMap<>();
+	
 	/**
 	 * Registers a registry as "Ephemeral".
 	 * <p>
@@ -257,7 +347,7 @@ public final class RegistryServices
 		 * @param rootName REQUIRED - the root node's name
 		 * @param loadFactor OPTIONAL - the load factor used for the internal
 		 * hashtable for performance optimization. By default this value is 0
-		 * .75 (float
+		 * .75 (float)
 		 * @param entries OPTIONAL - default entries to inject into the internal
 		 * hashtable
 		 *
@@ -311,13 +401,27 @@ public final class RegistryServices
 		
 		private final Hashtable<String,RegistryEntry> leaves;
 		
-		public EphemeralRegistry(
-			String rootName
-		)
+		/**
+		 * Initiates a new Ephemeral Registry by using just the rootName
+		 *
+		 * @param rootName The name to use for this registry (this is
+		 * descriptive)
+		 */
+		public EphemeralRegistry(String rootName)
 		{
 			this(rootName,0.75F,null);
 		}
 		
+		/**
+		 * Initiates a new Ephemeral Reigstry with some more parameters.
+		 *
+		 * @param rootName The name to use for this registry (this is
+		 * descriptive)
+		 * @param loadFactor The load factor to use for the internal backing
+		 * hash table
+		 * @param entries Any default entries that can be emplaced into the
+		 * hashtable
+		 */
 		public EphemeralRegistry(
 			String rootName,float loadFactor,
 			Pair<String/*leaf name*/,RegistryEntry/*metadata*/>[] entries
@@ -332,23 +436,61 @@ public final class RegistryServices
 			{
 				for(Pair<String,RegistryEntry> m: entries)
 				{
+					String name=assertLeafNameFormat(m.first());
 					leaves.put(
-						m.first(),
+						name,
 						m.second()
 					);
-					setObjectName(rootName);
 				}
 			}
 		}
 		
+		private static volatile CharSequence[] NOT_ALLOWED_SEQUENCES={
+			">",
+			"<",
+			"/",
+			"?",
+			"\"",
+			";",
+			":",
+			"!"
+		};
+		
+		private static String assertLeafNameFormat(String rootName)
+		{
+			DebugService.panicOn(
+				BasicService.strContains(
+					rootName,
+					NOT_ALLOWED_SEQUENCES
+				),
+				"The supplied rootName of \""+rootName+"\" was "+
+				"found to contain an invalid character!"
+			);
+			return rootName.toLowerCase();
+		}
+		
+		public <T extends RegistryEntry> void registerEntry(
+			String rootName,
+			T entry
+		)
+		{
+			String name=assertLeafNameFormat(rootName);
+			THROW_NOW_IF(leaves.containsKey(name),"The supplied leaf "+
+												  "key of "+name+"was "+
+												  "already found in the registry!");
+			leaves.put(name,entry);
+		}
+		
 		public RegistryEntry acquireEntry(String leafName)
 		{
+			String name=assertLeafNameFormat(leafName);
 			THROW_NOW_IF(
-				!leaves.containsKey(leafName),
-				"The supplied "+"leaf key of "+leafName+" was not found in this registry!"
+				!leaves.containsKey(name),
+				"The supplied leaf key of "+name+" was not found in this "+
+				"registry!"
 			);
 			return leaves
-				.get(leafName);
+				.get(name);
 		}
 		
 		@Override void setEntry(final String name,final RegistryEntry entry)

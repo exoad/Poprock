@@ -1,6 +1,7 @@
 package pkg.exoad.softgradient.core.services;
 
 import pkg.exoad.softgradient.core.Pair;
+import pkg.exoad.softgradient.core.annotations.ServiceClass;
 
 import java.util.Collection;
 import java.util.Objects;
@@ -20,6 +21,7 @@ import java.util.function.Consumer;
  *
  * @author Jack Meng
  */
+@ServiceClass(requiresArming=false)
 public final class BasicService
 {
 	private BasicService()
@@ -54,6 +56,24 @@ public final class BasicService
 		return false;
 	}
 
+	/**
+	 * A macro call for {@link java.lang.String#contains(CharSequence)} where
+	 * you might want check against multiple sequences.
+	 *
+	 * @param str The target string to search in
+	 * @param chars The supplied sequences to search against
+	 *
+	 * @return true or false if any of the target sequences were found
+	 */
+	public static boolean strContains(String str,CharSequence... chars)
+	{
+		assert chars!=null;
+		for(CharSequence r: chars)
+			if(str.contains(r))
+				return true;
+		return false;
+	}
+	
 	/**
 	 * Checks if any values in a Pair are nulled values. Please note that this
 	 * function does not do additional checks after just {@link Pair#first()} or

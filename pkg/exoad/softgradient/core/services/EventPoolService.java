@@ -3,6 +3,7 @@ package pkg.exoad.softgradient.core.services;
 import java.util.*;
 
 import pkg.exoad.softgradient.core.Pair;
+import pkg.exoad.softgradient.core.annotations.ServiceClass;
 import pkg.exoad.softgradient.core.services.mixins.DebuggableMixin;
 import pkg.exoad.softgradient.core.annotations.NotVirtual;
 
@@ -59,6 +60,7 @@ import pkg.exoad.softgradient.core.annotations.NotVirtual;
  *
  * @author Jack Meng
  */
+@ServiceClass(requiresArming=false)
 public final class EventPoolService
 {
 	private EventPoolService()
