@@ -41,9 +41,9 @@ public final class RegistryServices
 		implements
 		ITypeInferencing<Collection<Class<? extends RegistryEntry>>>
 	{
-		abstract RegistryEntry acquireEntry(String name);
+		protected abstract RegistryEntry acquireEntry(String name);
 		
-		abstract void setEntry(
+		abstract void registryEntry(
 			String name,
 			/*covariant*/ RegistryEntry entry
 		);
@@ -120,18 +120,40 @@ public final class RegistryServices
 		
 		private RegistryEntryFactory(){}
 		
+		/**
+		 * Named constructor method for setting the checker function
+		 *
+		 * @param check The checker function
+		 *
+		 * @return this
+		 */
 		public RegistryEntryFactory withCheck(Functor11<Boolean,Object> check)
 		{
 			this.check=check;
 			return this;
 		}
 		
+		/**
+		 * Named constructor method for setting the canonical name property
+		 *
+		 * @param name The canonical name
+		 *
+		 * @return this
+		 */
 		public RegistryEntryFactory withCanonicalName(String name)
 		{
 			this.canonicalName=name;
 			return this;
 		}
 		
+		/**
+		 * Named constructor method for setting the default value on false
+		 * evaluation
+		 *
+		 * @param defaultCheck The default value
+		 *
+		 * @return this
+		 */
 		public RegistryEntryFactory withDefaultValue(
 			Object defaultCheck
 		)
@@ -176,19 +198,56 @@ public final class RegistryServices
 		}
 	}
 	
+	/**
+	 * The base representation of a Descriptive Registry entry that just has one
+	 * internal property of {@code description}. <strong>Please use the Factory
+	 * method to construct this object from scratch.
+	 * </strong>
+	 *
+	 * @author Jack Meng
+	 * @see DescriptiveRegistryEntryFactory
+	 */
 	public abstract static class DescriptiveRegistryEntry
 		extends RegistryEntry
 		implements
 		Serializable
 	{
+		/**
+		 * @return The description of this entry
+		 */
 		public abstract String description();
 	}
 	
+	/**
+	 * A Descriptive Registry is one that also possess another property that
+	 * presents a user friendly description of this entry. This is extremely
+	 * useful for when you are writing a settings page, this part will be able
+	 * to automate that styling.
+	 *
+	 * <p>
+	 * This class aims to automate the creation of a regular Descriptive
+	 * Registry entry by complying with the named construction.
+	 * </p>
+	 *
+	 * @author Jack Meng
+	 * @see RegistryEntryFactory
+	 */
 	public static final class DescriptiveRegistryEntryFactory
 		extends RegistryEntryFactory
 	{
-		private String description;
+		/**
+		 * Internal raw representation of the description
+		 */
+		protected String description;
 		
+		/**
+		 * Named construction for the property Description of the Descriptive
+		 * Entry class.
+		 *
+		 * @param str The description
+		 *
+		 * @return this (covariance)
+		 */
 		public DescriptiveRegistryEntryFactory withDescription(String str)
 		{
 			this.description=str;
@@ -230,6 +289,14 @@ public final class RegistryServices
 		}
 	}
 	
+	/**
+	 * Base class for a registry entry which describes a certain data type held
+	 * in the registry. By default it holds some very routinely used properties
+	 * of an entry, but must be overriden if you want the correct
+	 * functionalities.
+	 *
+	 * @author Jack Meng
+	 */
 	public abstract static class RegistryEntry
 		implements Serializable
 	{
@@ -239,6 +306,7 @@ public final class RegistryServices
 		 * Most likely should be overriden as the default implement just
 		 * returns
 		 * <code>true</code> no matter what happens!
+		 * public
 		 *
 		 * @param r The value to check against
 		 * @param <T> Object type
@@ -278,6 +346,11 @@ public final class RegistryServices
 			return currentValue;
 		}
 		
+		/**
+		 * Returns the default value held by this entry. This can be nullable
+		 *
+		 * @return The default value wrapped in an {@link java.util.Optional}
+		 */
 		public Optional<?> defaultValue()
 		{
 			return Optional.empty();
@@ -445,7 +518,7 @@ public final class RegistryServices
 			}
 		}
 		
-		private static final CharSequence[] NOT_ALLOWED_SEQUENCES={
+		private static volatile CharSequence[] NOT_ALLOWED_SEQUENCES={
 			">",
 			"<",
 			"/",
@@ -481,7 +554,7 @@ public final class RegistryServices
 			leaves.put(name,entry);
 		}
 		
-		public RegistryEntry acquireEntry(String leafName)
+		@Override protected RegistryEntry acquireEntry(String leafName)
 		{
 			String name=assertLeafNameFormat(leafName);
 			THROW_NOW_IF(
@@ -493,9 +566,11 @@ public final class RegistryServices
 				.get(name);
 		}
 		
-		@Override void setEntry(final String name,final RegistryEntry entry)
+		@Override public void registryEntry(
+			final String name,
+			final RegistryEntry entry
+		)
 		{
-		
 		}
 		
 		@Override protected void forEach(final Consumer<Object> e)
