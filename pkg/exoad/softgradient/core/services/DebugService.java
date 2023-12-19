@@ -41,6 +41,13 @@ public final class DebugService
 	 */
 	public static String logTimeStampFormat="mm/dd/YYYY HH:mm:ssss";
 	
+	/**
+	 * Represents the logging level used for a log event
+	 *
+	 * @author Jack Meng
+	 *
+	 * @see #log(LogLevel,Object)
+	 */
 	public enum LogLevel
 	{
 		INFO("info"),
@@ -62,6 +69,9 @@ public final class DebugService
 	
 	private static volatile PrintStream out;
 	
+	/**
+	 * @return The internal output stream used by this debug service
+	 */
 	public static PrintStream getOut()
 	{
 		if(out==null)
@@ -69,11 +79,20 @@ public final class DebugService
 		return out;
 	}
 	
+	/**
+	 * Sets the internal output stream used by this debug service
+	 * @param p The new output stream
+	 */
 	public static synchronized void setOut(PrintStream p)
 	{
 		out=p;
 	}
 	
+	/**
+	 * Logs a message to the console with the specified level
+	 * @param level The level of the log
+	 * @param msg The message to log
+	 */
 	public static void log(LogLevel level,Object msg)
 	{
 		out.println(MessageFormat.format(

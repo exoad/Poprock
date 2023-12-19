@@ -238,7 +238,7 @@ public final class RegistryServices
 		/**
 		 * Internal raw representation of the description
 		 */
-		protected String description;
+		private String description;
 		
 		/**
 		 * Named construction for the property Description of the Descriptive
@@ -518,7 +518,7 @@ public final class RegistryServices
 			}
 		}
 		
-		private static volatile CharSequence[] NOT_ALLOWED_SEQUENCES={
+		private static final CharSequence[] NOT_ALLOWED_SEQUENCES={
 			">",
 			"<",
 			"/",
@@ -542,17 +542,6 @@ public final class RegistryServices
 			return rootName.toLowerCase();
 		}
 		
-		public <T extends RegistryEntry> void registerEntry(
-			String rootName,
-			T entry
-		)
-		{
-			String name=assertLeafNameFormat(rootName);
-			THROW_NOW_IF(leaves.containsKey(name),"The supplied leaf "+
-												  "key of "+name+"was "+
-												  "already found in the registry!");
-			leaves.put(name,entry);
-		}
 		
 		@Override protected RegistryEntry acquireEntry(String leafName)
 		{
@@ -567,10 +556,15 @@ public final class RegistryServices
 		}
 		
 		@Override public void registryEntry(
-			final String name,
+			String name,
 			final RegistryEntry entry
 		)
 		{
+			name=assertLeafNameFormat(name);
+			THROW_NOW_IF(leaves.containsKey(name),"The supplied leaf "+
+												  "key of "+name+"was "+
+												  "already found in the registry!");
+			leaves.put(name,entry);
 		}
 		
 		@Override protected void forEach(final Consumer<Object> e)
