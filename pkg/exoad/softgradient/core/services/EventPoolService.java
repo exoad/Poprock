@@ -162,7 +162,7 @@ public final class EventPoolService
 		// Key: Identifier, Value: Pair of Stack of Listeners and the payload
 		private HashMap</*id of the event*/Class<? extends EventPayload/*must
 		extend
-		marker interface*/>,Pair</*all the listeners*/PriorityQueue<Runnable>,/*the
+		marker interface*/>,Pair</*all the listeners*/ArrayList<Runnable>,/*the
 		currently held result of this payload*/Object>> payloads=new HashMap<>();
 		
 		/**
@@ -202,7 +202,7 @@ public final class EventPoolService
 				.put(
 					id,
 					new Pair<>(
-						new PriorityQueue<>(),
+						new ArrayList<>(),
 						payload
 					)
 				);

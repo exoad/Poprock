@@ -187,7 +187,7 @@ public final class RegistryServices
 	public static final class DescriptiveRegistryEntryFactory
 		extends RegistryEntryFactory
 	{
-		protected String description;
+		private String description;
 		
 		public DescriptiveRegistryEntryFactory withDescription(String str)
 		{
@@ -445,7 +445,7 @@ public final class RegistryServices
 			}
 		}
 		
-		private static volatile CharSequence[] NOT_ALLOWED_SEQUENCES={
+		private static final CharSequence[] NOT_ALLOWED_SEQUENCES={
 			">",
 			"<",
 			"/",
