@@ -25,17 +25,6 @@ public class AppEntry
 {
 	static
 	{
-		// do all pre-runtime property settings and checks before the main function is called
-		System
-			.setProperty(
-				"sun.java2d.opengl",
-				"True"
-			);
-		System
-			.setProperty(
-				"flatlaf.useWindowDecorations",
-				"true"
-			);
 		System
 			.setProperty(
 				"flatlaf.menuBarEmbeded",
@@ -105,6 +94,10 @@ public class AppEntry
 	public static void main(String[] args)
 	{
 		RegistryServices.armService();
+		UIServices.propagate(
+			UIServices.PropertyKey.USE_OPENGL_TRACED,
+			UIServices.PropertyKey.USE_FLATLAF_WINDOW_DECOR
+		);
 		// EVENT POOL REGISTRATION
 		//
 		// Pool_ID "1" -> Default color pipeline pool

@@ -3,6 +3,7 @@ package pkg.exoad.softgradient.core.services;
 import pkg.exoad.softgradient.core.*;
 import pkg.exoad.softgradient.core.annotations.NotVirtual;
 import pkg.exoad.softgradient.core.annotations.ServiceClass;
+import pkg.exoad.softgradient.core.annotations.VolatileImpl;
 import pkg.exoad.softgradient.core.services.mixins.DebuggableAllRequiredNamedFieldsMixin;
 import pkg.exoad.softgradient.core.services.mixins.DebuggableMixin;
 import pkg.exoad.softgradient.core.services.mixins.NamedObjMixin;
@@ -14,7 +15,10 @@ import java.util.function.Consumer;
 /**
  * <h2>Regsitry Services</h2>
  *
- * A registry is just a place for global properties to be accessed.
+ * A registry is just a place for global properties to be accessed. Registries
+ * follows a similar structure to {@link EventPoolService} where by which
+ * children are set based on a registration system. Furthermore, all registries
+ * are public.
  *
  * @author Jack Meng
  */
@@ -26,23 +30,57 @@ public final class RegistryServices
 	
 	private static boolean armed=false;
 	
+	/**
+	 * Arms the Registry Services. Should be automatically called by
+	 * {@link Services}
+	 */
 	public static synchronized void armService()
 	{
 		if(!armed) armed=true;
 	}
 	
-	public static void runOnArmed(Runnable r)
+	/**
+	 * Internal macro method
+	 *
+	 * @param r Runnable
+	 */
+	static void runOnArmed(Runnable r)
 	{
 		if(armed) r.run();
-		
 	}
 	
+	/**
+	 * This is the root class used by all of the various implementations of a
+	 * Registry. Registries are meant to be collatable groups of properties.
+	 *
+	 * @author Jack Meng
+	 */
 	public abstract static class BaseRegistry
 		implements
 		ITypeInferencing<Collection<Class<? extends RegistryEntry>>>
 	{
+		/**
+		 * Returns the internal representation of a leaf.
+		 * <p>
+		 * <em>Note that this method must handle an invalid name</em>
+		 * </p>
+		 *
+		 * @param name The name of the leaf to look up
+		 *
+		 * @return The RegistryEntry
+		 */
 		protected abstract RegistryEntry acquireEntry(String name);
 		
+		/**
+		 * This method is the main entry into "putting" a leaf into a registry.
+		 * It acts similar to the registration process used by
+		 * {@link EventPoolService}.
+		 *
+		 * @param name The name of the leaf
+		 * @param entry The base modal of the leaf (property)
+		 *
+		 * @see RegistryEntry
+		 */
 		abstract void registryEntry(
 			String name,
 			/*covariant*/ RegistryEntry entry
@@ -121,7 +159,10 @@ public final class RegistryServices
 		private RegistryEntryFactory(){}
 		
 		/**
-		 * Named constructor method for setting the checker function
+		 * Named constructor method for setting the checker function. Please
+		 * note that the functionality of the checker is mainly used for custom
+		 * user implemented checks. For example Integer Bound Checks, these are
+		 * not handled by any registries themselves (for the most part).
 		 *
 		 * @param check The checker function
 		 *
@@ -162,6 +203,14 @@ public final class RegistryServices
 			return this;
 		}
 		
+		/**
+		 * Internal method used to check the most basic properties.
+		 * <p>
+		 * <strong>This method should be called by child classes to make
+		 * sure at least the base properties are met.
+		 * </strong>
+		 * </p>
+		 */
 		protected void checkTargets()
 		{
 			ASSERT(check);
@@ -382,7 +431,7 @@ public final class RegistryServices
 	 *
 	 * @see EphemeralRegistry.EphemeralRegistryConfig
 	 */
-	public static int registerEphemeralRegistry(
+	@VolatileImpl(reason="Supplied id already exists") public static int registerEphemeralRegistry(
 		int id,EphemeralRegistry.EphemeralRegistryConfig config
 	)
 	{
@@ -399,7 +448,24 @@ public final class RegistryServices
 	); return id;
 	}
 	
+	// TODO: Finish impl
 	public static final class BroadcastingRegistry
+		implements DebuggableMixin,
+				   NamedObjMixin
+	{
+	
+	}
+	
+	// TODO: Finish impl
+	public static final class PrivateStashedRegistry
+		implements DebuggableMixin,
+				   NamedObjMixin
+	{
+	
+	}
+	
+	// TODO: Finish impl
+	public static final class WeakRegistry
 		implements DebuggableMixin,
 				   NamedObjMixin
 	{
@@ -408,6 +474,30 @@ public final class RegistryServices
 	
 	/**
 	 * <h2>Ephemeral Registry</h2>
+	 *
+	 * An EphemeralRegistry is the most basic registry type. By basic meaning
+	 * that any functionality that depends on this registry must perform manual
+	 * lookup within this registry. This means when a property is changed, no
+	 * MVC pattern is implemented by the registry.
+	 *
+	 * <p>
+	 * <em>However, you can get around this by using a registry entry's
+	 * internal checker function as a listener. <strong>However, sometimes this
+	 * is not</strong> guranteed to be called.
+	 * </em>
+	 *
+	 * <h3>Leaf Validation</h3>
+	 * <p>
+	 * Leaf validation defines how properties flow within the registry. This
+	 * just means what happens when the program wants to set an entry's value to
+	 * something else. For the most part, this is quite trivial, we call the
+	 * entry's checker function and see what it shows and do the appropriate
+	 * operation based on the result. However, Ephemeral Registry also performs
+	 * a few optimizations on behalf of the entries themselves. One of the
+	 * biggest is basic object equality. If the current entry's value is already
+	 * equal to
+	 * </p>
+	 * </p>
 	 */
 	public static final class EphemeralRegistry
 		extends BaseRegistry
@@ -495,7 +585,7 @@ public final class RegistryServices
 		 * @param entries Any default entries that can be emplaced into the
 		 * hashtable
 		 */
-		public EphemeralRegistry(
+		@VolatileImpl(reason="load factor less than 0") public EphemeralRegistry(
 			String rootName,float loadFactor,
 			Pair<String/*leaf name*/,RegistryEntry/*metadata*/>[] entries
 		)
@@ -518,6 +608,9 @@ public final class RegistryServices
 			}
 		}
 		
+		/**
+		 * Internal conventions that are preserved
+		 */
 		private static final CharSequence[] NOT_ALLOWED_SEQUENCES={
 			">",
 			"<",
@@ -529,7 +622,18 @@ public final class RegistryServices
 			"!"
 		};
 		
-		private static String assertLeafNameFormat(String rootName)
+		/**
+		 * Formats the rootName accordingly. If the root name is invalid, this
+		 * function throws an exception which is always a programming error.
+		 *
+		 * @param rootName The rootname
+		 *
+		 * @return The formatted rootname.
+		 */
+		@VolatileImpl(
+			reason="The supplied rootName contains invalid "+
+				   "characters"
+		) private static String assertLeafNameFormat(String rootName)
 		{
 			DebugService.panicOn(
 				BasicService.strContains(
@@ -542,8 +646,9 @@ public final class RegistryServices
 			return rootName.toLowerCase();
 		}
 		
-		
-		@Override protected RegistryEntry acquireEntry(String leafName)
+		@VolatileImpl(reason="The supplied leaf was not found.") @Override protected RegistryEntry acquireEntry(
+			String leafName
+		)
 		{
 			String name=assertLeafNameFormat(leafName);
 			THROW_NOW_IF(
@@ -555,7 +660,7 @@ public final class RegistryServices
 				.get(name);
 		}
 		
-		@Override public void registryEntry(
+		@VolatileImpl(reason="The supplied leaf was already registered.") @Override public void registryEntry(
 			String name,
 			final RegistryEntry entry
 		)

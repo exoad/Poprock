@@ -4,6 +4,7 @@ import java.util.*;
 
 import pkg.exoad.softgradient.core.Pair;
 import pkg.exoad.softgradient.core.annotations.ServiceClass;
+import pkg.exoad.softgradient.core.annotations.VolatileImpl;
 import pkg.exoad.softgradient.core.services.mixins.DebuggableMixin;
 import pkg.exoad.softgradient.core.annotations.NotVirtual;
 
@@ -160,7 +161,7 @@ public final class EventPoolService
 	{
 		
 		// Key: Identifier, Value: Pair of Stack of Listeners and the payload
-		private HashMap</*id of the event*/Class<? extends EventPayload/*must
+		private final HashMap</*id of the event*/Class<? extends EventPayload/*must
 		extend
 		marker interface*/>,Pair</*all the listeners*/ArrayList<Runnable>,/*the
 		currently held result of this payload*/Object>> payloads=new HashMap<>();
@@ -171,7 +172,7 @@ public final class EventPoolService
 		 * @param id identifier of the payload type
 		 * @param r The listener lambda (function)
 		 */
-		public void attachListener(
+		@VolatileImpl(reason="The suggested listener ID already exists") public void attachListener(
 			Class<? extends EventPayload> id,Runnable r
 		)
 		{
@@ -218,7 +219,9 @@ public final class EventPoolService
 		 *
 		 * @see java.lang.Class#cast(Object)
 		 */
-		public <T extends EventPayload> T getPayload(Class<T> id)
+		@VolatileImpl(reason="Suggested ID does not exist!") public <T extends EventPayload> T getPayload(
+			Class<T> id
+		)
 		{
 			THROW_NOW_IF(
 				!payloads
