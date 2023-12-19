@@ -49,4 +49,15 @@ public interface DebuggableMixin
 		if(condition)
 			THROW_NOW(message);
 	}
+	
+	/**
+	 * @param level LogLevel
+	 * @param message Attached log message
+	 *
+	 * @see pkg.exoad.softgradient.core.services.DebugService#log(DebugService.LogLevel,Object)
+	 */
+	@NotVirtual default void LOG(DebugService.LogLevel level,String message)
+	{
+		DebugService.log(level,message);
+	}
 }
