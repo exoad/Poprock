@@ -25,7 +25,7 @@ public final class BasicService
 	private BasicService()
 	{
 	}
-	
+
 	/**
 	 * A very naive implementation to determine if a list of classes contain the
 	 * provided class by just checking their canonical names. VERY NAIVE AND
@@ -53,7 +53,7 @@ public final class BasicService
 				return true;
 		return false;
 	}
-	
+
 	/**
 	 * Checks if any values in a Pair are nulled values. Please note that this
 	 * function does not do additional checks after just {@link Pair#first()} or
@@ -71,7 +71,7 @@ public final class BasicService
 				return true;
 		return false;
 	}
-	
+
 	/**
 	 * Similar to {@link java.util.Objects#requireNonNull(Object)}, but instead
 	 * we are going to check for a vararg amount of Objects. It is primarily
@@ -94,7 +94,7 @@ public final class BasicService
 			Objects
 				.requireNonNull(r);
 	}
-	
+
 	/**
 	 * Supplies an empty runnable that does nothing when called. Very useful for
 	 * placeholders and when you don't want to pass a {@code null} that could
@@ -106,7 +106,7 @@ public final class BasicService
 	{
 		return ()->{};
 	}
-	
+
 	/**
 	 * Supplies an empty consumer that does nothing when supplied anything. Very
 	 * useful for placeholders and when you don't want to pass a {@code null}.
