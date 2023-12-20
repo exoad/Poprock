@@ -6,6 +6,7 @@ import pkg.exoad.softgradient.core.annotations.ServiceClass;
 import java.util.Collection;
 import java.util.Objects;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 /**
  * Basic Service - Some very rudementary functions that can be used for some
