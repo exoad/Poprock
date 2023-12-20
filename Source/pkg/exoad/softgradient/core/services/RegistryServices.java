@@ -9,6 +9,7 @@ import pkg.exoad.softgradient.core.services.mixins.DebuggableMixin;
 import pkg.exoad.softgradient.core.services.mixins.NamedObjMixin;
 
 import java.io.Serializable;
+import java.lang.ref.WeakReference;
 import java.util.*;
 import java.util.function.Consumer;
 
@@ -55,10 +56,16 @@ public final class RegistryServices
 	 *
 	 * @author Jack Meng
 	 */
-	public abstract static class BaseRegistry
+	public sealed abstract static class BaseRegistry
 		implements
 		ITypeInferencing<Collection<Class<? extends RegistryEntry>>>
+		permits
+		EphemeralRegistry,
+		WeakRegistry,
+		ExternRegistry
 	{
+		protected BaseRegistry(){}
+		
 		/**
 		 * Returns the internal representation of a leaf.
 		 * <p>
@@ -81,7 +88,7 @@ public final class RegistryServices
 		 *
 		 * @see RegistryEntry
 		 */
-		abstract void registryEntry(
+		abstract void registerEntry(
 			String name,
 			/*covariant*/ RegistryEntry entry
 		);
@@ -114,6 +121,43 @@ public final class RegistryServices
 					);
 			});
 			return e.isEmpty()?Optional.empty():Optional.of(e);
+		}
+	}
+	
+	/**
+	 * <h2>External Registry</h2>
+	 * This is a registry that is implemented by a third party or can be
+	 * implemented by a third party. It should barely be used as the options
+	 * provided by the standard registry services should suffice.
+	 *
+	 * @author Jack Meng
+	 */
+	public static non-sealed class ExternRegistry
+		extends BaseRegistry
+		implements
+		NamedObjMixin
+	{
+		
+		@Override protected RegistryEntry acquireEntry(final String name)
+		{
+			// break base implementation
+			return null;
+		}
+		
+		@Override public void registerEntry(String name,RegistryEntry entry)
+		{
+			// break base implementation
+		}
+		
+		@Override protected void forEach(Consumer<Object> e)
+		{
+			// break base implementation
+		}
+		
+		@Override public Optional<Collection<Class<? extends RegistryEntry>>> inferTyping()
+		{
+			// break the default implementation
+			return Optional.empty();
 		}
 	}
 	
@@ -427,11 +471,9 @@ public final class RegistryServices
 	 * @param config The configuration to use for registering this
 	 * EphemeralRegistry
 	 *
-	 * @return The id alloted
-	 *
 	 * @see EphemeralRegistry.EphemeralRegistryConfig
 	 */
-	@VolatileImpl(reason="Supplied id already exists") public static int registerEphemeralRegistry(
+	@VolatileImpl(reason="Supplied id already exists") public static void registerEphemeralRegistry(
 		int id,EphemeralRegistry.EphemeralRegistryConfig config
 	)
 	{
@@ -445,7 +487,26 @@ public final class RegistryServices
 			config.loadFactor,
 			config.entries
 		)
-	); return id;
+	);
+	}
+	
+	/**
+	 * Acquires the ephemeral registry found from the pool.
+	 * <p>
+	 * If this function panics, it is 99% a source issue.
+	 * </p>
+	 *
+	 * @param id The id of the registry to look for
+	 *
+	 * @return The ephemeral registry that was found under the supplied ID
+	 */
+	@VolatileImpl(reason="Supplied id does not exist") public static EphemeralRegistry getEphemeral(
+		int id
+	)
+	{
+		DebugService.panicOn(!OBJECTS.containsKey(id),"Failed to find a "+
+													  "registry with "+id);
+		return OBJECTS.get(id);
 	}
 	
 	// TODO: Finish impl
@@ -465,11 +526,43 @@ public final class RegistryServices
 	}
 	
 	// TODO: Finish impl
+	
+	/**
+	 * <h2>Weak Registry</h2>
+	 * A weak registry makes it so that all entries held by the internal hash
+	 * table are attributed using a weak reference once that entry has been
+	 * accessed AT LEAST ONCE.
+	 *
+	 * <p>
+	 * If the entry has been accessed at least once, it is purely up to when the
+	 * next GC phase until that entry disappears.
+	 * </p>
+	 *
+	 * @author Jack Meng
+	 */
 	public static final class WeakRegistry
+		extends BaseRegistry
 		implements DebuggableMixin,
 				   NamedObjMixin
 	{
-	
+		private transient HashMap<String,WeakReference<RegistryEntry>> leafs;
+		
+		@Override protected RegistryEntry acquireEntry(final String name)
+		{
+			return null;
+		}
+		
+		@Override void registerEntry(
+			final String name,final RegistryEntry entry
+		)
+		{
+		
+		}
+		
+		@Override protected void forEach(final Consumer<Object> e)
+		{
+		
+		}
 	}
 	
 	/**
@@ -502,7 +595,8 @@ public final class RegistryServices
 	public static final class EphemeralRegistry
 		extends BaseRegistry
 		implements DebuggableMixin,
-				   NamedObjMixin
+				   NamedObjMixin,
+				   Serializable
 	{
 		/**
 		 * Creates a configuration functionally
@@ -562,7 +656,7 @@ public final class RegistryServices
 		)
 		{}
 		
-		private final Hashtable<String,RegistryEntry> leaves;
+		private final HashMap<String,RegistryEntry> leaves;
 		
 		/**
 		 * Initiates a new Ephemeral Registry by using just the rootName
@@ -570,7 +664,7 @@ public final class RegistryServices
 		 * @param rootName The name to use for this registry (this is
 		 * descriptive)
 		 */
-		public EphemeralRegistry(String rootName)
+		private EphemeralRegistry(String rootName)
 		{
 			this(rootName,0.75F,null);
 		}
@@ -585,7 +679,7 @@ public final class RegistryServices
 		 * @param entries Any default entries that can be emplaced into the
 		 * hashtable
 		 */
-		@VolatileImpl(reason="load factor less than 0") public EphemeralRegistry(
+		@VolatileImpl(reason="load factor less than 0") private EphemeralRegistry(
 			String rootName,float loadFactor,
 			Pair<String/*leaf name*/,RegistryEntry/*metadata*/>[] entries
 		)
@@ -594,7 +688,7 @@ public final class RegistryServices
 				loadFactor<=0,
 				"The load factor for the entry must be "+">0!"
 			);
-			leaves=new Hashtable<>(entries==null?0:entries.length,loadFactor);
+			leaves=new HashMap<>(entries==null?0:entries.length,loadFactor);
 			if(entries!=null)
 			{
 				for(Pair<String,RegistryEntry> m: entries)
@@ -617,6 +711,9 @@ public final class RegistryServices
 			"/",
 			"?",
 			"\"",
+			"'",
+			"[",
+			"]",
 			";",
 			":",
 			"!"
@@ -660,7 +757,7 @@ public final class RegistryServices
 				.get(name);
 		}
 		
-		@VolatileImpl(reason="The supplied leaf was already registered.") @Override public void registryEntry(
+		@VolatileImpl(reason="The supplied leaf was already registered.") @Override public void registerEntry(
 			String name,
 			final RegistryEntry entry
 		)
