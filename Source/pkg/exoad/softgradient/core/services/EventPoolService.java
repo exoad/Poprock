@@ -253,7 +253,8 @@ public final class EventPoolService
 			THROW_NOW_IF(
 				!payloads
 					.containsKey(id),
-				"Payload fetch failed: StackNo such event exists with the given id: "+id
+				"Payload fetch failed: No such event exists with the given "+
+				"id: "+id
 					.getCanonicalName()
 			);
 			payloads

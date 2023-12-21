@@ -3,13 +3,19 @@ import pkg.exoad.softgradient.tests.lib.Section;
 import pkg.exoad.softgradient.tests.lib.TestRoot;
 
 import java.util.Arrays;
+import java.util.Stack;
 public class TestMain
 {
+	public static final Stack<String> INVALIDATIONS=new Stack<>();
 	
 	public static void main(String[] args)
 	{
+		long passed=0, failed=0, skipped=0, invalidations=0;
 		for(int i=0;i<Config.TESTS.length;i++)
 		{
+			invalidations+=INVALIDATIONS.size();
+			if(!INVALIDATIONS.isEmpty())
+				INVALIDATIONS.clear();
 			// pre validation
 			TestRoot r=Config.TESTS[i];
 			if(Arrays
@@ -17,16 +23,23 @@ public class TestMain
 							.getClass()
 							.getDeclaredAnnotations())
 				.anyMatch(x->x instanceof Section))
-				System.out.println("[CHECK_] | Test("+i+") Annotation#OK#{"+Arrays.toString(
+			{
+				System.out.println("[PCHECK] | Test("+i+") Annotation#OK#{"+Arrays.toString(
 					r
 						.getClass()
 						.getDeclaredAnnotations())+
 								   "}:"+r.getClass());
+				String tcName=
+					((Section)r
+						.getClass()
+						.getDeclaredAnnotations()[0]).name(); // :(
+				
+			}
 			else
 			{
 				if(Config.FAIL_FAST)
 				{
-					System.out.println("[CHECK_] | Test("+i+") Annotation"+
+					System.out.println("[PCHECK] | Test("+i+") Annotation"+
 									   "#FAILED#{"+Arrays.toString(r
 																	   .getClass()
 																	   .getDeclaredAnnotations())+
@@ -34,12 +47,18 @@ public class TestMain
 					System.exit(-1);
 				}
 				else
-					System.out.println("[CHECK_] | Test("+i+") Annotation"+
+				{
+					System.out.println("[PCHECK] | Test("+i+") Annotation"+
 									   "#SKIP#{"+Arrays.toString(r
 																	 .getClass()
 																	 .getDeclaredAnnotations())+
 									   "}:"+r.getClass());
+					skipped++;
+				}
 			}
 		}
+		System.out.println("[RESULT]\n - \tPassed: "+passed+"\n - \tFailed:"+
+						   " "+failed+" (Invalidations: +"+invalidations+")\n "+
+						   "- \tSkipped: "+skipped);
 	}
 }
