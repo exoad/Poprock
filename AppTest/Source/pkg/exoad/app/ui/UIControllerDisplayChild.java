@@ -1,18 +1,16 @@
 package pkg.exoad.app.ui;
 
+import net.exoad.annotations.poprock.core.PublicConstants;
+import net.exoad.annotations.poprock.core.services.BasicService;
+import net.exoad.annotations.poprock.core.services.ColorService;
+import net.exoad.annotations.poprock.core.services.DebugService;
+import net.exoad.annotations.poprock.core.services.EventPoolService;
+import net.exoad.annotations.poprock.desktop.ui.*;
+import net.exoad.annotations.poprock.desktop.ui.UIDelegate.Alignment;
+import net.exoad.annotations.poprock.desktop.ui.UIPanelDelegate.BoxLayoutAlignment;
 import pkg.exoad.app.SharedConstants;
 import pkg.exoad.app.events.payloads.ControllerChildDelegatesEventPayload;
 import pkg.exoad.app.events.payloads.GradientEventPayload;
-import pkg.exoad.poprock.Offset;
-import pkg.exoad.poprock.PublicConstants;
-import pkg.exoad.poprock.ThemeConstants;
-import pkg.exoad.poprock.services.BasicService;
-import pkg.exoad.poprock.services.ColorService;
-import pkg.exoad.poprock.services.DebugService;
-import pkg.exoad.poprock.services.EventPoolService;
-import pkg.exoad.poprock.ui.*;
-import pkg.exoad.poprock.ui.UIDelegate.Alignment;
-import pkg.exoad.poprock.ui.UIPanelDelegate.BoxLayoutAlignment;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,6 +23,7 @@ class UIControllerDisplayChild
 	private final JPanel blocksPanel;
 	private final JScrollPane scrollPane;
 	private final JPanel bottomButtonsPanel;
+	
 	public UIControllerDisplayChild()
 	{
 		// init all listeners for the eventpool registry["1"]
@@ -191,7 +190,7 @@ class UIControllerDisplayChild
 		);
 		
 	}
-
+	
 	private void insertNewBlock(InnerControllerBlock block)
 	{
 		block

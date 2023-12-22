@@ -1,20 +1,21 @@
 package pkg.exoad.app;
 
 import com.formdev.flatlaf.intellijthemes.FlatHighContrastIJTheme;
+import net.exoad.annotations.poprock.core.ColorObj;
+import net.exoad.annotations.poprock.core.services.*;
+import net.exoad.annotations.poprock.desktop.services.UIServices;
+import net.exoad.annotations.poprock.desktop.ui.ThemeConstants;
+import net.exoad.annotations.poprock.desktop.ui.UIWindow;
 import pkg.exoad.app.events.payloads.ControllerChildDelegatesEventPayload;
 import pkg.exoad.app.events.payloads.GradientEventPayload;
 import pkg.exoad.app.ui.UIAppMainDelegate;
-import pkg.exoad.poprock.ColorObj;
-import pkg.exoad.poprock.ThemeConstants;
-import pkg.exoad.poprock.services.*;
-import pkg.exoad.poprock.ui.UIWindow;
 
 import javax.swing.*;
 import javax.swing.plaf.ColorUIResource;
 
 /**
- * Main entry point into the Poprock application. Should not be called if
- * you are using it as a library!
+ * Main entry point into the Poprock application. Should not be called if you
+ * are using it as a library!
  *
  * @author Jack Meng
  */

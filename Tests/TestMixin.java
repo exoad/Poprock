@@ -1,4 +1,4 @@
-import pkg.exoad.poprock.annotations.NotVirtual;
+import net.exoad.annotations.NotVirtual;
 
 public interface TestMixin
 {

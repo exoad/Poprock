@@ -1,7 +1,7 @@
 package pkg.exoad.app.events.payloads;
 
 import pkg.exoad.app.ui.UIControllerDelegateChilds;
-import pkg.exoad.poprock.services.EventPoolService.EventPayload;
+import net.exoad.annotations.poprock.core.services.EventPoolService.EventPayload;
 
 import java.util.Collection;
 

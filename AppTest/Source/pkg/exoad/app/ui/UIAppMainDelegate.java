@@ -1,8 +1,8 @@
 package pkg.exoad.app.ui;
 
-import pkg.exoad.poprock.ui.UIDelegate;
-import pkg.exoad.poprock.ui.java.UXSplit;
-import pkg.exoad.poprock.ui.java.UXSplit.SplitLocation;
+import net.exoad.annotations.poprock.desktop.ui.UIDelegate;
+import net.exoad.annotations.poprock.desktop.ui.java.UXSplit;
+import net.exoad.annotations.poprock.desktop.ui.java.UXSplit.SplitLocation;
 
 /**
  * The main content panel that holds all of the necessary information for

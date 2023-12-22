@@ -1,12 +1,11 @@
 package pkg.exoad.app.ui;
 
+import net.exoad.annotations.poprock.core.services.ColorService;
+import net.exoad.annotations.poprock.core.services.EventPoolService;
+import net.exoad.annotations.poprock.desktop.ui.*;
+import net.exoad.annotations.poprock.desktop.ui.UIPanelDelegate.BoxLayoutAlignment;
+import net.exoad.annotations.poprock.desktop.ui.java.UXPanel;
 import pkg.exoad.app.events.payloads.ControllerChildDelegatesEventPayload;
-import pkg.exoad.poprock.ThemeConstants;
-import pkg.exoad.poprock.services.ColorService;
-import pkg.exoad.poprock.services.EventPoolService;
-import pkg.exoad.poprock.ui.*;
-import pkg.exoad.poprock.ui.UIPanelDelegate.BoxLayoutAlignment;
-import pkg.exoad.poprock.ui.java.UXPanel;
 
 import java.util.List;
 

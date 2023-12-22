@@ -1,9 +1,9 @@
 package pkg.exoad.app.events.payloads;
 
 import pkg.exoad.app.util.GradientColor;
-import pkg.exoad.poprock.services.EventPoolService;
-import pkg.exoad.poprock.ColorObj;
-import pkg.exoad.poprock.services.EventPoolService.EventPayload;
+import net.exoad.annotations.poprock.core.services.EventPoolService;
+import net.exoad.annotations.poprock.core.ColorObj;
+import net.exoad.annotations.poprock.core.services.EventPoolService.EventPayload;
 
 import java.util.Arrays;
 

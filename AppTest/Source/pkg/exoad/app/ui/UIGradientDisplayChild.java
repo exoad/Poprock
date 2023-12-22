@@ -2,9 +2,9 @@ package pkg.exoad.app.ui;
 
 import pkg.exoad.app.SharedConstants;
 import pkg.exoad.app.events.payloads.GradientEventPayload;
-import pkg.exoad.poprock.ThemeConstants;
-import pkg.exoad.poprock.services.ColorService;
-import pkg.exoad.poprock.services.EventPoolService;
+import net.exoad.annotations.poprock.desktop.ui.ThemeConstants;
+import net.exoad.annotations.poprock.core.services.ColorService;
+import net.exoad.annotations.poprock.core.services.EventPoolService;
 
 import javax.swing.*;
 import java.awt.*;
