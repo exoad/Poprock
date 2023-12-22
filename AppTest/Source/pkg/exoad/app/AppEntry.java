@@ -4,16 +4,16 @@ import com.formdev.flatlaf.intellijthemes.FlatHighContrastIJTheme;
 import pkg.exoad.app.events.payloads.ControllerChildDelegatesEventPayload;
 import pkg.exoad.app.events.payloads.GradientEventPayload;
 import pkg.exoad.app.ui.UIAppMainDelegate;
-import pkg.exoad.softgradient.core.ColorObj;
-import pkg.exoad.softgradient.core.ThemeConstants;
-import pkg.exoad.softgradient.core.services.*;
-import pkg.exoad.softgradient.core.ui.UIWindow;
+import pkg.exoad.poprock.ColorObj;
+import pkg.exoad.poprock.ThemeConstants;
+import pkg.exoad.poprock.services.*;
+import pkg.exoad.poprock.ui.UIWindow;
 
 import javax.swing.*;
 import javax.swing.plaf.ColorUIResource;
 
 /**
- * Main entry point into the SoftGradient application. Should not be called if
+ * Main entry point into the Poprock application. Should not be called if
  * you are using it as a library!
  *
  * @author Jack Meng
@@ -115,7 +115,7 @@ public class AppEntry
 			);
 		UIWindow
 			.make()
-			.withTitle("SoftGradient ~ exoad")
+			.withTitle("Poprock ~ exoad")
 			.withSize(
 				SharedConstants.WINDOW_WIDTH,
 				SharedConstants.WINDOW_HEIGHT

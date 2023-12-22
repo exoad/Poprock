@@ -1,23 +1,24 @@
 package pkg.exoad.app.events.payloads;
 
 import pkg.exoad.app.util.GradientColor;
-import pkg.exoad.softgradient.core.ColorObj;
-import pkg.exoad.softgradient.core.services.EventPoolService.EventPayload;
+import pkg.exoad.poprock.services.EventPoolService;
+import pkg.exoad.poprock.ColorObj;
+import pkg.exoad.poprock.services.EventPoolService.EventPayload;
 
 import java.util.Arrays;
 
 /**
- * An identifier payload for deploying Gradient Events to the SoftGradient
- * application. It contains information for the SoftGradient app to process at
+ * An identifier payload for deploying Gradient Events to the Poprock
+ * application. It contains information for the Poprock app to process at
  * runtime. Thus, you should only listen to this payload type from the EventPool
- * if you are using the SoftGradient app as well.
+ * if you are using the Poprock app as well.
  *
  * <p>
  * <strong>Listening to EventPool</strong>
  * </p>
  *
  * <blockquote><pre>
- * import pkg.exoad.softgradient.core.events.*;
+ * import pkg.exoad.Poprock.core.events.*;
  * //...
  * EventPool.attachListener(GradientEventPayload.class, () ->
  * System.out.println("It got dispatched!"));
@@ -32,19 +33,19 @@ import java.util.Arrays;
  * <br/>
  * <p>
  * Highly unsuggested as messing with the pre-exsiting ephemeral dispatching of
- * this payload class within the SoftGradient app can result in this Payload
+ * this payload class within the Poprock app can result in this Payload
  * being ignored, overwritten, corrupted, or just causing errors because of
  * synchronization errors (race conditions, among others).
  *
  * <blockquote><pre>
- * import pkg.exoad.softgradient.core.events.*;
+ * import pkg.exoad.Poprock.core.events.*;
  * //...
  * EventPool.dispatchEvent(GradientEventPayload.class,GradientEventPayload.EMPTY);
  * </pre></blockquote>
  *
  * @author Jack Meng
  * @see #EMPTY
- * @see pkg.exoad.softgradient.core.services.EventPoolService
+ * @see EventPoolService
  */
 public final record GradientEventPayload(
 	GradientColor[] colors,float startX,float startY,float endX,float endY

@@ -1,11 +1,11 @@
-# SoftGradient
+# Poprock
 
 > [!WARNING]
 > This project is a **work in progress**!
 
-A simple tool to create various gradients of your liking with various color themes.
+exoad's extensible and lightweight library for any Java application
 
-**View the documentation [here](https://exoad.github.io/SoftGradient/)** (Currently only in Chinese)
+**View the documentation [here](https://exoad.github.io/Poprock/)** (Currently only in Chinese)
 
 ## Table of contents
 F
@@ -26,14 +26,14 @@ TODO
 
 **Platform support**
 
-| Platform        	| Flavors             	| Performance 	| Support     	| Testing     	| Notes                    	|
-|-----------------	|---------------------	|-------------	|-------------	|-------------	|--------------------------	|
-| Linux           	| `6.1.62-1`          	| 🟢 - OK    	| 🟢 - YES     	| 🟢 - TESTED  	| 	Tested against Manjaro-KDE |
-| MacOS (OSX)     	|                     	| ⚫ - N/A     	| 🟢 - YES    	| 🔴 - NONE    	|                          	|
-| Windows (Win32) 	| `10`, `11`          	| 🟢 - OK     	| 🟢 - YES     	| 🟢 - TESTED    	|  Tested against Win11                   	|
+| Platform        	 | Flavors             	 | Performance 	 | Support     	  | Testing     	    | Notes                    	               |
+|-------------------|-----------------------|---------------|----------------|------------------|------------------------------------------|
+| Linux           	 | `6.1.62-1`          	 | 🟢 - OK    	  | 🟢 - YES     	 | 🟢 - TESTED  	   | 	Tested against Manjaro-KDE              |
+| MacOS (OSX)     	 | 	                     | ⚫ - N/A     	 | 🟢 - YES    	  | 🔴 - NONE    	   | 	                                        |
+| Windows (Win32) 	 | `10`, `11`          	 | 🟢 - OK     	 | 🟢 - YES     	 | 🟢 - TESTED    	 | Tested against Win11                   	 |
 
 **JRE Support**
 
-| **Version** 	| **Provider** 	| **Build**                     	| **State** 	|
-|-------------	|--------------	|-------------------------------	|-----------	|
-| 17.0.9      	| Adoptium     	| Temurin-17.0.9+9 (2023-10-17) 	| WORKING   	|
+| **Version** 	 | **Provider** 	 | **Build**                     	 | **State** 	 |
+|---------------|----------------|---------------------------------|-------------|
+| 17.0.9      	 | Adoptium     	 | Temurin-17.0.9+9 (2023-10-17) 	 | WORKING   	 |

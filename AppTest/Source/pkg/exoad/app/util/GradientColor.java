@@ -1,6 +1,6 @@
 package pkg.exoad.app.util;
 
-import pkg.exoad.softgradient.core.ColorObj;
+import pkg.exoad.poprock.ColorObj;
 
 import java.awt.*;
 

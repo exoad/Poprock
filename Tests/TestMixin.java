@@ -1,4 +1,4 @@
-import pkg.exoad.softgradient.core.annotations.NotVirtual;
+import pkg.exoad.poprock.annotations.NotVirtual;
 
 public interface TestMixin
 {

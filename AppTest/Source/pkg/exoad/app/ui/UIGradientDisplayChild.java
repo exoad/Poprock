@@ -2,9 +2,9 @@ package pkg.exoad.app.ui;
 
 import pkg.exoad.app.SharedConstants;
 import pkg.exoad.app.events.payloads.GradientEventPayload;
-import pkg.exoad.softgradient.core.ThemeConstants;
-import pkg.exoad.softgradient.core.services.ColorService;
-import pkg.exoad.softgradient.core.services.EventPoolService;
+import pkg.exoad.poprock.ThemeConstants;
+import pkg.exoad.poprock.services.ColorService;
+import pkg.exoad.poprock.services.EventPoolService;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,13 +1,13 @@
 package pkg.exoad.app.ui;
 
-import pkg.exoad.softgradient.core.ui.UIDelegate;
-import pkg.exoad.softgradient.core.ui.java.UXSplit;
-import pkg.exoad.softgradient.core.ui.java.UXSplit.SplitLocation;
+import pkg.exoad.poprock.ui.UIDelegate;
+import pkg.exoad.poprock.ui.java.UXSplit;
+import pkg.exoad.poprock.ui.java.UXSplit.SplitLocation;
 
 /**
  * The main content panel that holds all of the necessary information for
  * building the rest of the UI tree and delegates. This is not a library class,
- * this is part of the SoftGradient app itself.
+ * this is part of the Poprock app itself.
  *
  * @author Jack Meng
  */

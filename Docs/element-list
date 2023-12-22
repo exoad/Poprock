@@ -1,12 +1,16 @@
 unnamed package
 com.jackmeng
+net.exoad
+net.exoad.ansicolor
+net.exoad.color
+net.exoad.math
 pkg.exoad.app
 pkg.exoad.app.events.payloads
 pkg.exoad.app.ui
 pkg.exoad.app.util
-pkg.exoad.softgradient.core
-pkg.exoad.softgradient.core.annotations
-pkg.exoad.softgradient.core.services
-pkg.exoad.softgradient.core.services.mixins
-pkg.exoad.softgradient.core.ui
-pkg.exoad.softgradient.core.ui.java
+pkg.exoad.poprock
+pkg.exoad.poprock.annotations
+pkg.exoad.poprock.services
+pkg.exoad.poprock.services.mixins
+pkg.exoad.poprock.ui
+pkg.exoad.poprock.ui.java

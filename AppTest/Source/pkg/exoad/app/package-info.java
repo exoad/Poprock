@@ -1,6 +1,6 @@
 /**
- * This package contains the SoftGradient application built using the
- * SoftGradient library.
+ * This package contains the Poprock application built using the
+ * Poprock library.
  * <p>
  * Everything here is custom tailored to the app itself and should not be used
  * outside as a "library" piece.
