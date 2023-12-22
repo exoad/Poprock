@@ -1,6 +1,4 @@
-package pkg.exoad.softgradient.tests.lib;
 import pkg.exoad.softgradient.core.annotations.NotVirtual;
-import pkg.exoad.softgradient.tests.TestMain;
 
 public interface TestMixin
 {

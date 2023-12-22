@@ -1,7 +1,3 @@
-package pkg.exoad.softgradient.tests;
-import pkg.exoad.softgradient.tests.lib.Section;
-import pkg.exoad.softgradient.tests.lib.TestRoot;
-
 import java.util.Arrays;
 import java.util.Stack;
 public class TestMain
