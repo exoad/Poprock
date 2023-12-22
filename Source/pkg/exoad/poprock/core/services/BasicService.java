@@ -1,7 +1,7 @@
 package pkg.exoad.poprock.core.services;
 
 import net.exoad.annotations.ServiceClass;
-import pkg.exoad.poprock.core.Pair;
+import pkg.exoad.poprock.core.dsa.Pair;
 
 import java.util.Collection;
 import java.util.Objects;

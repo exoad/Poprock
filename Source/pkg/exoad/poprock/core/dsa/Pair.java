@@ -1,4 +1,4 @@
-package pkg.exoad.poprock.core;
+package pkg.exoad.poprock.core.dsa;
 
 public final class Pair<A,B>
 {

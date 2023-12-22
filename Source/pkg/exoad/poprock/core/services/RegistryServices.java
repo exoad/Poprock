@@ -6,7 +6,7 @@ import pkg.exoad.poprock.core.services.mixins.NamedObjMixin;
 import pkg.exoad.poprock.core.Functor11;
 import pkg.exoad.poprock.core.ICollatable;
 import pkg.exoad.poprock.core.ITypeInferencing;
-import pkg.exoad.poprock.core.Pair;
+import pkg.exoad.poprock.core.dsa.Pair;
 import net.exoad.annotations.NotVirtual;
 import net.exoad.annotations.ServiceClass;
 import net.exoad.annotations.VolatileImpl;

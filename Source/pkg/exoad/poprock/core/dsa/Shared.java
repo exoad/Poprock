@@ -1,4 +1,4 @@
-package pkg.exoad.poprock.core;
+package pkg.exoad.poprock.core.dsa;
 
 import java.util.HashMap;
 import java.util.UUID;
