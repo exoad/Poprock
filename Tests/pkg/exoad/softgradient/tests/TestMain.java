@@ -33,7 +33,7 @@ public class TestMain
 					((Section)r
 						.getClass()
 						.getDeclaredAnnotations()[0]).name(); // :(
-				
+				passed++;
 			}
 			else
 			{
@@ -44,6 +44,7 @@ public class TestMain
 																	   .getClass()
 																	   .getDeclaredAnnotations())+
 									   "}:"+r.getClass());
+					failed++;
 					System.exit(-1);
 				}
 				else
@@ -54,6 +55,7 @@ public class TestMain
 																	 .getDeclaredAnnotations())+
 									   "}:"+r.getClass());
 					skipped++;
+					invalidations=passed-skipped;
 				}
 			}
 		}

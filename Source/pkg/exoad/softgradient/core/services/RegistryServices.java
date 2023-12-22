@@ -93,6 +93,11 @@ public final class RegistryServices
 			/*covariant*/ RegistryEntry entry
 		);
 		
+		public String acquireEntryCanonicalName(String name)
+		{
+			return acquireEntry(name).getCanonicalName();
+		}
+		
 		public Object acquireEntryValue(String name)
 		{
 			return acquireEntry(name).currentValue;
@@ -105,7 +110,8 @@ public final class RegistryServices
 		 */
 		protected abstract void forEach(Consumer<Object> e);
 		
-		@NotVirtual @Override
+		@NotVirtual /*probably not a good suggestion other than
+		mixins*/ @Override
 		public Optional<Collection<Class<? extends RegistryEntry>>> inferTyping()
 		{
 			HashSet<Class<? extends RegistryEntry>> e=new HashSet<>();
@@ -162,19 +168,6 @@ public final class RegistryServices
 	}
 	
 	/**
-	 * Construction method to begin the method chaining pattern for creating a
-	 * RegistryEntry
-	 *
-	 * @return A new registry entry factory
-	 *
-	 * @see RegistryEntryFactory
-	 */
-	public static RegistryEntryFactory makeEntry()
-	{
-		return new RegistryEntryFactory();
-	}
-	
-	/**
 	 * <strong>RegistryEntry Factory</strong>
 	 * <p>
 	 * This class helps to construct a RegistryEntry using method chaining. It
@@ -183,11 +176,11 @@ public final class RegistryServices
 	 * </p>
 	 *
 	 * <strong>To use this class, you must call
-	 * {@link RegistryServices#makeEntry()}!</strong>
+	 * {@link RegistryEntryFactory#make() }!</strong>
 	 *
 	 * @author Jack Meng
 	 * @see RegistryEntry
-	 * @see RegistryServices#makeEntry()
+	 * @see RegistryEntryFactory#make()
 	 */
 	public static sealed class RegistryEntryFactory
 		implements
@@ -196,8 +189,19 @@ public final class RegistryServices
 		permits
 		DescriptiveRegistryEntryFactory
 	{
+		/**
+		 * Starts the factory of making a registry entry using method chaining
+		 *
+		 * @return A new instance of the Registry Entry Factory
+		 */
+		public static RegistryEntryFactory make()
+		{
+			return new RegistryEntryFactory();
+		}
+		
 		protected Functor11<Boolean,Object> check;
 		protected Object defaultValueCheck;
+		private Object currentValue;
 		protected String canonicalName;
 		
 		private RegistryEntryFactory(){}
@@ -247,6 +251,24 @@ public final class RegistryServices
 			return this;
 		}
 		
+		public RegistryEntryFactory withValue(Object value)
+		{
+			DebugService.panicOn(check==null||!check.call(value),"The "+
+																 "registry "+
+																 "entry "+
+																 "factory was"+
+																 " given an "+
+																 "invalid "+
+																 "value due "+
+																 "to the "+
+																 "check "+
+																 "functor "+
+																 "being "+
+																 "invalid!");
+			this.currentValue=value;
+			return this;
+		}
+		
 		/**
 		 * Internal method used to check the most basic properties.
 		 * <p>
@@ -260,12 +282,30 @@ public final class RegistryServices
 			ASSERT(check);
 			ASSERT(defaultValueCheck);
 			ASSERT(canonicalName);
+			if(currentValue==null)
+				SharedServices
+					.getBool("registry_services.allow_nullable_value")
+					.ifPresent(x->{
+								   
+								   if(currentValue==null)
+								   {
+									   DebugService.log(
+										   DebugService.LogLevel.WARN,
+										   "Entry factory["+hashCode()+"] was found to "+
+										   "have an initial null value, setting it to "+
+										   "the default value!"
+									   );
+									   currentValue=defaultValueCheck;
+								   }
+							   }
+					);
+			
 		}
 		
 		@Override public RegistryEntry collate()
 		{
 			checkTargets();
-			return new RegistryEntry()
+			RegistryEntry r=new RegistryEntry()
 			{
 				@Override public String getCanonicalName()
 				{
@@ -288,6 +328,8 @@ public final class RegistryServices
 						super.setCurrentValue(r);
 				}
 			};
+			r.currentValue=this.currentValue;
+			return r;
 		}
 	}
 	
@@ -300,7 +342,7 @@ public final class RegistryServices
 	 * @author Jack Meng
 	 * @see DescriptiveRegistryEntryFactory
 	 */
-	public abstract static class DescriptiveRegistryEntry
+	private abstract static class DescriptiveRegistryEntry
 		extends RegistryEntry
 		implements
 		Serializable
@@ -328,6 +370,17 @@ public final class RegistryServices
 	public static final class DescriptiveRegistryEntryFactory
 		extends RegistryEntryFactory
 	{
+		/**
+		 * Function used to start the method chaining for the Descriptive
+		 * Registry Entry class
+		 *
+		 * @return A new descriptive entry instance for method chaining
+		 */
+		public static DescriptiveRegistryEntryFactory make()
+		{
+			return new DescriptiveRegistryEntryFactory();
+		}
+		
 		/**
 		 * Internal raw representation of the description
 		 */
@@ -537,6 +590,7 @@ public final class RegistryServices
 	 * If the entry has been accessed at least once, it is purely up to when the
 	 * next GC phase until that entry disappears.
 	 * </p>
+	 * <h2>THIS IS A WORK IN PROGRESS</h2>
 	 *
 	 * @author Jack Meng
 	 */
@@ -545,18 +599,63 @@ public final class RegistryServices
 		implements DebuggableMixin,
 				   NamedObjMixin
 	{
-		private transient HashMap<String,WeakReference<RegistryEntry>> leafs;
+		private final transient HashMap<Long,WeakReference<RegistryEntry>> leafs;
+		
+		public WeakRegistry(String rootName)
+		{
+			setObjectName(rootName);
+			leafs=new HashMap<>();
+		}
 		
 		@Override protected RegistryEntry acquireEntry(final String name)
 		{
+			DebugService.throwNow("A WEAK REGISTRY DOES NOT HAVE A VALID "+
+								  "FULFILLMENT FUNCTION");
 			return null;
 		}
 		
-		@Override void registerEntry(
+		@Override public synchronized void registerEntry(
 			final String name,final RegistryEntry entry
 		)
 		{
+			long id=UUID
+				.fromString(name)
+				.getLeastSignificantBits();
+			THROW_NOW_IF(leafs.containsKey(id)&&leafs
+							 .get(id)
+							 .refersTo(entry)
+				,"The supplied entry was found to be bound to the same object"+
+				 " reference ["+((entry.hashCode()<<31)&0xFF)+" clashes with "+((leafs
+																					 .get(
+																						 id)
+																					 .get()
+																					 .hashCode()<<31)&0xFF)+"]");
+			leafs.put(id,new WeakReference<>(entry));
+		}
 		
+		public boolean isBound(long name)
+		{
+			return true;
+			// no impl
+		}
+		
+		@VolatileImpl(
+			reason="The computed hash of the name can be "+
+				   "nonexistent"
+		) @Override public synchronized Object acquireEntryValue(String name)
+		{
+			long id=UUID
+				.fromString(name)
+				.getLeastSignificantBits();
+			THROW_NOW_IF(
+				!leafs.containsKey(id),
+				"The supplied name "+name+
+				"does not exist in this "+
+				"registry!"
+			);
+			return leafs
+				.get(id)
+				.get();
 		}
 		
 		@Override protected void forEach(final Consumer<Object> e)
@@ -578,7 +677,6 @@ public final class RegistryServices
 	 * internal checker function as a listener. <strong>However, sometimes this
 	 * is not</strong> guranteed to be called.
 	 * </em>
-	 *
 	 * <h3>Leaf Validation</h3>
 	 * <p>
 	 * Leaf validation defines how properties flow within the registry. This
@@ -656,6 +754,9 @@ public final class RegistryServices
 		)
 		{}
 		
+		/**
+		 * The internal representation of all of the properties
+		 */
 		private final HashMap<String,RegistryEntry> leaves;
 		
 		/**

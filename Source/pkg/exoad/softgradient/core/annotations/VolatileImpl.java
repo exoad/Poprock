@@ -13,6 +13,7 @@ import java.lang.annotation.*;
 @Target({ElementType.METHOD,ElementType.CONSTRUCTOR})
 @Retention(RetentionPolicy.CLASS)
 @Documented
+@Inherited
 public @interface VolatileImpl
 {
 	String reason();

@@ -1,9 +1,9 @@
 package pkg.exoad.softgradient.tests;
-import pkg.exoad.softgradient.core.Pair;
 import pkg.exoad.softgradient.core.services.RegistryServices;
 import pkg.exoad.softgradient.tests.lib.Section;
 import pkg.exoad.softgradient.tests.lib.TestMixin;
 import pkg.exoad.softgradient.tests.lib.TestRoot;
+
 @Section(name="Base Registry Entry Load Factor Test") public class Test_RegistryServices
 	implements TestRoot,
 			   TestMixin
@@ -20,5 +20,26 @@ import pkg.exoad.softgradient.tests.lib.TestRoot;
 			)
 		);
 		$ASSERT(RegistryServices.getEphemeral(1)!=null,"Was null");
+		$ASSERT(RegistryServices
+					.getEphemeral(1)
+					.getObjectName()
+					.equals(
+						"test_exoad"),"Differing registry name");
+		Object ref=new Object();
+		RegistryServices
+			.getEphemeral(1)
+			.registerEntry(
+				"entry#1",
+				RegistryServices.RegistryEntryFactory
+					.make()
+					.withCanonicalName("Test Entry #1")
+					.withCheck(e->true)
+					.withDefaultValue(ref)
+					.collate()
+			);
+		$ASSERT(RegistryServices
+					.getEphemeral(1)
+					.acquireEntryValue("entry#1")
+					.equals(ref),"Differing registry acquired value");
 	}
 }
