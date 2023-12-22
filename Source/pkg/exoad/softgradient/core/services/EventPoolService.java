@@ -26,7 +26,7 @@ import pkg.exoad.softgradient.core.annotations.NotVirtual;
  * <p>
  * <h3>Event Pools are ephemeral</h3>. If you are using SoftGradient as
  * a library and never call
- * {@link pkg.exoad.softgradient.app.AppEntry#main(String[])}, your {@code 1}
+ * {@link pkg.exoad.app.AppEntry#main(String[])}, your {@code 1}
  * event pool might not be the same as the one found in the default SoftGradient
  * app. For example, in the SoftGradient App, event pool {@code 1} represents a
  * singular pipeline for deploying colors. While event pool {@code 2} represents
