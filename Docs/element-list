@@ -2,12 +2,6 @@ unnamed package
 com.jackmeng
 net.exoad
 net.exoad.annotations
-net.exoad.annotations.poprock.core
-net.exoad.annotations.poprock.core.services
-net.exoad.annotations.poprock.core.services.mixins
-net.exoad.annotations.poprock.desktop.services
-net.exoad.annotations.poprock.desktop.ui
-net.exoad.annotations.poprock.desktop.ui.java
 net.exoad.ansicolor
 net.exoad.color
 net.exoad.math
@@ -15,3 +9,9 @@ pkg.exoad.app
 pkg.exoad.app.events.payloads
 pkg.exoad.app.ui
 pkg.exoad.app.util
+pkg.exoad.poprock.core
+pkg.exoad.poprock.core.services
+pkg.exoad.poprock.core.services.mixins
+pkg.exoad.poprock.desktop.services
+pkg.exoad.poprock.desktop.ui
+pkg.exoad.poprock.desktop.ui.java

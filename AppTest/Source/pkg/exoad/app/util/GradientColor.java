@@ -1,6 +1,6 @@
 package pkg.exoad.app.util;
 
-import net.exoad.annotations.poprock.core.ColorObj;
+import pkg.exoad.poprock.core.ColorObj;
 
 import java.awt.*;
 

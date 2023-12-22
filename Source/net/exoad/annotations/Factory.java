@@ -1,5 +1,5 @@
 package net.exoad.annotations;
-import net.exoad.annotations.poprock.core.ICollatable;
+import pkg.exoad.poprock.core.ICollatable;
 
 import java.lang.annotation.*;
 /**

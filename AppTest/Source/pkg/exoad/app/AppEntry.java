@@ -1,11 +1,11 @@
 package pkg.exoad.app;
 
 import com.formdev.flatlaf.intellijthemes.FlatHighContrastIJTheme;
-import net.exoad.annotations.poprock.core.ColorObj;
-import net.exoad.annotations.poprock.core.services.*;
-import net.exoad.annotations.poprock.desktop.services.UIServices;
-import net.exoad.annotations.poprock.desktop.ui.ThemeConstants;
-import net.exoad.annotations.poprock.desktop.ui.UIWindow;
+import pkg.exoad.poprock.core.ColorObj;
+import pkg.exoad.poprock.core.services.*;
+import pkg.exoad.poprock.desktop.services.UIServices;
+import pkg.exoad.poprock.desktop.ui.ThemeConstants;
+import pkg.exoad.poprock.desktop.ui.UIWindow;
 import pkg.exoad.app.events.payloads.ControllerChildDelegatesEventPayload;
 import pkg.exoad.app.events.payloads.GradientEventPayload;
 import pkg.exoad.app.ui.UIAppMainDelegate;

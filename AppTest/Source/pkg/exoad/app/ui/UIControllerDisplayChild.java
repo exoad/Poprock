@@ -1,13 +1,13 @@
 package pkg.exoad.app.ui;
 
-import net.exoad.annotations.poprock.core.PublicConstants;
-import net.exoad.annotations.poprock.core.services.BasicService;
-import net.exoad.annotations.poprock.core.services.ColorService;
-import net.exoad.annotations.poprock.core.services.DebugService;
-import net.exoad.annotations.poprock.core.services.EventPoolService;
-import net.exoad.annotations.poprock.desktop.ui.*;
-import net.exoad.annotations.poprock.desktop.ui.UIDelegate.Alignment;
-import net.exoad.annotations.poprock.desktop.ui.UIPanelDelegate.BoxLayoutAlignment;
+import pkg.exoad.poprock.core.PublicConstants;
+import pkg.exoad.poprock.core.services.BasicService;
+import pkg.exoad.poprock.core.services.ColorService;
+import pkg.exoad.poprock.core.services.DebugService;
+import pkg.exoad.poprock.core.services.EventPoolService;
+import pkg.exoad.poprock.desktop.ui.*;
+import pkg.exoad.poprock.desktop.ui.UIDelegate.Alignment;
+import pkg.exoad.poprock.desktop.ui.UIPanelDelegate.BoxLayoutAlignment;
 import pkg.exoad.app.SharedConstants;
 import pkg.exoad.app.events.payloads.ControllerChildDelegatesEventPayload;
 import pkg.exoad.app.events.payloads.GradientEventPayload;
