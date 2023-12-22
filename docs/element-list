@@ -8,3 +8,5 @@ pkg.exoad.softgradient.core.services
 pkg.exoad.softgradient.core.services.mixins
 pkg.exoad.softgradient.core.ui
 pkg.exoad.softgradient.core.ui.java
+pkg.exoad.softgradient.tests
+pkg.exoad.softgradient.tests.lib
