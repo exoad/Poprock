@@ -1,5 +1,10 @@
 package net.exoad.platform;
-public enum PlatformName
+/**
+ * Representation for Platform information
+ *
+ * @author Jack Meng
+ */
+public enum PlatformKey
 {
 	// Reference from OpenJDK repo:
 	// WINDOWS: https://github.com/openjdk/jdk/blob/master/src/java.base/windows/native/libjava/java_props_md.c#L481-L568
@@ -23,12 +28,15 @@ public enum PlatformName
 	WINDOWS_XP("Windows XP",false), // no support
 	WINDOWS_2003("Windows 2003",false), // no support
 	WINDOWS_2000("Windows 2000",false), // no support
-	;
+	UNIX(Platform.__unix_UNAME(),true), // returns whatever uname returns
+	MACOS("Mac OS X",true),
+	SOLARIS("Solaris",false), // no support
+	UNKNOWN("Unknown",false);
 	
 	final String name;
 	final boolean supported;
 	
-	PlatformName(String name,boolean supported)
+	PlatformKey(String name,boolean supported)
 	{
 		this.name     =name;
 		this.supported=supported;

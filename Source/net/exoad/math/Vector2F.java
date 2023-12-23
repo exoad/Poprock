@@ -1,4 +1,4 @@
-package com.jackmeng;
+package net.exoad.math;
 public class Vector2F
 {
 	public float x, y;

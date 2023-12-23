@@ -12,9 +12,8 @@ public class UIWindow
 	
 	private UIWindow()
 	{
-		setTitle("Poprock ~ exoad");
+		setTitle("Poprock@"+hashCode());
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		
 	}
 	
 	public static UIWindow make()

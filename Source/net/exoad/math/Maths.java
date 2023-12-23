@@ -13,6 +13,31 @@ public final class Maths
 		return Math.max(min,Math.min(max,value));
 	}
 	
+	public static float piToTau(float theta)
+	{
+		return theta<0.0f?theta+2.0f*(float)Math.PI:theta;
+	}
+	
+	public static float tauToPi(float theta)
+	{
+		return theta>Math.PI?theta-2.0f*(float)Math.PI:theta;
+	}
+	
+	public static float radToDeg(float theta)
+	{
+		return theta*(180.0f/(float)Math.PI);
+	}
+	
+	public static float degToRad(float theta)
+	{
+		return theta*((float)Math.PI/180.0f);
+	}
+	
+	public static float lerp(float a,float b,float t)
+	{
+		return a*(1.0f-t)+b*t;
+	}
+	
 	public static float[] windowFraction(float fraction,int width,int height)
 	{
 		return new float[]
