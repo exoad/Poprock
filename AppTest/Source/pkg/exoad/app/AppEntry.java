@@ -3,7 +3,7 @@ package pkg.exoad.app;
 import com.formdev.flatlaf.intellijthemes.FlatHighContrastIJTheme;
 import pkg.exoad.poprock.core.ColorObj;
 import pkg.exoad.poprock.core.services.*;
-import pkg.exoad.poprock.desktop.services.UIServices;
+import pkg.exoad.poprock.desktop.ui.services.UIServices;
 import pkg.exoad.poprock.desktop.ui.ThemeConstants;
 import pkg.exoad.poprock.desktop.ui.UIWindow;
 import pkg.exoad.app.events.payloads.ControllerChildDelegatesEventPayload;

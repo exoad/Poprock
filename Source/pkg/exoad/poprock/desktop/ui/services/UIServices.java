@@ -1,4 +1,4 @@
-package pkg.exoad.poprock.desktop.services;
+package pkg.exoad.poprock.desktop.ui.services;
 import pkg.exoad.poprock.core.services.DebugService;
 
 import javax.swing.*;
