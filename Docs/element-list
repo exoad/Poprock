@@ -5,13 +5,16 @@ net.exoad.annotations
 net.exoad.ansicolor
 net.exoad.color
 net.exoad.math
+net.exoad.platform
 pkg.exoad.app
 pkg.exoad.app.events.payloads
 pkg.exoad.app.ui
 pkg.exoad.app.util
 pkg.exoad.poprock.core
+pkg.exoad.poprock.core.dsa
 pkg.exoad.poprock.core.services
 pkg.exoad.poprock.core.services.mixins
-pkg.exoad.poprock.desktop.services
+pkg.exoad.poprock.desktop
 pkg.exoad.poprock.desktop.ui
 pkg.exoad.poprock.desktop.ui.java
+pkg.exoad.poprock.desktop.ui.services
