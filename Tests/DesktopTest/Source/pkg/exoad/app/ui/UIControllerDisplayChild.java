@@ -1,16 +1,16 @@
 package pkg.exoad.app.ui;
 
+import pkg.exoad.app.SharedConstants;
+import pkg.exoad.app.events.payloads.ControllerChildDelegatesEventPayload;
+import pkg.exoad.app.events.payloads.GradientEventPayload;
 import pkg.exoad.poprock.core.PublicConstants;
+import pkg.exoad.poprock.core.debug.DebugService;
 import pkg.exoad.poprock.core.services.BasicService;
 import pkg.exoad.poprock.core.services.ColorService;
-import pkg.exoad.poprock.core.debug.DebugService;
 import pkg.exoad.poprock.core.services.EventPoolService;
 import pkg.exoad.poprock.desktop.ui.*;
 import pkg.exoad.poprock.desktop.ui.UIDelegate.Alignment;
 import pkg.exoad.poprock.desktop.ui.UIPanelDelegate.BoxLayoutAlignment;
-import pkg.exoad.app.SharedConstants;
-import pkg.exoad.app.events.payloads.ControllerChildDelegatesEventPayload;
-import pkg.exoad.app.events.payloads.GradientEventPayload;
 
 import javax.swing.*;
 import java.awt.*;
@@ -182,7 +182,8 @@ class UIControllerDisplayChild
 							)
 					)
 			)
-			.withTransparency(true)
+			//this causes visual artifacts under the buttons:
+			// .withTransparency(true)
 			.asComponent();
 		add(
 			bottomButtonsPanel,

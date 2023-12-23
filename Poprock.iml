@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/Source" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Content" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/Tests/CoreTest" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Tests/DesktopAudioTest/Source" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Tests/DesktopTest/Content" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/Tests/DesktopTest/Source" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/Docs" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="requires" level="project" />
+    <orderEntry type="library" name="luaj-jse-3.0.2" level="project" />
+  </component>
+</module>
