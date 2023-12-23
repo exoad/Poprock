@@ -3,8 +3,8 @@ package pkg.exoad.poprock.desktop.ui.java;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 
-import pkg.exoad.poprock.core.services.mixins.DebuggableMixin;
-import pkg.exoad.poprock.core.ColorObj;
+import pkg.exoad.poprock.core.debug.DebuggableMixin;
+import pkg.exoad.poprock.core.Color;
 
 @DefsEqual(
 	target="Label_Type", reference={JLabel.class,JComponent.class}
@@ -19,7 +19,7 @@ import pkg.exoad.poprock.core.ColorObj;
 		super(rootedContent);
 	}
 	
-	public void setFgColor(ColorObj colorObj)
+	public void setFgColor(Color colorObj)
 	{
 		setForeground(
 			colorObj

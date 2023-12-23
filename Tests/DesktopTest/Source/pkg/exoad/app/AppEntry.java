@@ -1,14 +1,17 @@
 package pkg.exoad.app;
 
 import com.formdev.flatlaf.intellijthemes.FlatHighContrastIJTheme;
-import pkg.exoad.poprock.core.ColorObj;
-import pkg.exoad.poprock.core.services.*;
-import pkg.exoad.poprock.desktop.ui.services.UIServices;
-import pkg.exoad.poprock.desktop.ui.ThemeConstants;
-import pkg.exoad.poprock.desktop.ui.UIWindow;
 import pkg.exoad.app.events.payloads.ControllerChildDelegatesEventPayload;
 import pkg.exoad.app.events.payloads.GradientEventPayload;
 import pkg.exoad.app.ui.UIAppMainDelegate;
+import pkg.exoad.poprock.core.Color;
+import pkg.exoad.poprock.core.debug.DebugService;
+import pkg.exoad.poprock.core.services.ColorService;
+import pkg.exoad.poprock.core.services.EventPoolService;
+import pkg.exoad.poprock.core.services.RegistryServices;
+import pkg.exoad.poprock.desktop.ui.ThemeConstants;
+import pkg.exoad.poprock.desktop.ui.UIWindow;
+import pkg.exoad.poprock.desktop.ui.services.UIServices;
 
 import javax.swing.*;
 import javax.swing.plaf.ColorUIResource;
@@ -23,6 +26,7 @@ public class AppEntry
 {
 	static
 	{
+		UIServices.propagate(UIServices.PropertyKey.USE_OPENGL_TRACED);
 		System
 			.setProperty(
 				"flatlaf.menuBarEmbeded",
@@ -31,7 +35,7 @@ public class AppEntry
 		UIManager
 			.put(
 				"ScrollBar.background",
-				ColorObj.TRANSPARENT
+				Color.TRANSPARENT
 			);
 		UIManager
 			.put(
@@ -46,12 +50,12 @@ public class AppEntry
 		UIManager
 			.put(
 				"Component.focusedBorderColor",
-				ColorObj.TRANSPARENT
+				Color.TRANSPARENT
 			);
 		UIManager
 			.put(
 				"Component.focusColor",
-				ColorObj.TRANSPARENT
+				Color.TRANSPARENT
 			);
 		UIManager
 			.put(
@@ -92,10 +96,6 @@ public class AppEntry
 	public static void main(String[] args)
 	{
 		RegistryServices.armService();
-		UIServices.propagate(
-			UIServices.PropertyKey.USE_OPENGL_TRACED,
-			UIServices.PropertyKey.USE_FLATLAF_WINDOW_DECOR
-		);
 		// EVENT POOL REGISTRATION
 		//
 		// Pool_ID "1" -> Default color pipeline pool
@@ -120,10 +120,6 @@ public class AppEntry
 			.withSize(
 				SharedConstants.WINDOW_WIDTH,
 				SharedConstants.WINDOW_HEIGHT
-			)
-			.withIcon(
-				AssetsService
-					.fetchImageIcon("Content/app-icon.png")
 			)
 			.withMinSize(
 				SharedConstants.WINDOW_WIDTH,

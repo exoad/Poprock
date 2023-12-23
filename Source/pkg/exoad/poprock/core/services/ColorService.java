@@ -1,9 +1,7 @@
 package pkg.exoad.poprock.core.services;
 
-import java.awt.Color;
-
 import net.exoad.annotations.ServiceClass;
-import pkg.exoad.poprock.core.ColorObj;
+import pkg.exoad.poprock.core.Color;
 
 /**
  * Color Service - A utility class for providing basic operations on Colors.
@@ -11,7 +9,7 @@ import pkg.exoad.poprock.core.ColorObj;
  *
  * @author Jack Meng
  * @see java.awt.Color
- * @see ColorObj
+ * @see Color
  */
 @ServiceClass(requiresArming=false)
 public final class ColorService
@@ -30,9 +28,9 @@ public final class ColorService
 	 *
 	 * @return The Color Object
 	 */
-	public static ColorObj hexToColor(String hex)
+	public static Color hexToColor(String hex)
 	{
-		return new ColorObj(
+		return new Color(
 			Integer
 				.valueOf(
 					hex // here we ignore the first symbol which should be a hashtag, but we really don't care, so technically it could be anything
@@ -63,9 +61,9 @@ public final class ColorService
 		);
 	}
 	
-	public static Color hexToColorAWT(String hex)
+	public static java.awt.Color hexToColorAWT(String hex)
 	{
-		return new Color(
+		return new java.awt.Color(
 			Integer
 				.valueOf(
 					hex // here we ignore the first symbol which should be a hashtag, but we really don't care, so technically it could be anything
@@ -105,9 +103,9 @@ public final class ColorService
 	 *
 	 * @return The invertted AWT Color Object
 	 */
-	public static Color invertColor(Color r)
+	public static java.awt.Color invertColor(java.awt.Color r)
 	{
-		return new Color(
+		return new java.awt.Color(
 			255-r
 				.getRed(),
 			255-r

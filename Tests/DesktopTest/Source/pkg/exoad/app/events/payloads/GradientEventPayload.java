@@ -2,7 +2,7 @@ package pkg.exoad.app.events.payloads;
 
 import pkg.exoad.app.util.GradientColor;
 import pkg.exoad.poprock.core.services.EventPoolService;
-import pkg.exoad.poprock.core.ColorObj;
+import pkg.exoad.poprock.core.Color;
 import pkg.exoad.poprock.core.services.EventPoolService.EventPayload;
 
 import java.util.Arrays;
@@ -66,7 +66,7 @@ public final record GradientEventPayload(
 	{
 		return new GradientEventPayload(
 			new GradientColor[]{new GradientColor(
-				ColorObj
+				Color
 					.randomColorObj(),
 				1f
 			)},

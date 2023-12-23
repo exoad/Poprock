@@ -1,6 +1,6 @@
 package pkg.exoad.poprock.desktop.ui;
 
-import pkg.exoad.poprock.core.ColorObj;
+import pkg.exoad.poprock.core.Color;
 import pkg.exoad.poprock.desktop.ui.java.UXLabel;
 
 public class UILabelDelegate
@@ -24,7 +24,7 @@ public class UILabelDelegate
 		return this;
 	}
 	
-	public UILabelDelegate withForegroundColor(ColorObj color)
+	public UILabelDelegate withForegroundColor(Color color)
 	{
 		rootDelegate
 			.setFgColor(color);

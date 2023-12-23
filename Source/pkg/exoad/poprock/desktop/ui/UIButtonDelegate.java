@@ -1,10 +1,8 @@
 package pkg.exoad.poprock.desktop.ui;
 
-import java.awt.Color;
-
 import javax.swing.ImageIcon;
 
-import pkg.exoad.poprock.core.ColorObj;
+import pkg.exoad.poprock.core.Color;
 import pkg.exoad.poprock.core.services.ColorService;
 import pkg.exoad.poprock.desktop.ui.java.UXButton;
 
@@ -52,7 +50,7 @@ public final class UIButtonDelegate
 	{
 		rootDelegate
 			.setBackground(
-				new Color(
+				new java.awt.Color(
 					r,
 					g,
 					b
@@ -61,7 +59,7 @@ public final class UIButtonDelegate
 		return this;
 	}
 	
-	public UIButtonDelegate withBackgroundColor(ColorObj color)
+	public UIButtonDelegate withBackgroundColor(Color color)
 	{
 		rootDelegate
 			.setBgColor(color);
@@ -72,7 +70,7 @@ public final class UIButtonDelegate
 	{
 		rootDelegate
 			.setForeground(
-				new Color(
+				new java.awt.Color(
 					r,
 					g,
 					b
@@ -81,7 +79,7 @@ public final class UIButtonDelegate
 		return this;
 	}
 	
-	public UIButtonDelegate withForegroundColor(ColorObj color)
+	public UIButtonDelegate withForegroundColor(Color color)
 	{
 		rootDelegate
 			.setFgColor(color);

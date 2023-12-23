@@ -1,5 +1,6 @@
 package pkg.exoad.poprock.core.services;
 import net.exoad.annotations.ServiceClass;
+import pkg.exoad.poprock.core.debug.DebugService;
 
 import java.util.TreeMap;
 import java.util.Optional;

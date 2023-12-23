@@ -46,7 +46,7 @@ class UIGradientDisplayChild
 				GradientEventPayload.EMPTY
 			))
 		{
-			GradientEventPayload e=(GradientEventPayload)EventPoolService
+			GradientEventPayload e=EventPoolService
 				.getPool(1)
 				.getPayload(GradientEventPayload.class);
 			g

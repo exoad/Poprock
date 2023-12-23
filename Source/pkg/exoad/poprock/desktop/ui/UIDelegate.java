@@ -3,7 +3,7 @@ package pkg.exoad.poprock.desktop.ui;
 import javax.swing.JComponent;
 import javax.swing.border.Border;
 
-import pkg.exoad.poprock.core.ColorObj;
+import pkg.exoad.poprock.core.Color;
 import pkg.exoad.poprock.core.services.AwtMixerService;
 
 import java.awt.Dimension;
@@ -17,7 +17,7 @@ public class UIDelegate<T extends JComponent>
 {
 	public final record DelegateProperties(
 		Size prefSize,Size size,Size minSize,Size maxSize,Offset origin,
-		boolean visibility,ColorObj bg,boolean opaqueness
+		boolean visibility,Color bg,boolean opaqueness
 	)
 	{
 	
@@ -87,7 +87,7 @@ public class UIDelegate<T extends JComponent>
 				),
 			rootDelegate
 				.isVisible(),
-			new ColorObj(
+			new Color(
 				rootDelegate
 					.getBackground()
 			),
@@ -116,7 +116,7 @@ public class UIDelegate<T extends JComponent>
 		if(transparency)
 			rootDelegate
 				.setBackground(
-					ColorObj.TRANSPARENT
+					Color.TRANSPARENT
 						.asAwt()
 				);
 		rootDelegate

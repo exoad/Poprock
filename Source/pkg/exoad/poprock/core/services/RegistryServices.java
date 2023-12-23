@@ -1,7 +1,8 @@
 package pkg.exoad.poprock.core.services;
 
-import pkg.exoad.poprock.core.services.mixins.DebuggableAllRequiredNamedFieldsMixin;
-import pkg.exoad.poprock.core.services.mixins.DebuggableMixin;
+import pkg.exoad.poprock.core.debug.DebugService;
+import pkg.exoad.poprock.core.debug.DebuggableAllRequiredNamedFieldsMixin;
+import pkg.exoad.poprock.core.debug.DebuggableMixin;
 import pkg.exoad.poprock.core.services.mixins.NamedObjMixin;
 import pkg.exoad.poprock.core.Functor11;
 import pkg.exoad.poprock.core.ICollatable;

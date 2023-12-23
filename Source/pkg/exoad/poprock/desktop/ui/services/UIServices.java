@@ -1,10 +1,41 @@
 package pkg.exoad.poprock.desktop.ui.services;
-import pkg.exoad.poprock.core.services.DebugService;
+import pkg.exoad.poprock.core.debug.DebugService;
 
 import javax.swing.*;
 public final class UIServices
 {
 	private UIServices(){}
+	
+	public static void propagate(
+		PropertyKey... key
+	)
+	{
+		DebugService.panicOn(key==null,"Property keys cannot be null for "+
+									   "propagation!");
+		for(PropertyKey k: key)
+		{
+			DebugService.panicOn(k==null,"A property key was found to be "+
+										 "null for propagation!");
+			if(k.type==PropertyKeyType.SYSTEM)
+			{
+				System.setProperty(k.keyName,k.value.toString());
+				DebugService.log(DebugService.LogLevel.INFO,"Set system "+
+															"property "+
+															k.keyName+
+															" to "+
+															k.value);
+			}
+			else if(k.type==PropertyKeyType.INTERNAL)
+			{
+				UIManager.put(k.keyName,k.value);
+				DebugService.log(DebugService.LogLevel.INFO,"Set UI "+
+															"property "+
+															k.keyName+
+															" to "+
+															k.value);
+			}
+		}
+	}
 	
 	private enum PropertyKeyType
 	{
@@ -40,22 +71,5 @@ public final class UIServices
 			this.value  =value;
 		}
 		
-	}
-	
-	public static void propagate(
-		PropertyKey... key
-	)
-	{
-		DebugService.panicOn(key==null,"Property keys cannot be null for "+
-									   "propagation!");
-		for(PropertyKey k: key)
-		{
-			DebugService.panicOn(k==null,"A property key was found to be "+
-										 "null for propagation!");
-			if(k.type==PropertyKeyType.SYSTEM)
-				System.setProperty(k.keyName,k.value.toString());
-			else if(k.type==PropertyKeyType.INTERNAL)
-				UIManager.put(k.keyName,k.value);
-		}
 	}
 }

@@ -1,7 +1,6 @@
-package pkg.exoad.poprock.core.services.mixins;
+package pkg.exoad.poprock.core.debug;
 
 import net.exoad.annotations.NotVirtual;
-import pkg.exoad.poprock.core.services.DebugService;
 
 /**
  * A [minimal] mixin sort of interface to allow for easy use of throwing

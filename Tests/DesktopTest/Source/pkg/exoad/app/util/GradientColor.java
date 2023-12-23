@@ -1,12 +1,10 @@
 package pkg.exoad.app.util;
 
-import pkg.exoad.poprock.core.ColorObj;
+import pkg.exoad.poprock.core.Color;
 
-import java.awt.*;
-
-public record GradientColor(ColorObj color,float fraction)
+public record GradientColor(Color color,float fraction)
 {
-	public Color asAwt()
+	public java.awt.Color asAwt()
 	{
 		return color
 			.asAwt();

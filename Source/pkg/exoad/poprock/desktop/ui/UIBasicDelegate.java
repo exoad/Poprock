@@ -1,6 +1,6 @@
 package pkg.exoad.poprock.desktop.ui;
 
-import pkg.exoad.poprock.core.services.mixins.SelfReportingMixin;
+import pkg.exoad.poprock.core.debug.SelfReportingMixin;
 
 import javax.swing.*;
 

@@ -1,4 +1,4 @@
-package pkg.exoad.poprock.core.services;
+package pkg.exoad.poprock.core.debug;
 
 import net.exoad.annotations.ProgramInvoked;
 import net.exoad.annotations.ServiceClass;
@@ -18,10 +18,6 @@ import java.util.Date;
 @ServiceClass(requiresArming=false)
 public final class DebugService
 {
-	private DebugService()
-	{
-	}
-	
 	/**
 	 * If you wish to edit this. The format defines the following tags:
 	 * <ul>
@@ -34,40 +30,16 @@ public final class DebugService
 	 * </ul>
 	 */
 	public static String logMessageFormat="[ {1} | {2} ] >> {3}";
-	
 	/**
 	 * If you wish to edit this, it must follow the format accepted by
 	 * {@link SimpleDateFormat}
 	 */
 	public static String logTimeStampFormat="mm/dd/YYYY HH:mm:ssss";
-	
-	/**
-	 * Represents the logging level used for a log event
-	 *
-	 * @author Jack Meng
-	 *
-	 * @see #log(LogLevel,Object)
-	 */
-	public enum LogLevel
-	{
-		INFO("info"),
-		WARN("warn"),
-		NOTE("note");
-		
-		final String levelName;
-		
-		LogLevel(String l)
-		{
-			this.levelName=l;
-		}
-		
-		public String getLevelName()
-		{
-			return this.levelName;
-		}
-	}
-	
 	private static volatile PrintStream out;
+	
+	private DebugService()
+	{
+	}
 	
 	/**
 	 * @return The internal output stream used by this debug service
@@ -81,6 +53,7 @@ public final class DebugService
 	
 	/**
 	 * Sets the internal output stream used by this debug service
+	 *
 	 * @param p The new output stream
 	 */
 	public static synchronized void setOut(PrintStream p)
@@ -90,12 +63,13 @@ public final class DebugService
 	
 	/**
 	 * Logs a message to the console with the specified level
+	 *
 	 * @param level The level of the log
 	 * @param msg The message to log
 	 */
 	public static void log(LogLevel level,Object msg)
 	{
-		out.println(MessageFormat.format(
+		getOut().println(MessageFormat.format(
 			logMessageFormat,
 			level
 				.getLevelName()
@@ -103,49 +77,6 @@ public final class DebugService
 			new SimpleDateFormat(logTimeStampFormat).format(new Date(System.currentTimeMillis())),
 			msg.toString()
 		));
-	}
-	
-	private static RuntimeException modifyThrowable(
-		RuntimeException throwable
-	)
-	{
-		throwable
-			.setStackTrace(
-				new StackTraceElement[]{
-					// this part should really be customized, but we can't cuz StackTraceElement.class is an immutable class!! D: big sad
-					
-					// we only supply the beginning stack trace because this will be the most useful call because it identifies the invoking source
-					new StackTraceElement(
-						throwable
-							.getStackTrace()[0]
-							.getClassName()+"...",
-						throwable
-							.getStackTrace()[0]
-							.getMethodName(),
-						":",
-						throwable
-							.getStackTrace()[0]
-							.getLineNumber()
-					),
-					// we only supply the ending stack trace because that could be useful to identify the root source
-					new StackTraceElement(
-						throwable
-							.getStackTrace()[throwable
-												 .getStackTrace().length-1]
-							.getClassName()+"...",
-						throwable
-							.getStackTrace()[throwable
-												 .getStackTrace().length-1]
-							.getMethodName(),
-						":",
-						throwable
-							.getStackTrace()[throwable
-												 .getStackTrace().length-1]
-							.getLineNumber()
-					)
-				}
-			);
-		return throwable;
 	}
 	
 	/**
@@ -180,6 +111,61 @@ public final class DebugService
 					"\n\t[!]\t"+message
 				)
 			);
+	}
+	
+	private static RuntimeException modifyThrowable(
+		RuntimeException throwable
+	)
+	{
+		throwable
+			.setStackTrace(
+				new StackTraceElement[]{
+					// this part should really be customized, but we can't cuz StackTraceElement.class is an immutable class!! D: big sad
+					
+					// we only supply the beginning stack trace because this will be the most useful call because it identifies the invoking source
+					new StackTraceElement(
+						throwable
+							.getStackTrace()[0]
+							.getClassName()+"...",
+						throwable
+							.getStackTrace()[0]
+							.getMethodName(),
+						":",
+						throwable
+							.getStackTrace()[0]
+							.getLineNumber()
+					),
+					new StackTraceElement(
+						throwable
+							.getStackTrace()[1]
+							.getClassName()+"...",
+						throwable
+							.getStackTrace()[1]
+							.getMethodName(),
+						":",
+						throwable
+							.getStackTrace()[1]
+							.getLineNumber()
+					),
+					// we only supply the ending stack trace because that could be useful to identify the root source
+					new StackTraceElement(
+						throwable
+							.getStackTrace()[throwable
+												 .getStackTrace().length-1]
+							.getClassName()+"...",
+						throwable
+							.getStackTrace()[throwable
+												 .getStackTrace().length-1]
+							.getMethodName(),
+						":",
+						throwable
+							.getStackTrace()[throwable
+												 .getStackTrace().length-1]
+							.getLineNumber()
+					)
+				}
+			);
+		return throwable;
 	}
 	
 	/**
@@ -217,5 +203,30 @@ public final class DebugService
 					cause
 				)
 			);
+	}
+	
+	/**
+	 * Represents the logging level used for a log event
+	 *
+	 * @author Jack Meng
+	 * @see #log(LogLevel,Object)
+	 */
+	public enum LogLevel
+	{
+		INFO("info"),
+		WARN("warn"),
+		NOTE("note");
+		
+		final String levelName;
+		
+		LogLevel(String l)
+		{
+			this.levelName=l;
+		}
+		
+		public String getLevelName()
+		{
+			return this.levelName;
+		}
 	}
 }

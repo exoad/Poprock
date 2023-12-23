@@ -3,7 +3,7 @@ package pkg.exoad.poprock.desktop.ui.java;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import pkg.exoad.poprock.core.ColorObj;
+import pkg.exoad.poprock.core.Color;
 
 @DefsEqual(
 	target="Button_Type", reference={JButton.class,JPanel.class}
@@ -11,7 +11,7 @@ import pkg.exoad.poprock.core.ColorObj;
 	extends
 	JButton
 {
-	public void setBgColor(ColorObj color)
+	public void setBgColor(Color color)
 	{
 		super.setBackground(
 			color
@@ -19,7 +19,7 @@ import pkg.exoad.poprock.core.ColorObj;
 		);
 	}
 	
-	public void setFgColor(ColorObj color)
+	public void setFgColor(Color color)
 	{
 		super.setForeground(
 			color

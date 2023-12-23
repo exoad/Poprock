@@ -1,6 +1,6 @@
-package pkg.exoad.poprock.core.services.mixins;
+package pkg.exoad.poprock.core.debug;
 import net.exoad.annotations.NotVirtual;
-import pkg.exoad.poprock.core.services.DebugService;
+import pkg.exoad.poprock.core.debug.DebugService;
 public interface DebuggableAllRequiredNamedFieldsMixin
 {
 	@NotVirtual public default void ASSERT(Object e)

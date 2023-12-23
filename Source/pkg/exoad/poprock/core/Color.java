@@ -1,35 +1,33 @@
 package pkg.exoad.poprock.core;
 
-import java.awt.Color;
-
-public class ColorObj
+public class Color
 {
-	public static final ColorObj TRANSPARENT=new ColorObj(
+	public static final Color TRANSPARENT=new Color(
 		0,
 		0,
 		0,
 		0
 	);
 	
-	private Color color;
+	private java.awt.Color color;
 	
-	public ColorObj(Color color)
+	public Color(java.awt.Color color)
 	{
 		this.color=color;
 	}
 	
-	public ColorObj(int r,int g,int b)
+	public Color(int r,int g,int b)
 	{
-		this.color=new Color(
+		this.color=new java.awt.Color(
 			r,
 			g,
 			b
 		);
 	}
 	
-	public ColorObj(int r,int g,int b,int a)
+	public Color(int r,int g,int b,int a)
 	{
-		this.color=new Color(
+		this.color=new java.awt.Color(
 			r,
 			g,
 			b,
@@ -37,18 +35,18 @@ public class ColorObj
 		);
 	}
 	
-	public ColorObj(float r,float g,float b)
+	public Color(float r,float g,float b)
 	{
-		this.color=new Color(
+		this.color=new java.awt.Color(
 			r,
 			g,
 			b
 		);
 	}
 	
-	public ColorObj(float r,float g,float b,float a)
+	public Color(float r,float g,float b,float a)
 	{
-		this.color=new Color(
+		this.color=new java.awt.Color(
 			r,
 			g,
 			b,
@@ -56,9 +54,9 @@ public class ColorObj
 		);
 	}
 	
-	public ColorObj withRed(int r)
+	public Color withRed(int r)
 	{
-		color=new Color(
+		color=new java.awt.Color(
 			r,
 			color
 				.getGreen(),
@@ -70,9 +68,9 @@ public class ColorObj
 		return this;
 	}
 	
-	public ColorObj withGreen(int g)
+	public Color withGreen(int g)
 	{
-		color=new Color(
+		color=new java.awt.Color(
 			color
 				.getRed(),
 			g,
@@ -84,9 +82,9 @@ public class ColorObj
 		return this;
 	}
 	
-	public ColorObj withBlue(int b)
+	public Color withBlue(int b)
 	{
-		color=new Color(
+		color=new java.awt.Color(
 			color
 				.getRed(),
 			color
@@ -98,9 +96,9 @@ public class ColorObj
 		return this;
 	}
 	
-	public ColorObj withAlpha(int a)
+	public Color withAlpha(int a)
 	{
-		color=new Color(
+		color=new java.awt.Color(
 			color
 				.getRed(),
 			color
@@ -112,17 +110,17 @@ public class ColorObj
 		return this;
 	}
 	
-	public Color asAwt()
+	public java.awt.Color asAwt()
 	{
 		return color;
 	}
 	
-	public static ColorObj generate(float saturation,float brightness)
+	public static Color generate(float saturation,float brightness)
 	{
 		float hue=SharedConstants.RNG
 			.nextFloat();
-		return new ColorObj(
-			Color
+		return new Color(
+			java.awt.Color
 				.getHSBColor(
 					hue*360,
 					saturation,
@@ -131,9 +129,9 @@ public class ColorObj
 		);
 	}
 	
-	public static ColorObj randomColorObj()
+	public static Color randomColorObj()
 	{
-		return new ColorObj(
+		return new Color(
 			SharedConstants.RNG
 				.nextFloat(),
 			SharedConstants.RNG
