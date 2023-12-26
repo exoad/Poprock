@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Cluster Version="20231225">
+    <Name>test</Name>
+    <Model>
+        <Width>64</Width>
+        <Height>64</Height>
+        <Target>test.png</Target>
+    </Model>
+    <Shards DefaultWidth="13" DefaultHeight="13">
+        <ShardEntry Name="lime" X="0" Y="0" Width="13" Height="13"/>
+    </Shards>
+</Cluster>

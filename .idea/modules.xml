@@ -1,15 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-    <component name="ProjectModuleManager">
-
-        <modules>
-            <module fileurl="file://$PROJECT_DIR$/Tests/LuaTest/LuaTest.iml"
-                    filepath="$PROJECT_DIR$/Tests/LuaTest/LuaTest.iml"/>
-            <module fileurl="file://$PROJECT_DIR$/Tests/DesktopAudioTest/DesktopAudioTest.iml"
-                    filepath="$PROJECT_DIR$/Tests/DesktopAudioTest/DesktopAudioTest.iml"/>
-            <module fileurl="file://$PROJECT_DIR$/Tests/DesktopTest/DesktopTest.iml"
-                    filepath="$PROJECT_DIR$/Tests/DesktopTest/DesktopTest.iml"/>
-            <module fileurl="file://$PROJECT_DIR$/Poprock.iml" filepath="$PROJECT_DIR$/Poprock.iml"/>
-        </modules>
-    </component>
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Poprock.iml" filepath="$PROJECT_DIR$/Poprock.iml" />
+    </modules>
+  </component>
 </project>

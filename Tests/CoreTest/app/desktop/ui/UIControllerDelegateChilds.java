@@ -1,11 +1,10 @@
-package pkg.exoad.app.ui;
+package app.desktop.ui;
 
 import pkg.exoad.poprock.core.services.ColorService;
 import pkg.exoad.poprock.core.services.EventPoolService;
 import pkg.exoad.poprock.desktop.ui.*;
 import pkg.exoad.poprock.desktop.ui.UIPanelDelegate.BoxLayoutAlignment;
 import pkg.exoad.poprock.desktop.ui.java.UXPanel;
-import pkg.exoad.app.events.payloads.ControllerChildDelegatesEventPayload;
 
 import java.util.List;
 
@@ -54,7 +53,7 @@ public final class UIControllerDelegateChilds
 		UIControllerDelegate
 	
 	{
-		WindowSetupChildBlock()
+		public WindowSetupChildBlock()
 		{
 			super();
 			rootDelegate=UIPanelDelegate

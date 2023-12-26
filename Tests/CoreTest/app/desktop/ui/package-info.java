@@ -13,4 +13,4 @@
  * @see pkg.exoad.app
  * @see pkg.exoad.app.ui
  */
-package pkg.exoad.app;
+package app.desktop.ui;

@@ -1,9 +1,6 @@
-package pkg.exoad.app;
+package app.desktop.ui;
 
 import com.formdev.flatlaf.intellijthemes.FlatHighContrastIJTheme;
-import pkg.exoad.app.events.payloads.ControllerChildDelegatesEventPayload;
-import pkg.exoad.app.events.payloads.GradientEventPayload;
-import pkg.exoad.app.ui.UIAppMainDelegate;
 import pkg.exoad.poprock.core.Color;
 import pkg.exoad.poprock.core.debug.DebugService;
 import pkg.exoad.poprock.core.services.ColorService;

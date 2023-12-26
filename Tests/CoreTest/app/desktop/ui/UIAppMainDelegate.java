@@ -1,4 +1,4 @@
-package pkg.exoad.app.ui;
+package app.desktop.ui;
 
 import pkg.exoad.poprock.desktop.ui.UIDelegate;
 import pkg.exoad.poprock.desktop.ui.java.UXSplit;
@@ -18,7 +18,7 @@ public final class UIAppMainDelegate
 	
 	/**
 	 * Singleton instance. We don't have to use the Singleton instance because
-	 * we are assured this will be utilized in {@link pkg.exoad.app.AppEntry}
+	 * we are assured this will be utilized in {@link AppEntry}
 	 */
 	public static final UIAppMainDelegate OBJECT=new UIAppMainDelegate();
 	

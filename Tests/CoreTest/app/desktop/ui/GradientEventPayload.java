@@ -1,6 +1,6 @@
-package pkg.exoad.app.events.payloads;
+package app.desktop.ui;
 
-import pkg.exoad.app.util.GradientColor;
+import app.desktop.ui.util.GradientColor;
 import pkg.exoad.poprock.core.services.EventPoolService;
 import pkg.exoad.poprock.core.Color;
 import pkg.exoad.poprock.core.services.EventPoolService.EventPayload;

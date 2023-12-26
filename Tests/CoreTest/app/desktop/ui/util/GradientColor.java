@@ -1,4 +1,4 @@
-package pkg.exoad.app.util;
+package app.desktop.ui.util;
 
 import pkg.exoad.poprock.core.Color;
 

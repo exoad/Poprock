@@ -1,4 +1,4 @@
-package pkg.exoad.app;
+package app.desktop.ui;
 public final class SharedConstants
 {
 	public static final int WINDOW_WIDTH=875;

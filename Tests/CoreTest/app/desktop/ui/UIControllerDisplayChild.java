@@ -1,8 +1,5 @@
-package pkg.exoad.app.ui;
+package app.desktop.ui;
 
-import pkg.exoad.app.SharedConstants;
-import pkg.exoad.app.events.payloads.ControllerChildDelegatesEventPayload;
-import pkg.exoad.app.events.payloads.GradientEventPayload;
 import pkg.exoad.poprock.core.PublicConstants;
 import pkg.exoad.poprock.core.debug.DebugService;
 import pkg.exoad.poprock.core.services.BasicService;
@@ -149,7 +146,7 @@ class UIControllerDisplayChild
 						Objects.requireNonNull(
 							InnerControllerBlock
 								.make(
-									new UIControllerDelegateChilds.WindowSetupChildBlock()
+									new app.desktop.ui.UIControllerDelegateChilds.WindowSetupChildBlock()
 										.withBorder(
 											UIHelper
 												.makeLinedBorder(
@@ -286,7 +283,7 @@ class UIControllerDisplayChild
 		
 		public static InnerControllerBlock make(UIDelegate<?> delegate)
 		{
-			if(delegate instanceof UIControllerDelegateChilds.UIControllerDelegate e)
+			if(delegate instanceof app.desktop.ui.UIControllerDelegateChilds.UIControllerDelegate e)
 				return new InnerControllerBlock(
 					e
 						.getHeaderName(),
