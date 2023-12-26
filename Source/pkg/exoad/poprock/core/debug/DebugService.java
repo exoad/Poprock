@@ -21,15 +21,15 @@ public final class DebugService
 	/**
 	 * If you wish to edit this. The format defines the following tags:
 	 * <ul>
-	 *     <li><code>{1}</code> denotes the {@link LogLevel}</li>
-	 *     <li><code>{2}</code> denotes the time invoked in <code>mm/dd/yy
+	 *     <li><code>{0}</code> denotes the {@link LogLevel}</li>
+	 *     <li><code>{1}</code> denotes the time invoked in <code>mm/dd/yy
 	 *     HH:MM:SS</code> format
 	 *     </li>
-	 *     <li><code>{3}</code> denotes the part where the message of the
+	 *     <li><code>{2}</code> denotes the part where the message of the
 	 *     log entry will be shown</li>
 	 * </ul>
 	 */
-	public static String logMessageFormat="[ {1} | {2} ] >> {3}";
+	public static String logMessageFormat="[ {0} | {1} ] >> {2}";
 	/**
 	 * If you wish to edit this, it must follow the format accepted by
 	 * {@link SimpleDateFormat}
