@@ -1,15 +1,18 @@
 package pkg.exoad.poprock.core.services;
 
 import net.exoad.annotations.ServiceClass;
-import pkg.exoad.poprock.core.dsa.Pair;
+import pkg.exoad.poprock.core.struct.Pair;
 
+import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
 
 /**
- * Basic Service - Some very rudementary functions that can be used for some
- * Java related stuffs:
+ * Basic Service - Some very rudementary functions that can be used for some Java related
+ * stuffs:
  *
  * <ul>
  * <li>Reflection helper functions</li>
@@ -24,15 +27,24 @@ import java.util.function.Consumer;
 @ServiceClass(requiresArming=false)
 public final class BasicService
 {
+	private static final List<Class<? extends Serializable>> PRIMS_CLASS=Arrays.asList(
+		Boolean.class,
+		Integer.class,
+		Double.class,
+		Long.class,
+		Short.class,
+		Byte.class,
+		Float.class
+	);
+	
 	private BasicService()
 	{
 	}
-
+	
 	/**
-	 * A very naive implementation to determine if a list of classes contain the
-	 * provided class by just checking their canonical names. VERY NAIVE AND
-	 * SHOULD NOT BE USED FOR MOST CASES. However, I have to say this is the
-	 * most easy way to do it :)
+	 * A very naive implementation to determine if a list of classes contain the provided
+	 * class by just checking their canonical names. VERY NAIVE AND SHOULD NOT BE USED FOR
+	 * MOST CASES. However, I have to say this is the most easy way to do it :)
 	 *
 	 * @param classes The classes to search in
 	 * @param clazz The class to search for
@@ -55,10 +67,10 @@ public final class BasicService
 				return true;
 		return false;
 	}
-
+	
 	/**
-	 * A macro call for {@link java.lang.String#contains(CharSequence)} where
-	 * you might want check against multiple sequences.
+	 * A macro call for {@link java.lang.String#contains(CharSequence)} where you might
+	 * want check against multiple sequences.
 	 *
 	 * @param str The target string to search in
 	 * @param chars The supplied sequences to search against
@@ -75,8 +87,8 @@ public final class BasicService
 	}
 	
 	/**
-	 * Checks if any values in a Pair are nulled values. Please note that this
-	 * function does not do additional checks after just {@link Pair#first()} or
+	 * Checks if any values in a Pair are nulled values. Please note that this function
+	 * does not do additional checks after just {@link Pair#first()} or
 	 * {@link Pair#second()} for nullability!
 	 *
 	 * @param v An array of Pairs to check
@@ -91,11 +103,11 @@ public final class BasicService
 				return true;
 		return false;
 	}
-
+	
 	/**
-	 * Similar to {@link java.util.Objects#requireNonNull(Object)}, but instead
-	 * we are going to check for a vararg amount of Objects. It is primarily
-	 * useful for dealing with parameter validation:
+	 * Similar to {@link java.util.Objects#requireNonNull(Object)}, but instead we are
+	 * going to check for a vararg amount of Objects. It is primarily useful for dealing
+	 * with parameter validation:
 	 *
 	 * <blockquote><pre>
 	 * public Foo(A a,B b,C c)
@@ -114,11 +126,11 @@ public final class BasicService
 			Objects
 				.requireNonNull(r);
 	}
-
+	
 	/**
 	 * Supplies an empty runnable that does nothing when called. Very useful for
-	 * placeholders and when you don't want to pass a {@code null} that could
-	 * lead to a {@link java.lang.NullPointerException}
+	 * placeholders and when you don't want to pass a {@code null} that could lead to a
+	 * {@link java.lang.NullPointerException}
 	 *
 	 * @return The Empty, do-nothing runnable
 	 */
@@ -126,10 +138,10 @@ public final class BasicService
 	{
 		return ()->{};
 	}
-
+	
 	/**
-	 * Supplies an empty consumer that does nothing when supplied anything. Very
-	 * useful for placeholders and when you don't want to pass a {@code null}.
+	 * Supplies an empty consumer that does nothing when supplied anything. Very useful
+	 * for placeholders and when you don't want to pass a {@code null}.
 	 *
 	 * @return The empty, do-nothing consumer
 	 *
@@ -138,5 +150,11 @@ public final class BasicService
 	public static Consumer<?> emptyConsumer()
 	{
 		return e->{};
+	}
+	
+	public static boolean isWrapperClass(Class<?> e)
+	{
+		return PRIMS_CLASS
+			.contains(e);
 	}
 }

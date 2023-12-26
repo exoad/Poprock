@@ -7,7 +7,7 @@ import net.exoad.annotations.ServiceClass;
 import net.exoad.annotations.VolatileImpl;
 import pkg.exoad.poprock.core.debug.DebugService;
 import pkg.exoad.poprock.core.debug.DebuggableMixin;
-import pkg.exoad.poprock.core.dsa.Pair;
+import pkg.exoad.poprock.core.struct.Pair;
 
 /**
  * <h2>EventPool</h2> - <strong>The main global event registry for Poprock

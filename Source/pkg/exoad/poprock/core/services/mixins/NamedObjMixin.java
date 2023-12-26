@@ -1,6 +1,6 @@
 package pkg.exoad.poprock.core.services.mixins;
 
-import pkg.exoad.poprock.core.dsa.Shared;
+import pkg.exoad.poprock.core.struct.Shared;
 import net.exoad.annotations.NotVirtual;
 
 import java.util.HashMap;

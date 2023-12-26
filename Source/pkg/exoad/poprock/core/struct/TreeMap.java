@@ -1,4 +1,4 @@
-package pkg.exoad.poprock.core.dsa;
+package pkg.exoad.poprock.core.struct;
 
 import pkg.exoad.poprock.core.ITypeInferencing;
 

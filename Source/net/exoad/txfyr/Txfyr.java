@@ -1,4 +1,6 @@
 package net.exoad.txfyr;
+import pkg.exoad.poprock.core.struct.Result;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -42,13 +44,13 @@ public final class Txfyr
 		return Optional.empty();
 	}
 	
-	public static boolean isValidTxfyrFile(String path)
+	public static Result<Boolean,TxfyrValidityReason> isValidTxfyrFile(String path)
 	{
 		if(!path.endsWith(".txf"))
-			return false;
+			return Result.make(false,TxfyrValidityReason.INCORRECT_FILE_EXTENSION);
 		File f=new File(path);
 		if(f.isDirectory()||!f.isFile()||f.isDirectory()||!f.canRead()||!f.canWrite())
-			return false;
+			return Result.make(false,TxfyrValidityReason.IS_NOT_VALID_FILE);
 		try(ZipFile zipFile=new ZipFile(path))
 		{
 			Enumeration<? extends ZipEntry> entries=zipFile.entries();
@@ -58,12 +60,21 @@ public final class Txfyr
 				if(entry
 					.getName()
 					.endsWith(".txfyr"))
-					return true;
+					return Result.make(true,TxfyrValidityReason.VALID_FILE);
 			}
-			return false;
+			return Result.make(false,TxfyrValidityReason.NO_TXFYR_IDENTIFIER);
 		}catch(IOException e)
 		{
-			return false;
+			e.printStackTrace();
+			return Result.make(false,TxfyrValidityReason.EXCEPTION_CAUGHT);
 		}
+	}
+	
+	public enum TxfyrValidityReason
+	{
+		INCORRECT_FILE_EXTENSION,
+		IS_NOT_VALID_FILE,
+		EXCEPTION_CAUGHT,
+		NO_TXFYR_IDENTIFIER,VALID_FILE;
 	}
 }
