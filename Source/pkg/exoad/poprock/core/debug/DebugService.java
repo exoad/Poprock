@@ -8,10 +8,10 @@ import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 /**
- * Debug Service - Utility class for handling various exceptions that can be
- * thrown during the runtime of this program. <br/> Most of the things occuring
- * here like throwing errors should only happen in development. This is
- * especially the case because the hints provided are only able to.
+ * Debug Service - Utility class for handling various exceptions that can be thrown during
+ * the runtime of this program. <br/> Most of the things occuring here like throwing
+ * errors should only happen in development. This is especially the case because the hints
+ * provided are only able to.
  *
  * @author Jack Meng
  */
@@ -41,6 +41,29 @@ public final class DebugService
 	{
 	}
 	
+	public static void info(Object msg)
+	{
+		log(LogLevel.INFO,msg);
+	}
+	
+	/**
+	 * Logs a message to the console with the specified level
+	 *
+	 * @param level The level of the log
+	 * @param msg The message to log
+	 */
+	public static void log(LogLevel level,Object msg)
+	{
+		getOut().println(MessageFormat.format(
+			logMessageFormat,
+			level
+				.getLevelName()
+				.toUpperCase(),
+			new SimpleDateFormat(logTimeStampFormat).format(new Date(System.currentTimeMillis())),
+			msg
+		));
+	}
+	
 	/**
 	 * @return The internal output stream used by this debug service
 	 */
@@ -61,31 +84,22 @@ public final class DebugService
 		out=p;
 	}
 	
-	/**
-	 * Logs a message to the console with the specified level
-	 *
-	 * @param level The level of the log
-	 * @param msg The message to log
-	 */
-	public static void log(LogLevel level,Object msg)
+	public static void warn(Object msg)
 	{
-		getOut().println(MessageFormat.format(
-			logMessageFormat,
-			level
-				.getLevelName()
-				.toUpperCase(),
-			new SimpleDateFormat(logTimeStampFormat).format(new Date(System.currentTimeMillis())),
-			msg.toString()
-		));
+		log(LogLevel.WARN,msg);
+	}
+	
+	public static void note(Object msg)
+	{
+		log(LogLevel.NOTE,msg);
 	}
 	
 	/**
-	 * Tells the debug service to prepare an exception right now because of an
-	 * internal error. Also note this is a synchronized method meaning only ONE
-	 * thread may call it at a time.
+	 * Tells the debug service to prepare an exception right now because of an internal
+	 * error. Also note this is a synchronized method meaning only ONE thread may call it
+	 * at a time.
 	 *
-	 * @param message The error message. THIS SHOULD NOT BE AUTOMATICALLY
-	 * GENERATED
+	 * @param message The error message. THIS SHOULD NOT BE AUTOMATICALLY GENERATED
 	 */
 	@ProgramInvoked public static synchronized void throwNow(String message)
 	{
@@ -96,12 +110,12 @@ public final class DebugService
 	}
 	
 	/**
-	 * Tells the debug service to prepare an exception ONLY IF the condition
-	 * passed returns TRUE
+	 * Tells the debug service to prepare an exception ONLY IF the condition passed
+	 * returns TRUE
 	 *
 	 * @param condition The condition
-	 * @param message The message. THIS SHOULD NOT BE AUTOMATICALLY GENERATED.
-	 * [This is usually the hint given to a programmer]
+	 * @param message The message. THIS SHOULD NOT BE AUTOMATICALLY GENERATED. [This is
+	 * usually the hint given to a programmer]
 	 */
 	public static synchronized void panicOn(boolean condition,String message)
 	{
@@ -169,8 +183,8 @@ public final class DebugService
 	}
 	
 	/**
-	 * Instructs the service to kill the current program with a runtime
-	 * exception and another exception or throwable provided.
+	 * Instructs the service to kill the current program with a runtime exception and
+	 * another exception or throwable provided.
 	 *
 	 * @param e The other provided throwable
 	 */
@@ -183,8 +197,8 @@ public final class DebugService
 	}
 	
 	/**
-	 * Similar to {@link #panicOn(boolean,String)} but instead you can also pass
-	 * a related cause of this exception.
+	 * Similar to {@link #panicOn(boolean,String)} but instead you can also pass a related
+	 * cause of this exception.
 	 *
 	 * @param condition The condition
 	 * @param message The message

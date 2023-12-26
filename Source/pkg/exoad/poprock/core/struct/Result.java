@@ -1,4 +1,12 @@
 package pkg.exoad.poprock.core.struct;
+/**
+ * An improvised pair data structure for returning a result with a description.
+ *
+ * @param <T> The type of the result
+ * @param <V> The resul description of type Enum
+ *
+ * @author Jack Meng
+ */
 public final class Result<T,V extends Enum<?>>
 {
 	public final T result;

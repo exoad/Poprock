@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Cluster Version="20231225">
-    <Name>test</Name>
     <Model>
+        <Name>test</Name>
         <Width>64</Width>
         <Height>64</Height>
         <Target>test.png</Target>
