@@ -1,14 +1,13 @@
 package net.exoad.txfyr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import pkg.exoad.poprock.core.debug.DebugService;
 
-import javax.imageio.ImageIO;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -110,6 +109,7 @@ public final class TxfyrReader
 						if(targetEntry!=null) // according to the docs of ZipFile::getEntry
 						// oh yea, i think all of the debugging related things are not really worth it
 						{
+							/*
 							BufferedImage image=ImageIO.read(zipFile.getInputStream(
 								targetEntry));
 							DebugService.panicOn(
@@ -120,6 +120,15 @@ public final class TxfyrReader
 								clusterWidth>image.getWidth(),
 								"The target for cluster: "+clusterName+" has a width specification("+clusterWidth+") that exceeds the target texture's width("+image.getWidth()+")"
 							);
+							*/
+							Element shardElement=(Element)clusterRoot
+								.getElementsByTagName("Shards")
+								.item(0);
+							NodeList shards=shardElement.getElementsByTagName("ShardEntry");
+							for(int i=0;i<shards.getLength();i++)
+							{
+							
+							}
 						}
 						else
 							DebugService.panicWith(new FileNotFoundException(

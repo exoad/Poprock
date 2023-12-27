@@ -29,6 +29,7 @@ public class TestMain
 					((Section)r
 						.getClass()
 						.getDeclaredAnnotations()[0]).name(); // :(
+				r.test();
 				passed++;
 			}
 			else

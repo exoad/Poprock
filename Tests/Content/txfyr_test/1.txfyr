@@ -6,7 +6,7 @@
         <Height>64</Height>
         <Target>test.png</Target>
     </Model>
-    <Shards DefaultWidth="13" DefaultHeight="13">
+    <Shards>
         <ShardEntry Name="lime" X="0" Y="0" Width="13" Height="13"/>
     </Shards>
 </Cluster>

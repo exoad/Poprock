@@ -1,8 +1,10 @@
 public interface Config
 {
-	static final boolean FAIL_FAST=true;
-	static final TestRoot[] TESTS={
-		new Test_RegistryServices()
+	boolean FAIL_FAST=true;
+	TestRoot[] TESTS={
+		new Test_RegistryServices(),
+		new Test_IdentityConvolve(),
+		new Test_RidgeConvolve()
 	};
 	
 }

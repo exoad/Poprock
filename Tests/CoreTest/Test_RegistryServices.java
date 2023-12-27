@@ -1,3 +1,5 @@
+import pkg.exoad.poprock.core.registry.EphemeralRegistry;
+import pkg.exoad.poprock.core.registry.RegistryEntryFactory;
 import pkg.exoad.poprock.core.registry.RegistryServices;
 
 @Section(name="Base Registry Entry Load Factor Test") public class Test_RegistryServices
@@ -9,7 +11,7 @@ import pkg.exoad.poprock.core.registry.RegistryServices;
 		RegistryServices.armService();
 		RegistryServices.registerEphemeralRegistry(
 			1,
-			new RegistryServices.EphemeralRegistry.EphemeralRegistryConfig(
+			new EphemeralRegistry.EphemeralRegistryConfig(
 				"test_exoad",
 				0.75F,
 				null
@@ -26,7 +28,7 @@ import pkg.exoad.poprock.core.registry.RegistryServices;
 			.getEphemeral(1)
 			.registerEntry(
 				"entry#1",
-				RegistryServices.RegistryEntryFactory
+				RegistryEntryFactory
 					.make()
 					.withCanonicalName("Test Entry #1")
 					.withCheck(e->true)

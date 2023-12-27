@@ -24,4 +24,9 @@ public record TxfyrShard(String key,int x,int y,int width,int height)
 	{
 		return (int)Math.hypot(width,height);
 	}
+	
+	@Override public String toString()
+	{
+		return "TxfyrShard[\n\tname="+key+"\n\tx="+x+"\n\ty="+y+"\n\twidth="+width+"\n\theight="+height+"]";
+	}
 }
