@@ -36,11 +36,68 @@ public final class DebugService
 	 */
 	public static String logTimeStampFormat="mm/dd/YYYY HH:mm:ssss";
 	private static volatile PrintStream out;
+	private static boolean USE_PANIC=true;
+	private static boolean USE_CUSTOM_STACK_TRACE=true;
 	
 	private DebugService()
 	{
 	}
 	
+	/**
+	 * Sets whether any panic messages or other messages for exceptions and errors are
+	 * thrown to the print stream with a customized stack trace.
+	 * <p>
+	 * This option only exists to reduce cluster in pre existing exceptions
+	 * </p>
+	 *
+	 * @param b on or off
+	 */
+	public static void allowCustomStackTrace(boolean b)
+	{
+		USE_CUSTOM_STACK_TRACE=b;
+	}
+	
+	/**
+	 * Whether the debug service is using custom stack traces for panicking
+	 *
+	 * @return true or false
+	 */
+	public static boolean isUsingCustomStackTraces()
+	{
+		return USE_CUSTOM_STACK_TRACE;
+	}
+	
+	/**
+	 * Sets whether any functions depending on any of the DebugService's
+	 * <code>panic</code> functions will not be able to emit
+	 * anything.
+	 *
+	 * <h2>THIS IS A VERY DANGEROUS METHOD, JUST LEAVE IT ON!!</h2>
+	 *
+	 * @param b on or off
+	 */
+	public static void allowPanicking(boolean b)
+	{
+		USE_PANIC=b;
+	}
+	
+	/**
+	 * Whether the debug service is allowed to panic the current program. Most of the time
+	 * this is set to <code>true</code> unless
+	 * {@link DebugService#allowPanicking(boolean)} is modified.
+	 *
+	 * @return true or false
+	 */
+	public static boolean canPanic()
+	{
+		return USE_PANIC;
+	}
+	
+	/**
+	 * Macro call for <code>DebugService.log(LogLevel.INFO,...)</code>
+	 *
+	 * @param msg message
+	 */
 	public static void info(Object msg)
 	{
 		log(LogLevel.INFO,msg);
@@ -84,11 +141,21 @@ public final class DebugService
 		out=p;
 	}
 	
+	/**
+	 * Macro call for <code>DebugService.log(LogLevel.WARN,...)</code>
+	 *
+	 * @param msg message
+	 */
 	public static void warn(Object msg)
 	{
 		log(LogLevel.WARN,msg);
 	}
 	
+	/**
+	 * Macro call for <code>DebugService.log(LogLevel.NOTE,...)</code>
+	 *
+	 * @param msg message
+	 */
 	public static void note(Object msg)
 	{
 		log(LogLevel.NOTE,msg);
@@ -101,12 +168,13 @@ public final class DebugService
 	 *
 	 * @param message The error message. THIS SHOULD NOT BE AUTOMATICALLY GENERATED
 	 */
-	@ProgramInvoked public static synchronized void throwNow(String message)
+	@ProgramInvoked public static synchronized void panicNow(String message)
 	{
-		panicOn(
-			true,
-			"\n\t[!]\t"+message
-		);
+		if(USE_PANIC)
+			panicOn(
+				true,
+				"\n\t[!]\t"+message
+			);
 	}
 	
 	/**
@@ -119,7 +187,7 @@ public final class DebugService
 	 */
 	public static synchronized void panicOn(boolean condition,String message)
 	{
-		if(condition)
+		if(condition&&USE_PANIC)
 			throw modifyThrowable(
 				new RuntimeException(
 					"\n\t[!]\t"+message
@@ -227,10 +295,22 @@ public final class DebugService
 	 */
 	public enum LogLevel
 	{
+		/**
+		 * INFO - Just a quick debug message
+		 */
 		INFO("info"),
+		/**
+		 * WARN - something might be wrong or in a critical state
+		 */
 		WARN("warn"),
+		/**
+		 * NOTE - Just a headsup
+		 */
 		NOTE("note");
 		
+		/**
+		 * Internal representation to the print stream
+		 */
 		final String levelName;
 		
 		LogLevel(String l)

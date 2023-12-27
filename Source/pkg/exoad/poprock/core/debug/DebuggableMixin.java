@@ -28,12 +28,12 @@ public interface DebuggableMixin
 	/**
 	 * @param message hint for the error message
 	 *
-	 * @see DebugService#throwNow(String)
+	 * @see DebugService#panicNow(String)
 	 */
 	@NotVirtual default void THROW_NOW(String message)
 	{
 		DebugService
-			.throwNow(getCanonicallyNamedThis()+": "+message);
+			.panicNow(getCanonicallyNamedThis()+": "+message);
 	}
 	
 	/**

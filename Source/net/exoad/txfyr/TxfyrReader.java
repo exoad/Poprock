@@ -4,10 +4,13 @@ import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 import pkg.exoad.poprock.core.debug.DebugService;
 
+import javax.imageio.ImageIO;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -102,7 +105,25 @@ public final class TxfyrReader
 							.item(0)
 							.getTextContent()
 							.trim();
-						
+						// parse for all shards
+						ZipEntry targetEntry=zipFile.getEntry(clusterTarget);
+						if(targetEntry!=null) // according to the docs of ZipFile::getEntry
+						// oh yea, i think all of the debugging related things are not really worth it
+						{
+							BufferedImage image=ImageIO.read(zipFile.getInputStream(
+								targetEntry));
+							DebugService.panicOn(
+								clusterHeight>image.getHeight(),
+								"The target for cluster: "+clusterName+" has a height specification("+clusterHeight+") that exceeds the target texture's height("+image.getHeight()+")"
+							);
+							DebugService.panicOn(
+								clusterWidth>image.getWidth(),
+								"The target for cluster: "+clusterName+" has a width specification("+clusterWidth+") that exceeds the target texture's width("+image.getWidth()+")"
+							);
+						}
+						else
+							DebugService.panicWith(new FileNotFoundException(
+								"Could not find cluster texture target: "+clusterTarget+" for cluster: "+clusterName));
 					}
 				}
 			}catch(IOException|ParserConfigurationException|SAXException|

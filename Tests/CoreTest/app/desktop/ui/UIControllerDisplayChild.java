@@ -290,7 +290,7 @@ class UIControllerDisplayChild
 					e
 				);
 			DebugService
-				.throwNow(
+				.panicNow(
 					"delegate for 'make' of InnerControllerBlock received a none instance of UIControllerDelegate!"
 				);
 			return null;

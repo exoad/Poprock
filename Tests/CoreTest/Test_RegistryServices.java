@@ -1,4 +1,4 @@
-import pkg.exoad.poprock.core.services.RegistryServices;
+import pkg.exoad.poprock.core.registry.RegistryServices;
 
 @Section(name="Base Registry Entry Load Factor Test") public class Test_RegistryServices
 	implements TestRoot,

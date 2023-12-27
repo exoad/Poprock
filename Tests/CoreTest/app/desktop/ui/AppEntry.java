@@ -5,7 +5,7 @@ import pkg.exoad.poprock.core.Color;
 import pkg.exoad.poprock.core.debug.DebugService;
 import pkg.exoad.poprock.core.services.ColorService;
 import pkg.exoad.poprock.core.services.EventPoolService;
-import pkg.exoad.poprock.core.services.RegistryServices;
+import pkg.exoad.poprock.core.registry.RegistryServices;
 import pkg.exoad.poprock.desktop.ui.ThemeConstants;
 import pkg.exoad.poprock.desktop.ui.UIWindow;
 import pkg.exoad.poprock.desktop.ui.services.UIServices;
