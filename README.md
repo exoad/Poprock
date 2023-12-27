@@ -1,7 +1,6 @@
-<h1 align="center">Poprock</h1>
+<h1 align="center">
+🪨 Poprock
+</h1>
 
-<div align="center">
-  
-![](../Repo/title.png)
-
-</div>
+> [!CAUTION]
+> Currently, this is a work in progress!
