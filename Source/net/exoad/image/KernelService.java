@@ -1,11 +1,37 @@
 package net.exoad.image;
 import net.exoad.annotations.ServiceClass;
 
+import java.awt.image.BufferedImage;
 import java.awt.image.Kernel;
 @ServiceClass(requiresArming=false)
 public final class KernelService
 {
 	private KernelService(){}
+	
+	public static int convolveBufferedImageAt(
+		BufferedImage image,float[][] kernel,int x,int y
+	)
+	{
+		float r=0, g=0, b=0;
+		for(int i=-1;i<=1;i++)
+		{
+			for(int j=-1;j<=1;j++)
+			{
+				int rgb=image.getRGB(x+j,y+i);
+				int red=(rgb>>16)&0xFF;
+				int green=(rgb>>8)&0xFF;
+				int blue=rgb&0xFF;
+				r+=red*kernel[i+1][j+1];
+				g+=green*kernel[i+1][j+1];
+				b+=blue*kernel[i+1][j+1];
+			}
+		}
+		return (Math.min(255,Math.max(0,(int)r))<<16)|(Math.min(255,
+																Math.max(0,
+																		 (int)g))<<8)|Math.min(
+			255,
+			Math.max(0,(int)b));
+	}
 	
 	/**
 	 * Assures all values in the kernel sum to 1

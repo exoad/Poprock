@@ -1,11 +1,10 @@
 package net.exoad.image;
 import pkg.exoad.poprock.core.struct.Pair;
 
-import java.awt.image.Kernel;
 import java.util.Arrays;
-public final class ConvolveFunctor
+public final class ConvolveMatrix
 {
-	private ConvolveFunctor(){}
+	private ConvolveMatrix(){}
 	
 	public static Pair<Integer,float[]> compute0(int radius)
 	{

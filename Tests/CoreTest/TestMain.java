@@ -1,19 +1,26 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Stack;
 public class TestMain
 {
 	public static final Stack<String> INVALIDATIONS=new Stack<>();
+	public static final ArrayList<TestRoot> TESTS=new ArrayList<>();
+	
+	static
+	{
+		TESTS.add(new Test_GaussianKernel());
+	}
 	
 	public static void main(String[] args)
 	{
 		long passed=0, failed=0, skipped=0, invalidations=0;
-		for(int i=0;i<Config.TESTS.length;i++)
+		for(int i=0;i<TESTS.size();i++)
 		{
 			invalidations+=INVALIDATIONS.size();
 			if(!INVALIDATIONS.isEmpty())
 				INVALIDATIONS.clear();
 			// pre validation
-			TestRoot r=Config.TESTS[i];
+			TestRoot r=TESTS.get(i);
 			if(Arrays
 				.stream(r
 							.getClass()
