@@ -7,7 +7,7 @@ import java.util.Collection;
 import java.util.LinkedHashSet;
 public class TxfyrCluster
 {
-	public final String key;
+	public final String name;
 	public final int width;
 	public final int height;
 	public final BufferedImage source;
@@ -24,7 +24,7 @@ public class TxfyrCluster
 		assert source!=null;
 		assert shards!=null&&!shards.isEmpty();
 		this.shards=new LinkedHashSet<>(shards);
-		this.key   =key;
+		this.name  =key;
 		this.source=source;
 		this.width =width;
 		this.height=height;
@@ -37,19 +37,19 @@ public class TxfyrCluster
 			.parallelStream()
 			.forEachOrdered(x->{
 				if(x==null)
-					throw new InvalidTxfyrShardException("Txfyr Cluster["+key+"] has a null shard!");
+					throw new InvalidTxfyrShardException("Txfyr Cluster["+name+"] has a null shard!");
 				if(x.x()>width)
-					throw new InvalidTxfyrShardException("Txfyr Cluster["+key+"] found a shard["+x.key()+"] with X="+x.x()+" which is greater than this cluster's width of "+width);
+					throw new InvalidTxfyrShardException("Txfyr Cluster["+name+"] found a shard["+x.key()+"] with X="+x.x()+" which is greater than this cluster's width of "+width);
 				if(x.y()>height)
-					throw new InvalidTxfyrShardException("Txfyr Cluster["+key+"] found a shard["+x.key()+"] with Y="+x.y()+" which is greater than this cluster's height of "+height);
+					throw new InvalidTxfyrShardException("Txfyr Cluster["+name+"] found a shard["+x.key()+"] with Y="+x.y()+" which is greater than this cluster's height of "+height);
 				if(x.area()>width*height)
-					throw new InvalidTxfyrShardException(("Txfyr Cluster["+key+"] found a shard["+x.key()+"] that has a size "+x.area()+" that is greater than this cluster's size of "+(width*height)));
+					throw new InvalidTxfyrShardException(("Txfyr Cluster["+name+"] found a shard["+x.key()+"] that has a size "+x.area()+" that is greater than this cluster's size of "+(width*height)));
 			});
 	}
 	
 	@Override public String toString()
 	{
-		return "TxfyrCluster[\n\tname="+key+"\n\twidth="+width+"\n\tsource="+BufferedImageType.of(
-			source.getType())+"]";
+		return "TxfyrCluster[name="+name+",width="+width+",sourceType="+BufferedImageType.of(
+			source.getType())+",sourceRasterData="+source.getData()+"]";
 	}
 }

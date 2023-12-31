@@ -41,7 +41,6 @@ public final class Kernels
 		float[][] kernel=new float[size][size];
 		float sum=0.0F;
 		int center=size/2;
-		
 		for(int i=0;i<size;i++)
 		{
 			for(int j=0;j<size;j++)
@@ -55,5 +54,4 @@ public final class Kernels
 		KernelService.normalizeKernel(kernel);
 		return kernel;
 	}
-	
 }

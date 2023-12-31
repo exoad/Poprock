@@ -27,6 +27,6 @@ public record TxfyrShard(String key,int x,int y,int width,int height)
 	
 	@Override public String toString()
 	{
-		return "TxfyrShard[\n\tname="+key+"\n\tx="+x+"\n\ty="+y+"\n\twidth="+width+"\n\theight="+height+"]";
+		return "TxfyrShard[name="+key+",x="+x+",y="+y+",width="+width+",height="+height+"]";
 	}
 }

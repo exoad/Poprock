@@ -1,5 +1,5 @@
 package net.exoad.image;
-import pkg.exoad.poprock.core.struct.Shared;
+import pkg.exoad.poprock.core.struct.Wrap;
 
 import java.awt.image.BufferedImage;
 import java.util.Arrays;
@@ -15,7 +15,7 @@ public class BufferedImageType
 	 */
 	public static Type of(int i)
 	{
-		Shared<Type> type=Shared.of(null);
+		Wrap<Type> type=Wrap.of(null);
 		Arrays
 			.stream(Type.values())
 			.forEach(x->{
