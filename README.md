@@ -1,5 +1,7 @@
 <h1 align="center">
-🪨 Poprock
+<img src="Repo/Poprock_Logo.png" width=76 />
+<br/>
+Poprock
 </h1>
 
 > [!CAUTION]
