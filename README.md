@@ -63,7 +63,10 @@ jf.setVisible(true)
 ```java
 UIWindow.make()
         .withTitle("Foo")
-        .withIcon(AssetsService.fetchImage("icon.png"));
+        .withIcon(
+            AssetsService.fetchImage("icon.png")
+                         .as(ImageRasterizer.Type.BUFFERED_IMAGE)
+        )
         .withDim(300,400)
         .withMaxDim(300,400)
         .withLocation(Alignment.CENTER)
@@ -73,3 +76,6 @@ UIWindow.make()
   </td>
   </tr>
 </table>
+
+> [!NOTE]
+> The formatting is also part of the "Named" Construction pattern and is critical to making the code much more readable.
