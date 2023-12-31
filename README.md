@@ -1,39 +1,30 @@
-# Poprock
+<h1 align="center">
+🪨 Poprock
+</h1>
 
-> [!WARNING]
-> This project is a **work in progress**!
+> [!CAUTION]
+> Currently, this is a work in progress!
 
-exoad's extensible and lightweight library for any Java application
+**Poprock** is a resilient and lightweight framework designed to harness the extensive Java ecosystem for the swift and efficient development of desktop applications. Beyond constructing basic GUIs, the Poprock framework seamlessly extends its utility to the creation of straightforward games, music players, and other applications. In addition to desktop applications, Poprock can function as a standalone library for diverse tasks such as mathematical computations, audio processing, image processing, and more.
 
-**View the documentation [here](https://exoad.github.io/Poprock/)** (Currently only in Chinese)
+Furthermore, it is licensed under the free-to-use `BSD-4` license.
 
-## Table of contents
-F
-## Building
+## Features
 
-**Please make sure you are using Java SE 11+.** Preferably 17.
+* Desktop GUI
+* Audio Pipeline
+* Linear Algebra Base
+* Image Processing
+* Color & Theme Processor
+* **Txfyr** - a simple texture atlas library
 
-TODO
+... and more to come
 
-## Support
 
-> [!NOTE]
-> This project will be released as prebuilt binaries in JAR for all platforms.
->
-> However, VM-bundled versions are only released for some platforms.
->
-> Performance can thus vary with the JVM used!
+## Design
 
-**Platform support**
+This section documents quirks and other features that are used in the "code" of Poprock
 
-| Platform        	 | Flavors             	 | Performance 	 | Support     	  | Testing     	    | Notes                    	               |
-|-------------------|-----------------------|---------------|----------------|------------------|------------------------------------------|
-| Linux           	 | `6.1.62-1`          	 | 🟢 - OK    	  | 🟢 - YES     	 | 🟢 - TESTED  	   | 	Tested against Manjaro-KDE              |
-| MacOS (OSX)     	 | 	                     | ⚫ - N/A     	 | 🟢 - YES    	  | 🔴 - NONE    	   | 	                                        |
-| Windows (Win32) 	 | `10`, `11`          	 | 🟢 - OK     	 | 🟢 - YES     	 | 🟢 - TESTED    	 | Tested against Win11                   	 |
+### "Named Construction / Factory"
 
-**JRE Support**
-
-| **Version** 	 | **Provider** 	 | **Build**                     	 | **State** 	 |
-|---------------|----------------|---------------------------------|-------------|
-| 17.0.9      	 | Adoptium     	 | Temurin-17.0.9+9 (2023-10-17) 	 | WORKING   	 |
+Named construction leverages *method chaining* 
