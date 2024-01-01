@@ -18,7 +18,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 public final class TxfyrReader
 {
-	private static WeakHashMap<String,TxfyrCluster> __cache=new WeakHashMap<>();
+	private static final WeakHashMap<String,TxfyrCluster> __cache=new WeakHashMap<>();
 	
 	private TxfyrReader(){}
 	

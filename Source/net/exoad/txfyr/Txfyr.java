@@ -8,12 +8,10 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 public final class Txfyr
 {
-	private Txfyr(){}
+	public static final long VERSION=2024_01_01L;
+	public static final String[] ALLOWED_FILE_TYPES_EXTENSIONS=new String[]{"png","jpg","jpeg"};
 	
-	public static long getVersion()
-	{
-		return 2023_12_25L;
-	}
+	private Txfyr(){}
 	
 	public static Result<Boolean,TxfyrValidityReason> isValidTxfyrFile(String path)
 	{
