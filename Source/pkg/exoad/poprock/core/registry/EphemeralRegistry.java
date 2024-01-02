@@ -4,7 +4,7 @@ import pkg.exoad.poprock.core.debug.DebugService;
 import pkg.exoad.poprock.core.debug.DebuggableMixin;
 import pkg.exoad.poprock.core.services.BasicService;
 import pkg.exoad.poprock.core.services.mixins.NamedObjMixin;
-import pkg.exoad.poprock.core.struct.Pair;
+import pkg.exoad.poprock.core.Pair;
 
 import java.io.Serializable;
 import java.util.Collection;

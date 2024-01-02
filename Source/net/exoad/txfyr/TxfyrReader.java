@@ -20,6 +20,7 @@ public final class TxfyrReader
 {
 	private static final WeakHashMap<String,TxfyrCluster> __cache=new WeakHashMap<>();
 	
+	
 	private TxfyrReader(){}
 	
 	public static Optional<ZipEntry[]> exportAllIdentifiersRaw(String path)

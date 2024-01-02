@@ -1,5 +1,5 @@
 package net.exoad.image;
-import pkg.exoad.poprock.core.struct.Wrap;
+import pkg.exoad.poprock.core.Wrap;
 
 import java.awt.image.BufferedImage;
 import java.util.Arrays;

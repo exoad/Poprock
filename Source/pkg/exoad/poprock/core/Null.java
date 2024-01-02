@@ -1,4 +1,4 @@
-package pkg.exoad.poprock.core.struct;
+package pkg.exoad.poprock.core;
 
 public final class Null
 {

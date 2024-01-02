@@ -5,7 +5,7 @@ import net.exoad.annotations.ServiceClass;
 import net.exoad.annotations.VolatileImpl;
 import pkg.exoad.poprock.core.debug.DebugService;
 import pkg.exoad.poprock.core.debug.DebuggableMixin;
-import pkg.exoad.poprock.core.struct.Pair;
+import pkg.exoad.poprock.core.Pair;
 
 import java.util.ArrayList;
 import java.util.Collection;

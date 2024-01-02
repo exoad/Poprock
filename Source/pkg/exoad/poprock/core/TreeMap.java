@@ -1,6 +1,4 @@
-package pkg.exoad.poprock.core.struct;
-
-import pkg.exoad.poprock.core.ITypeInferencing;
+package pkg.exoad.poprock.core;
 
 import java.util.ArrayList;
 import java.util.Optional;

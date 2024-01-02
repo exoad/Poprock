@@ -1,7 +1,7 @@
 package pkg.exoad.poprock.core.services;
 
 import net.exoad.annotations.ServiceClass;
-import pkg.exoad.poprock.core.struct.Pair;
+import pkg.exoad.poprock.core.Pair;
 
 import java.io.Serializable;
 import java.util.Arrays;

@@ -1,5 +1,5 @@
 package net.exoad.txfyr;
-import pkg.exoad.poprock.core.struct.Result;
+import pkg.exoad.poprock.core.Result;
 
 import java.io.File;
 import java.io.IOException;

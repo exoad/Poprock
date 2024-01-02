@@ -1,5 +1,5 @@
 package net.exoad.image;
-import pkg.exoad.poprock.core.struct.Pair;
+import pkg.exoad.poprock.core.Pair;
 
 import java.util.Arrays;
 public final class ConvolveMatrix

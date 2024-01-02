@@ -1,4 +1,4 @@
-package pkg.exoad.poprock.core.struct;
+package pkg.exoad.poprock.core;
 /**
  * An improvised pair data structure for returning a result with a description.
  *

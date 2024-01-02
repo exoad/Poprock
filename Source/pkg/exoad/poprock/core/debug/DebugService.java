@@ -71,7 +71,6 @@ public final class DebugService
 	 * Sets whether any functions depending on any of the DebugService's
 	 * <code>panic</code> functions will not be able to emit
 	 * anything.
-	 *
 	 * <h2>THIS IS A VERY DANGEROUS METHOD, JUST LEAVE IT ON!!</h2>
 	 *
 	 * @param b on or off
