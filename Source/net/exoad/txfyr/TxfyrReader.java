@@ -77,10 +77,10 @@ public final class TxfyrReader
 						Element clusterRoot=doc.getDocumentElement();
 						DebugService.panicOn(
 							!Long
-								.toString(Txfyr.getVersion())
+								.toString(Txfyr.VERSION)
 								.equals(clusterRoot.getAttribute("Version")),
 							"A txfyr cluster identifier was found to have an incompatible version! Got: "+clusterRoot.getAttribute(
-								"Version")+" Required: "+Txfyr.getVersion()
+								"Version")+" Required: "+Txfyr.VERSION
 						);
 						Element modelElement=(Element)clusterRoot
 							.getElementsByTagName("Model")
