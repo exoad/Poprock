@@ -7,6 +7,7 @@ net.exoad
 net.exoad.annotations
 net.exoad.ansicolor
 net.exoad.color
+net.exoad.image
 net.exoad.math
 net.exoad.math.geom
 net.exoad.platform
@@ -16,7 +17,6 @@ pkg.exoad.poprock.core.debug
 pkg.exoad.poprock.core.registry
 pkg.exoad.poprock.core.services
 pkg.exoad.poprock.core.services.mixins
-pkg.exoad.poprock.core.struct
 pkg.exoad.poprock.desktop
 pkg.exoad.poprock.desktop.ui
 pkg.exoad.poprock.desktop.ui.java
