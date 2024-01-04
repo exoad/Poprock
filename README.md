@@ -18,12 +18,16 @@ Furthermore, it is licensed under the free-to-use `BSD-4` license.
 
 ## Features
 
-* Desktop GUI
-* Audio Pipeline
-* Linear Algebra Base
-* Image Processing
-* Color & Theme Processor
+* **Graphics Toolkit** with hardware (OpenGL) & software rendering 
+* **Native Audio engine** using ALSA, Jack, Pulse
+* **Tailwind** - real-time signal processing (WIP)
+* Fast **Linear Algebra** lib
+* Thread safe caching libraries
+* **Image Processing**
+* **Prismix** - color & Theme Processor
 * **Txfyr** - a simple texture atlas library
+* Seamless native SYS calls for Windows, OSX, and Linux*
+* Lua SPI integrations
 
 ... and more to come
 
