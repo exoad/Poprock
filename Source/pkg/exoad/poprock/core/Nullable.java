@@ -8,7 +8,7 @@ public class Nullable<A>
 	}
 	
 	// exploiting Java's type reification :) [this could be for the best or for the worst]
-	public static final Nullable NULL=Nullable.of(null);
+	public static final Nullable<Object> NULL=Nullable.of(null);
 	
 	private A ref;
 	
@@ -61,5 +61,10 @@ public class Nullable<A>
 	{
 		if(isNull())
 			this.ref=ref;
+	}
+	
+	@Override public String toString()
+	{
+		return isNull()?"null":ref.toString();
 	}
 }

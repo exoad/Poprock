@@ -8,7 +8,7 @@ public class TestMain
 	
 	static
 	{
-		TESTS.add(new Test_GaussianKernel());
+		TESTS.add(new Test_MemoryDiagnosticsModule());
 	}
 	
 	public static void main(String[] args)

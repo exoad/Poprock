@@ -2,7 +2,7 @@ package pkg.exoad.poprock.core.registry;
 import net.exoad.annotations.VolatileImpl;
 import pkg.exoad.poprock.core.debug.DebugService;
 import pkg.exoad.poprock.core.debug.DebuggableMixin;
-import pkg.exoad.poprock.core.services.mixins.NamedObjMixin;
+import pkg.exoad.poprock.core.mixins.NamedObjMixin;
 
 import java.lang.ref.WeakReference;
 import java.util.HashMap;

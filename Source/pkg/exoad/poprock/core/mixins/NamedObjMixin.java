@@ -1,4 +1,4 @@
-package pkg.exoad.poprock.core.services.mixins;
+package pkg.exoad.poprock.core.mixins;
 
 import pkg.exoad.poprock.core.Shared;
 import net.exoad.annotations.NotVirtual;

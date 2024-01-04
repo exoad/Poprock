@@ -4,7 +4,7 @@ import javax.swing.JComponent;
 import javax.swing.border.Border;
 
 import pkg.exoad.poprock.core.Color;
-import pkg.exoad.poprock.core.services.AwtMixerService;
+import pkg.exoad.poprock.core.AwtMixerService;
 
 import java.awt.Dimension;
 import java.awt.Component;

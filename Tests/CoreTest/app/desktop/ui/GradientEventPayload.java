@@ -1,9 +1,9 @@
 package app.desktop.ui;
 
 import app.desktop.ui.util.GradientColor;
-import pkg.exoad.poprock.core.services.EventPoolService;
+import pkg.exoad.poprock.core.EventPoolService;
 import pkg.exoad.poprock.core.Color;
-import pkg.exoad.poprock.core.services.EventPoolService.EventPayload;
+import pkg.exoad.poprock.core.EventPoolService.EventPayload;
 
 import java.util.Arrays;
 

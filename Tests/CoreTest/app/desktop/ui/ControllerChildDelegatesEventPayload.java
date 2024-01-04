@@ -1,6 +1,6 @@
 package app.desktop.ui;
 
-import pkg.exoad.poprock.core.services.EventPoolService.EventPayload;
+import pkg.exoad.poprock.core.EventPoolService.EventPayload;
 
 import java.util.Collection;
 

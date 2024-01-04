@@ -40,9 +40,4 @@ public final class MathF
 		float buffer=range*(1-smoothness*smooth);
 		return Math.max(min-buffer,Math.min(max+buffer,value));
 	}
-	
-	public static int clamp(int value,int min,int max)
-	{
-		return Math.max(min,Math.min(max,value));
-	}
 }

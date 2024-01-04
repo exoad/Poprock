@@ -1,7 +1,5 @@
 package pkg.exoad.poprock.desktop;
 
-import net.exoad.platform.Platform;
-import pkg.exoad.poprock.core.services.BasicService;
 /**
  * Basic information class for the poprock desktop library.
  *

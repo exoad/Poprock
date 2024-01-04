@@ -1,6 +1,6 @@
 package pkg.exoad.poprock.desktop.ui;
 
-import pkg.exoad.poprock.core.services.BasicService;
+import pkg.exoad.poprock.core.BasicService;
 
 import javax.swing.*;
 

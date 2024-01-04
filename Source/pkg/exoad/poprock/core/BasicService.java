@@ -1,6 +1,7 @@
-package pkg.exoad.poprock.core.services;
+package pkg.exoad.poprock.core;
 
 import net.exoad.annotations.ServiceClass;
+import net.exoad.math.Maths;
 import pkg.exoad.poprock.core.Pair;
 
 import java.io.Serializable;
@@ -66,6 +67,11 @@ public final class BasicService
 				))
 				return true;
 		return false;
+	}
+	
+	public static int clampBounds(int i)
+	{
+		return Maths.clampInt(i,Integer.MIN_VALUE,Integer.MAX_VALUE);
 	}
 	
 	/**

@@ -3,7 +3,7 @@ package pkg.exoad.poprock.desktop.ui;
 import javax.swing.ImageIcon;
 
 import pkg.exoad.poprock.core.Color;
-import pkg.exoad.poprock.core.services.ColorService;
+import pkg.exoad.poprock.core.ColorService;
 import pkg.exoad.poprock.desktop.ui.java.UXButton;
 
 public final class UIButtonDelegate

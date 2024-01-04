@@ -1,7 +1,7 @@
 package app.desktop.ui;
 
-import pkg.exoad.poprock.core.services.ColorService;
-import pkg.exoad.poprock.core.services.EventPoolService;
+import pkg.exoad.poprock.core.ColorService;
+import pkg.exoad.poprock.core.EventPoolService;
 import pkg.exoad.poprock.desktop.ui.*;
 import pkg.exoad.poprock.desktop.ui.UIPanelDelegate.BoxLayoutAlignment;
 import pkg.exoad.poprock.desktop.ui.java.UXPanel;

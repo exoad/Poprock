@@ -6,6 +6,7 @@ import net.exoad.annotations.ServiceClass;
 import java.io.PrintStream;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 /**
  * Debug Service - Utility class for handling various exceptions that can be thrown during
@@ -194,8 +195,8 @@ public final class DebugService
 			);
 	}
 	
-	private static RuntimeException modifyThrowable(
-		RuntimeException throwable
+	public static RuntimeException modifyThrowable(
+		Throwable throwable
 	)
 	{
 		throwable
@@ -246,7 +247,7 @@ public final class DebugService
 					)
 				}
 			);
-		return throwable;
+		return (RuntimeException)throwable;
 	}
 	
 	/**
@@ -261,6 +262,14 @@ public final class DebugService
 													   .currentThread()
 													   .getName()+" panicked "+
 												   "on "+e.getMessage(),e));
+	}
+	
+	public static synchronized void panicWith(Thread t,Throwable e)
+	{
+		throw modifyThrowable(new RuntimeException(
+			t.getName()+" panicked on"+e.getMessage(),
+			e
+		));
 	}
 	
 	/**

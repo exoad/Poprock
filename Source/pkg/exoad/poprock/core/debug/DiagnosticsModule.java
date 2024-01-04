@@ -1,9 +1,11 @@
 package pkg.exoad.poprock.core.debug;
 import pkg.exoad.poprock.core.IDisposable;
 
+import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
-public abstract class DiagnosticsModule<C extends DiagnosticsModule<C>> /* stupid ass generic-def for covariance */
+import java.util.function.Consumer;
+public abstract class DiagnosticsModule<C extends DiagnosticsModule<C,A>,A extends Record> /* stupid ass generic-def for covariance */
 	implements IDisposable
 {
 	private final AtomicLong startTimeStamp;
@@ -47,7 +49,11 @@ public abstract class DiagnosticsModule<C extends DiagnosticsModule<C>> /* stupi
 	
 	public abstract void start();
 	
-	protected abstract void startWith(Runnable r);
+	public abstract void createSnapshot(Consumer<A> cb);
+	
+	protected abstract C withPump(Consumer<A> r);
+	
+	public abstract void pause();
 	
 	public abstract void end();
 	

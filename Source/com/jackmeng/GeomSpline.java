@@ -4,21 +4,21 @@ import java.util.List;
 
 public class GeomSpline
 {
-	private final List<Double> x;
-	private final List<Double> y;
+	private final List<Float> x;
+	private final List<Float> y;
 	private final int n;
-	private final double[] z;
+	private final float[] z;
 	
-	public GeomSpline(List<Double> x,List<Double> y)
+	public GeomSpline(List<Float> x,List<Float> y)
 	{
 		this.x=x;
 		this.y=y;
 		this.n=x.size();
-		double[] h=new double[n];
-		double[] b=new double[n];
-		double[] u=new double[n];
-		double[] v=new double[n];
-		this.z=new double[n+1];
+		float[] h=new float[n];
+		float[] b=new float[n];
+		float[] u=new float[n];
+		float[] v=new float[n];
+		this.z=new float[n+1];
 		for(int i=0;i<n-1;i++)
 		{
 			h[i]=x.get(i+1)-x.get(i);
@@ -37,7 +37,7 @@ public class GeomSpline
 		z[0]=0;
 	}
 	
-	public double interpolate(double t)
+	public float interpolate(float t)
 	{
 		int i=0;
 		int j=n-1;
@@ -49,7 +49,7 @@ public class GeomSpline
 			else
 				i=k;
 		}
-		double dx=t-x.get(i);
+		float dx=t-x.get(i);
 		return y.get(i)+dx*(z[i]/2+dx*(z[j]-z[i])/(6*(x.get(j)-x.get(i)))
 							+(y.get(j)-y.get(i))/(x.get(j)-x.get(i)));
 	}

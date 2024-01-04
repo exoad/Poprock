@@ -1,5 +1,5 @@
 package pkg.exoad.poprock.core.registry;
-import pkg.exoad.poprock.core.services.mixins.NamedObjMixin;
+import pkg.exoad.poprock.core.mixins.NamedObjMixin;
 
 import java.util.Collection;
 import java.util.Optional;

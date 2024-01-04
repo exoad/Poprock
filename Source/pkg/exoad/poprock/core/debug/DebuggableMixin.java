@@ -24,7 +24,6 @@ public interface DebuggableMixin
 	extends
 	SelfReportingMixin // really shouldn't this for mixins
 {
-	
 	/**
 	 * @param message hint for the error message
 	 *

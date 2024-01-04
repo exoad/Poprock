@@ -1,6 +1,8 @@
-package pkg.exoad.poprock.core.services;
+package pkg.exoad.poprock.core;
 import net.exoad.annotations.ServiceClass;
 import pkg.exoad.poprock.core.debug.DebugService;
+import pkg.exoad.poprock.core.debug.DiagnosticsMode;
+import pkg.exoad.poprock.core.debug.DiagnosticsModule;
 
 import java.util.TreeMap;
 import java.util.Optional;
@@ -9,14 +11,14 @@ public final class SharedServices
 {
 	private SharedServices(){}
 	
-	private static final /*preserve ordering
-	 */ TreeMap<String,Object> properties;
+	private static final /*preserve ordering*/ TreeMap<String,Object> properties;
 	
 	static
 	{
 		properties=new TreeMap<>();
 		// load default properties
 		properties.put("registry_services.allow_nullable_value",true);
+		properties.put("debug.volume",DiagnosticsMode.FAIL_FAST);
 	}
 	
 	private static void noContain(String r)

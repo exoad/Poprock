@@ -2,7 +2,7 @@ package pkg.exoad.poprock.core.registry;
 import net.exoad.annotations.NotVirtual;
 import pkg.exoad.poprock.core.ITypeInferencing;
 import pkg.exoad.poprock.core.debug.DebugService;
-import pkg.exoad.poprock.core.services.EventPoolService;
+import pkg.exoad.poprock.core.EventPoolService;
 
 import java.util.Collection;
 import java.util.HashSet;

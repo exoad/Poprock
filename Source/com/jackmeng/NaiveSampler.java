@@ -4,6 +4,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.function.Consumer;
 
+/**
+ * Samples data through a time based periodc
+ *
+ * @author Jack Meng
+ * @param <T> the type of the data to sample back as
+ */
 public class NaiveSampler<T>
 	implements
 	Consumer<T>

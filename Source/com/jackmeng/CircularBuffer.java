@@ -50,8 +50,7 @@ public class CircularBuffer
 	public int push(byte[] data,int i,int len)
 	{
 		int rem=len;
-		int off=i;
-		rem=getRem(data,rem,off);
+		rem=getRem(data,rem,i);
 		return len-rem;
 	}
 	
@@ -76,14 +75,13 @@ public class CircularBuffer
 	public void opush(byte[] data,int i,int len)
 	{
 		int rem=len;
-		int off=i;
 		if(!overflows(len))
 		{
 			System.arraycopy(data,i,buffer,offset(),len);
 			next(len);
 			return;
 		}
-		rem=getRem(data,rem,off);
+		rem=getRem(data,rem,i);
 	}
 	
 	public void init()

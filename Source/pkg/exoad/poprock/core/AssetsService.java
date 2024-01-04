@@ -1,4 +1,4 @@
-package pkg.exoad.poprock.core.services;
+package pkg.exoad.poprock.core;
 
 import net.exoad.annotations.ServiceClass;
 

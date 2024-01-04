@@ -1,11 +1,10 @@
-package pkg.exoad.poprock.core.services;
+package pkg.exoad.poprock.core;
 
 import net.exoad.annotations.NotVirtual;
 import net.exoad.annotations.ServiceClass;
 import net.exoad.annotations.VolatileImpl;
 import pkg.exoad.poprock.core.debug.DebugService;
 import pkg.exoad.poprock.core.debug.DebuggableMixin;
-import pkg.exoad.poprock.core.Pair;
 
 import java.util.ArrayList;
 import java.util.Collection;

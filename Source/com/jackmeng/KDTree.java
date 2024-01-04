@@ -25,7 +25,7 @@ public class KDTree
 		root=buildTree(points,0);
 	}
 	
-	private KDNode buildTree(List<double[]> points,int depth)
+	public synchronized KDNode buildTree(List<double[]> points,int depth)
 	{
 		if(points.isEmpty())
 			return null;
@@ -39,7 +39,7 @@ public class KDTree
 		KDNode node=new KDNode(medianPoint);
 		List<double[]> leftPoints=points.subList(0,medianIndex);
 		List<double[]> rightPoints=points.subList(medianIndex+1,points.size());
-		node.left=buildTree(leftPoints,depth+1);
+		node.left =buildTree(leftPoints,depth+1);
 		node.right=buildTree(rightPoints,depth+1);
 		return node;
 	}

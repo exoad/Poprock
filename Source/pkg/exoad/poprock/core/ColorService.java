@@ -1,11 +1,10 @@
-package pkg.exoad.poprock.core.services;
+package pkg.exoad.poprock.core;
 
 import net.exoad.annotations.ServiceClass;
-import pkg.exoad.poprock.core.Color;
 
 /**
- * Color Service - A utility class for providing basic operations on Colors.
- * However, it is not used for more complicated color operations.
+ * Color Service - A utility class for providing basic operations on Colors. However, it
+ * is not used for more complicated color operations.
  *
  * @author Jack Meng
  * @see java.awt.Color
@@ -20,9 +19,9 @@ public final class ColorService
 	
 	/**
 	 * <strong>AWT Function</strong>
-	 * <br/> This function converts from a HEX Color code #FFFFFF to a color
-	 * object. <br/> The format must follow "#ffffff" with a hashtag at the
-	 * start and 6 trailing hexadecimal characters.
+	 * <br/> This function converts from a HEX Color code #FFFFFF to a color object. <br/>
+	 * The format must follow "#ffffff" with a hashtag at the start and 6 trailing
+	 * hexadecimal characters.
 	 *
 	 * @param hex The provided hex.
 	 *
@@ -96,8 +95,8 @@ public final class ColorService
 	
 	/**
 	 * <strong>AWT Function</strong>
-	 * Takes a color object and inverts the color values. For example, the
-	 * invert of WHITE would be BLACK.
+	 * Takes a color object and inverts the color values. For example, the invert of WHITE
+	 * would be BLACK.
 	 *
 	 * @param r The AWT Color Object to invert
 	 *

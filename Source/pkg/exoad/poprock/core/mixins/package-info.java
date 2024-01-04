@@ -7,4 +7,4 @@
  *
  * @author Jack Meng
  */
-package pkg.exoad.poprock.core.services.mixins;
+package pkg.exoad.poprock.core.mixins;

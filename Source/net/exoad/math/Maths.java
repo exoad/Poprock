@@ -3,6 +3,15 @@ public final class Maths
 {
 	private Maths(){}
 	
+	public static long unsignLong(long r)
+	{
+		if(Math.abs(r)>Long.MAX_VALUE>>1)
+			r >>= 1;
+		else
+			r=Math.abs(r);
+		return r;
+	}
+	
 	public static int clampInt(int value,int min,int max)
 	{
 		return Math.max(min,Math.min(max,value));

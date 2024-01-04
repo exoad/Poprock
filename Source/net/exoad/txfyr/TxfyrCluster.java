@@ -4,8 +4,11 @@ import net.exoad.image.BufferedImageType;
 
 import java.awt.image.BufferedImage;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
+import java.util.function.Consumer;
 public class TxfyrCluster
+	implements Iterable<TxfyrShard>
 {
 	public final String name;
 	public final int width;
@@ -19,6 +22,7 @@ public class TxfyrCluster
 		Collection<TxfyrShard> shards
 	)
 	{
+		// assert statements for programming issues or something wrong with the library itself
 		assert key!=null;
 		assert width>0&&height>0;
 		assert source!=null;
@@ -33,9 +37,9 @@ public class TxfyrCluster
 	
 	public synchronized void validate()
 	{
+		// TODO: swap all of the exception throwing to utilize the debug service
 		shards
-			.parallelStream()
-			.forEachOrdered(x->{
+			.forEach(x->{ // no need to use a stream here like the previous implementation
 				if(x==null)
 					throw new InvalidTxfyrShardException("Txfyr Cluster["+name+"] has a null shard!");
 				if(x.x()>width)
@@ -50,6 +54,18 @@ public class TxfyrCluster
 	@Override public String toString()
 	{
 		return "TxfyrCluster[name="+name+",width="+width+",sourceType="+BufferedImageType.of(
-			source.getType())+",sourceRasterData="+source.getData()+"]";
+			source.getType())+",sourceRasterData="+source.getData()+"]"; // maybe we should use a stringbuilder here to save on memory when appending strings, shitty string pools
+	}
+	
+	@Override public Iterator<TxfyrShard> iterator()
+	{
+		return this.shards.iterator();
+	}
+	
+	@Override public void forEach(
+		final Consumer<? super TxfyrShard> /* dafuq covariance??? */ action
+	)
+	{
+		this.shards.forEach(action);
 	}
 }

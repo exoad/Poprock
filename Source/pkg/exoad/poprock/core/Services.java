@@ -1,4 +1,4 @@
-package pkg.exoad.poprock.core.services;
+package pkg.exoad.poprock.core;
 import java.util.Arrays;
 public final class Services
 {
