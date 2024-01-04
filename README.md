@@ -24,10 +24,12 @@ Furthermore, it is licensed under the free-to-use `BSD-4` license.
 * Fast **Linear Algebra** lib
 * Thread safe caching libraries
 * **Image Processing**
+* **Property management** paradigm through pools and registries
 * **Prismix** - color & Theme Processor
 * **Txfyr** - a simple texture atlas library
 * Seamless native SYS calls for Windows, OSX, and Linux*
 * Lua SPI integrations
+* Uses **Constructive** semantics to create always readable code
 
 ... and more to come
 
