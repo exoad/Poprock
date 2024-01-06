@@ -6,7 +6,6 @@ import net.exoad.annotations.ServiceClass;
 import java.io.PrintStream;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
 /**
  * Debug Service - Utility class for handling various exceptions that can be thrown during

@@ -35,7 +35,7 @@ public final class AssetsService
 	 */
 	public static String ASSETS_OFFSET="";
 	// A very basic cache system for objects loaded from the assets folder, we use a weakhashmap so the gc can take care of making something expire
-	private static WeakHashMap<String,Object> cache;
+	private static final WeakHashMap<String,Object> cache;
 	
 	static
 	{

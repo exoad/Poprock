@@ -13,5 +13,5 @@ public enum DiagnosticsMode
 	 * States that whatever program should only emit the messages for those exceptions,
 	 * but not crash.
 	 */
-	EMIT;
+	EMIT
 }

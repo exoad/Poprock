@@ -12,10 +12,12 @@ public final class UIServices
 	{
 		DebugService.panicOn(key==null,"Property keys cannot be null for "+
 									   "propagation!");
+		assert key!=null;
 		for(PropertyKey k: key)
 		{
 			DebugService.panicOn(k==null,"A property key was found to be "+
 										 "null for propagation!");
+			assert k!=null;
 			if(k.type==PropertyKeyType.SYSTEM)
 			{
 				System.setProperty(k.keyName,k.value.toString());

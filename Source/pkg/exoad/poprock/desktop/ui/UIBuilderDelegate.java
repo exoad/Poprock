@@ -41,7 +41,7 @@ public class UIBuilderDelegate<T extends JComponent>
 		return new UIBuilderDelegate<>(component);
 	}
 	
-	private Supplier<UIDelegate<T>> builder;
+	private final Supplier<UIDelegate<T>> builder;
 	
 	private UIBuilderDelegate(Supplier<UIDelegate<T>> builder)
 	{

@@ -73,7 +73,7 @@ public class Shared<T>
 				(e
 					 .getClass()
 					 .hashCode()*31+e
-					 .hashCode())+""+e
+					 .hashCode())+e
 					.getClass()
 					.getCanonicalName()
 			);
@@ -91,7 +91,7 @@ public class Shared<T>
 	/**
 	 * Modifies the current value pointed to
 	 *
-	 * @param e
+	 * @param e value pointed to
 	 */
 	public void setValue(T e)
 	{

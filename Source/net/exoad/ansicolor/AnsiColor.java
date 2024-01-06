@@ -10,40 +10,38 @@ import java.util.Objects;
  * <h1>AnsiColor - ANSI Coloring</h1>
  * <em>Copyright (C) Jack Meng 2023</em>
  * <p>
- * ANSI provides most consoles with a coloring format that you can use to build
- * colorful CLI Applications or just to be more pretty with DEBUG messages. This
- * simple library helps you to create cascading calls for creating concise and
- * readable ANSI display codes. You don't have to mess with making your own and
- * potentially making it overburdened and verbose to use!
+ * ANSI provides most consoles with a coloring format that you can use to build colorful
+ * CLI Applications or just to be more pretty with DEBUG messages. This simple library
+ * helps you to create cascading calls for creating concise and readable ANSI display
+ * codes. You don't have to mess with making your own and potentially making it
+ * overburdened and verbose to use!
  * </p>
  * <p>
- * Use this project in your code for displaying colorful console messages! All
- * you have to is call {@link #make(String)} and then you have a whole bunch of
- * formatting options to utilize :)
+ * Use this project in your code for displaying colorful console messages! All you have to
+ * is call {@link #make(String)} and then you have a whole bunch of formatting options to
+ * utilize :)
  * </p>
  * <p>
- * You can also use functions similar to StringBuilder's class but however with
- * a very limited subset of the methods available to you. It is limited because
- * in order to create a cascading call pattern, certain functions that must
- * return a type other than the cascading type will destroy cascading. However,
- * some of them can be accessed like {@link String#charAt(int)} by calling the
- * {@link InternedInstance#content()} method which will return the String
- * representation of the content for you to mess with. Other than that, all
- * other methods will strictly return the current InternedInstance instance to
- * continue the cascading pattern.
+ * You can also use functions similar to StringBuilder's class but however with a very
+ * limited subset of the methods available to you. It is limited because in order to
+ * create a cascading call pattern, certain functions that must return a type other than
+ * the cascading type will destroy cascading. However, some of them can be accessed like
+ * {@link String#charAt(int)} by calling the {@link InternedInstance#content()} method
+ * which will return the String representation of the content for you to mess with. Other
+ * than that, all other methods will strictly return the current InternedInstance instance
+ * to continue the cascading pattern.
  * </p>
  * <h2>
  * Simple usage guide
  * </h2>
- * Everything is based off of the concept of cascading. You might have seen this
- * with the class {@link StringBuilder} which you can constantly call methods
- * like {@link StringBuilder#append(String)} and
- * {@link StringBuilder#insert(int,String)} in a long chain like <br>
- * {@code newStringBuilder("Hello").append("World").append("!")}. This is the
- * exact concept used with {@link AnsiColor}!
+ * Everything is based off of the concept of cascading. You might have seen this with the
+ * class {@link StringBuilder} which you can constantly call methods like
+ * {@link StringBuilder#append(String)} and {@link StringBuilder#insert(int,String)} in a
+ * long chain like <br> {@code newStringBuilder("Hello").append("World").append("!")}.
+ * This is the exact concept used with {@link AnsiColor}!
  * <br>
- * To start your cascade, you first must acquire an instance from
- * {@link AnsiColor} which you can do via two methods:
+ * To start your cascade, you first must acquire an instance from {@link AnsiColor} which
+ * you can do via two methods:
  * <ul>
  * <li>{@link AnsiColor#make(String)} - Supplies the payload (AKA the string you
  * want to format first).
@@ -154,9 +152,9 @@ import java.util.Objects;
 public final class AnsiColor
 {
 	/**
-	 * Determines if the ANSI printer should return the ANSI formatted or not.
-	 * If {@link #setAnsiEnabled()} returns false, raw content would be returned
-	 * without formatting.
+	 * Determines if the ANSI printer should return the ANSI formatted or not. If
+	 * {@link #setAnsiEnabled()} returns false, raw content would be returned without
+	 * formatting.
 	 */
 	private static boolean enableInternedInstance=true;
 	private final StringBuilder $ansi_content=new StringBuilder(); // set to empty string for now
@@ -168,9 +166,9 @@ public final class AnsiColor
 	/**
 	 * The current version
 	 *
-	 * @return A long in the format of YYYYMMDDVV. Where YYYY -> Four digit
-	 * year, MM -> 2 digit month number, DD -> 2 digit day number, VV -> for
-	 * version numbering like 1.1 would be "11"
+	 * @return A long in the format of YYYYMMDDVV. Where YYYY -> Four digit year, MM -> 2
+	 * digit month number, DD -> 2 digit day number, VV -> for version numbering like 1.1
+	 * would be "11"
 	 */
 	public static long getVersion()
 	{
@@ -208,12 +206,12 @@ public final class AnsiColor
 	}
 	
 	/**
-	 * Use this to grab an ANSI create instance. Primarily used if you want to
-	 * submit your payload before formatting such that the semantics are like
-	 * so: "make(content).color1().bold1()...toString()"
+	 * Use this to grab an ANSI create instance. Primarily used if you want to submit your
+	 * payload before formatting such that the semantics are like so:
+	 * "make(content).color1().bold1()...toString()"
 	 * <p>
-	 * Which one you use is up to personal preferences, there are no differences
-	 * except for looks (or is it?). Contrary to {@link #make()}
+	 * Which one you use is up to personal preferences, there are no differences except
+	 * for looks (or is it?). Contrary to {@link #make()}
 	 *
 	 * @return An ANSI create instance
 	 */
@@ -223,12 +221,12 @@ public final class AnsiColor
 	}
 	
 	/**
-	 * Use this to grab an ANSI create instance. Primarily used if you want to
-	 * submit your payload <strong>AFTER</strong> formatting such that the
-	 * semantics are like so: "make().color1().bold1()...toString(content)"
+	 * Use this to grab an ANSI create instance. Primarily used if you want to submit your
+	 * payload <strong>AFTER</strong> formatting such that the semantics are like so:
+	 * "make().color1().bold1()...toString(content)"
 	 * <p>
-	 * Which one you use is up to personal preferences, there are no differences
-	 * except for looks (or is it?). Contrary to {@link #make(String)}
+	 * Which one you use is up to personal preferences, there are no differences except
+	 * for looks (or is it?). Contrary to {@link #make(String)}
 	 *
 	 * @return An ANSI create instance
 	 */
@@ -239,9 +237,9 @@ public final class AnsiColor
 	
 	/**
 	 * <p>
-	 * This class is where all of the formatting happens. Acquire an instance
-	 * via {@link AnsiColor#make()} or {@link AnsiColor#make(String)} where you
-	 * can use cascading to create formatting.
+	 * This class is where all of the formatting happens. Acquire an instance via
+	 * {@link AnsiColor#make()} or {@link AnsiColor#make(String)} where you can use
+	 * cascading to create formatting.
 	 * </p>
 	 * <p>
 	 * For 4bit colors you should check out: <a href=
@@ -258,8 +256,8 @@ public final class AnsiColor
 		private final StringBuilder content;
 		
 		/**
-		 * If the user provides no String, then we assume that the payload (i.e.
-		 * content) will be submitted later.
+		 * If the user provides no String, then we assume that the payload (i.e. content)
+		 * will be submitted later.
 		 */
 		private InternedInstance()
 		{
@@ -268,15 +266,15 @@ public final class AnsiColor
 		
 		private InternedInstance(String content)
 		{
-			this.content=new StringBuilder(Objects.requireNonNull(content));
+			this.content =new StringBuilder(Objects.requireNonNull(content));
 			this.instance=new AnsiColor();
 		}
 		
 		/**
 		 * <p>
-		 * Get what is currently treated as raw content in this builder. Raw
-		 * content signifies anything that is TO BE FORMATTED and not the things
-		 * that do the formatting.
+		 * Get what is currently treated as raw content in this builder. Raw content
+		 * signifies anything that is TO BE FORMATTED and not the things that do the
+		 * formatting.
 		 * </p>
 		 * <strong>[!] THIS METHOD DESTROYS CASCADING [!]</strong>
 		 *
@@ -696,8 +694,8 @@ public final class AnsiColor
 		}
 		
 		/**
-		 * ANSI code maker. Constructs the ANSI code given and provides further
-		 * cascading simplifications.
+		 * ANSI code maker. Constructs the ANSI code given and provides further cascading
+		 * simplifications.
 		 *
 		 * @param content ANSI Code
 		 *
@@ -825,8 +823,8 @@ public final class AnsiColor
 		}
 		
 		/**
-		 * NOTE: On certain renderers, white_fg and white_bg will return a GRAY
-		 * color, while on some it returns WHITE! Calls {@link #white_fg()}
+		 * NOTE: On certain renderers, white_fg and white_bg will return a GRAY color,
+		 * while on some it returns WHITE! Calls {@link #white_fg()}
 		 */
 		public InternedInstance gray()
 		{
@@ -844,8 +842,8 @@ public final class AnsiColor
 		}
 		
 		/**
-		 * NOTE: On certain renderers, bright_black_fg and bright_black_bg will
-		 * return the same colors as black_fg and black_bg respectively. Calls
+		 * NOTE: On certain renderers, bright_black_fg and bright_black_bg will return the
+		 * same colors as black_fg and black_bg respectively. Calls
 		 * {@link #bright_black_fg()}
 		 */
 		public InternedInstance dark_gray()
@@ -1125,8 +1123,7 @@ public final class AnsiColor
 		}
 		
 		/**
-		 * Sometimes treated as double underline. Both are not widely
-		 * supported.
+		 * Sometimes treated as double underline. Both are not widely supported.
 		 */
 		public InternedInstance no_bold()
 		{
@@ -1231,11 +1228,11 @@ public final class AnsiColor
 		// ########### START MISC ########### //
 		
 		/**
-		 * Mostly used for internal creation of colors. You should rarely use
-		 * this if at all.
+		 * Mostly used for internal creation of colors. You should rarely use this if at
+		 * all.
 		 * <p>
-		 * Tells to treat the following elements (in the ANSI code) as a color
-		 * for the text's foreground
+		 * Tells to treat the following elements (in the ANSI code) as a color for the
+		 * text's foreground
 		 */
 		public InternedInstance fg()
 		{
@@ -1268,11 +1265,11 @@ public final class AnsiColor
 		}
 		
 		/**
-		 * Mostly used for internal creation of colors. You should rarely use
-		 * this if at all.
+		 * Mostly used for internal creation of colors. You should rarely use this if at
+		 * all.
 		 * <p>
-		 * Tells to treat the following elements (in the ANSI code) as a color
-		 * for the text's background
+		 * Tells to treat the following elements (in the ANSI code) as a color for the
+		 * text's background
 		 */
 		public InternedInstance bg()
 		{
@@ -1280,8 +1277,8 @@ public final class AnsiColor
 		}
 		
 		/**
-		 * Apply your own custom list of ANSI codes. It is not suggested using
-		 * this unless there are codes outside this builder's range.
+		 * Apply your own custom list of ANSI codes. It is not suggested using this unless
+		 * there are codes outside this builder's range.
 		 *
 		 * @param i ANSI codes (vararg)
 		 *
@@ -1295,8 +1292,8 @@ public final class AnsiColor
 		// ########### END MISC ########### //
 		
 		/**
-		 * Does not provide a RESET at the end as compared to
-		 * {@link #toString()} or {@link #toString(String)}
+		 * Does not provide a RESET at the end as compared to {@link #toString()} or
+		 * {@link #toString(String)}
 		 *
 		 * @return The finalized string without a rest character
 		 */
@@ -1309,9 +1306,9 @@ public final class AnsiColor
 		}
 		
 		/**
-		 * Should not be called by the programmer unless absolutely necessary.
-		 * The {@link #toString()} and {@link #escaped()} all call this method
-		 * in order to validate the String.
+		 * Should not be called by the programmer unless absolutely necessary. The
+		 * {@link #toString()} and {@link #escaped()} all call this method in order to
+		 * validate the String.
 		 * <p>
 		 * This method does not create the final values for rendering
 		 *
@@ -1324,8 +1321,8 @@ public final class AnsiColor
 		}
 		
 		/**
-		 * For debugging purposes. Displays the built value by escaping all the
-		 * necessary components.
+		 * For debugging purposes. Displays the built value by escaping all the necessary
+		 * components.
 		 *
 		 * @return String
 		 */
@@ -1354,9 +1351,8 @@ public final class AnsiColor
 		}
 		
 		/**
-		 * This method also appends a RESET character at the end to reset all
-		 * ANSI coloring after.
-		 *
+		 * This method also appends a RESET character at the end to reset all ANSI
+		 * coloring after.
 		 * Technically this is just a wrapper call to {@link #toString(String)}
 		 */
 		@Override public String toString()
@@ -1365,12 +1361,11 @@ public final class AnsiColor
 		}
 		
 		/**
-		 * Allows for content to be added at the end (either end). This method
-		 * also appends a RESET character at the end to reset all ANSI coloring
-		 * after.
+		 * Allows for content to be added at the end (either end). This method also
+		 * appends a RESET character at the end to reset all ANSI coloring after.
 		 *
-		 * @param content the content to append to the original content before
-		 * returning the string
+		 * @param content the content to append to the original content before returning
+		 * the string
 		 *
 		 * @return The formatted content
 		 */
@@ -1379,8 +1374,7 @@ public final class AnsiColor
 			return AnsiColor.setAnsiEnabled()?"\033["+end()
 				.append("m")
 				.append(this.content.append(content))
-				.append(AnsiColor.reset())
-				.toString():content;
+				.append(AnsiColor.reset()):content;
 		}
 		
 		/**
@@ -1394,7 +1388,7 @@ public final class AnsiColor
 		
 		public InternedInstance println(PrintStream e)
 		{
-			e.println(toString());
+			e.println(this);
 			return this;
 		}
 		
@@ -1431,9 +1425,9 @@ public final class AnsiColor
 		}
 		
 		/**
-		 * @param content
+		 * @param content content to print
 		 *
-		 * @return
+		 * @return this
 		 *
 		 * @since 1.1
 		 */
@@ -1444,9 +1438,9 @@ public final class AnsiColor
 		}
 		
 		/**
-		 * @param content
+		 * @param content content to print
 		 *
-		 * @return
+		 * @return this
 		 *
 		 * @since 1.1
 		 */

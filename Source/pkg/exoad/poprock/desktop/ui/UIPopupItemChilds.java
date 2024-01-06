@@ -27,7 +27,7 @@ public final class UIPopupItemChilds
 			);
 	}
 	
-	public static record SimplePopupDelegate(String name,Runnable action)
+	public record SimplePopupDelegate(String name,Runnable action)
 	{
 		public SimplePopupDelegate
 		{

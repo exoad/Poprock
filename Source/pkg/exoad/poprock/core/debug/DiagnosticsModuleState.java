@@ -6,5 +6,5 @@ public enum DiagnosticsModuleState
 {
 	NEUTRAL,
 	MONITORING,
-	PAUSED;
+	PAUSED
 }

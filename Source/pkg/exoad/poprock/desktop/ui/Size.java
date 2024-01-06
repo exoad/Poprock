@@ -1,6 +1,6 @@
 package pkg.exoad.poprock.desktop.ui;
 
-public final record Size(int width,int height)
+public record Size(int width,int height)
 {
 	
 	public int area()
