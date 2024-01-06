@@ -21,5 +21,7 @@ public class Test_MemoryDiagnosticsModule
 			e2.add(new Object[6][6][6][6][6][6]);
 		}
 		d.end();
+		
+		$PRINT("end");
 	}
 }
