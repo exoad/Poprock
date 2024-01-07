@@ -2,11 +2,6 @@ plugins {
     id 'java'
 }
 
-plugins {
-    id 'maven-publish'
-}
-
-
 group = 'pkg.exoad'
 version = '1.0.0'
 
