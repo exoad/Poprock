@@ -1,7 +1,6 @@
 package pkg.exoad.poprock.core.debug;
 import pkg.exoad.poprock.core.IDisposable;
 
-import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Consumer;

@@ -2,7 +2,6 @@ package pkg.exoad.poprock.core;
 
 import net.exoad.annotations.ServiceClass;
 import net.exoad.math.Maths;
-import pkg.exoad.poprock.core.Pair;
 
 import java.io.Serializable;
 import java.util.Arrays;

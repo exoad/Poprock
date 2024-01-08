@@ -2,7 +2,6 @@ package pkg.exoad.poprock.core;
 import net.exoad.annotations.ServiceClass;
 import pkg.exoad.poprock.core.debug.DebugService;
 import pkg.exoad.poprock.core.debug.DiagnosticsMode;
-import pkg.exoad.poprock.core.debug.DiagnosticsModule;
 
 import java.util.TreeMap;
 import java.util.Optional;

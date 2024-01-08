@@ -12,7 +12,7 @@ import java.awt.Dimension;
  * classes to Poprock versions. For example, instead of having to import
  * {@link java.awt.Dimension}, you can easily just use Poprock's core
  * {@link Size} when importing
- * {@link pkg.exoad.Poprock.core}
+ * {@link pkg.exoad.poprock.core}
  *
  * @author Jack Meng
  */

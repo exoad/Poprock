@@ -12,6 +12,8 @@ net.exoad.math.geom
 net.exoad.platform
 net.exoad.prismix
 net.exoad.txfyr
+net.exoad.units
+net.exoad.units.builtin
 pkg.exoad.poprock.core
 pkg.exoad.poprock.core.debug
 pkg.exoad.poprock.core.mixins

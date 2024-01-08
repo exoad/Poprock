@@ -1,6 +1,5 @@
 package pkg.exoad.poprock.core;
 
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
 public final class StructService

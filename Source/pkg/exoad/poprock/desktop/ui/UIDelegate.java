@@ -15,7 +15,7 @@ public class UIDelegate<T extends JComponent>
 	implements
 	UIBasicDelegate<T>
 {
-	public final record DelegateProperties(
+	public record DelegateProperties(
 		Size prefSize,Size size,Size minSize,Size maxSize,Offset origin,
 		boolean visibility,Color bg,boolean opaqueness
 	)

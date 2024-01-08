@@ -69,7 +69,7 @@ import javax.swing.*;
 	/**
 	 * Converts to a Swing Lightweight component form
 	 *
-	 * @return
+	 * @return as an awt suitable component (this should be used for internal operations only)
 	 */
 	public T asComponent();
 	
