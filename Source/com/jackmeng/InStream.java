@@ -7,14 +7,13 @@ import java.util.StringTokenizer;
 
 public class InStream
 {
-	private final InputStream io;
 	private BufferedReader br;
 	private StringTokenizer st;
 	
 	public InStream(InputStream e)
 	{
-		this.io=e==null?System.in:e;
-		br     =new BufferedReader(new InputStreamReader(this.io));
+		InputStream io=e==null?System.in:e;
+		br     =new BufferedReader(new InputStreamReader(io));
 	}
 	
 	public synchronized void reader(BufferedReader br)
@@ -31,7 +30,7 @@ public class InStream
 	{
 		return next(x->{
 			x.printStackTrace();
-			return (Void)null;
+			return null;
 		});
 	}
 	

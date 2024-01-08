@@ -3,7 +3,7 @@ public final class MathF
 {
 	private MathF(){}
 	
-	public static int binomial_coefficient(int n,int k)
+	public static int binomialCoefficient(int n,int k)
 	{
 		int result=1;
 		for(int i=1;i<=k;i++)
@@ -11,14 +11,14 @@ public final class MathF
 		return result;
 	}
 	
-	public static float clamp_with_epsilon(
+	public static float clampWithEpsilon(
 		float value,float min,float max,float epsilon
 	)
 	{
 		return Math.max(min-epsilon,Math.min(max+epsilon,value));
 	}
 	
-	public static float exponential_clamp(
+	public static float exponentialClamp(
 		float value,float min,float max,float exponent
 	)
 	{
@@ -29,7 +29,7 @@ public final class MathF
 		return Math.max(min-buffer,Math.min(max+buffer,value));
 	}
 	
-	public static float smoothstep_Clamp(
+	public static float smoothStepClamp(
 		float value,float min,float max,float smoothness
 	)
 	{

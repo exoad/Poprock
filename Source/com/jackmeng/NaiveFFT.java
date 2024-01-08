@@ -3,7 +3,7 @@ public final class NaiveFFT
 {
 	private NaiveFFT(){}
 	
-	public static Complex[] cooleytukey(Complex[] x)
+	public static Complex[] cooleyTukey(Complex[] x)
 	{
 		int n=x.length;
 		if(n==1)
@@ -13,10 +13,10 @@ public final class NaiveFFT
 		Complex[] even=new Complex[n/2];
 		for(int i=0;i<n/2;i++)
 			even[i]=x[2*i];
-		Complex[] q=cooleytukey(even);
+		Complex[] q=cooleyTukey(even);
 		for(int i=0;i<n/2;i++)
 			even[i]=x[2*i+1];
-		Complex[] r=cooleytukey(even);
+		Complex[] r=cooleyTukey(even);
 		Complex[] y=new Complex[n];
 		for(int k=0;k<n/2;k++)
 		{

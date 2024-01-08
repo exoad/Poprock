@@ -51,7 +51,7 @@ public class NaiveLRUCache<K,V>
 		node.next.prev=node.prev;
 	}
 	
-	private void addToFront(Node<K,V> node,int color)
+	public void addToFront(Node<K,V> node,int color)
 	{
 		Node<K,V> tailPrev=tail.prev;
 		node.next                 =tail;
@@ -64,7 +64,7 @@ public class NaiveLRUCache<K,V>
 		colorBlocks[color][0]     =node;
 	}
 	
-	private int getColor(K key)
+	public int getColor(K key)
 	{
 		return key.hashCode()%numColors;
 	}

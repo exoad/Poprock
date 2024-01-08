@@ -25,7 +25,7 @@ public class KDTree
 		root=buildTree(points,0);
 	}
 	
-	public synchronized KDNode buildTree(List<double[]> points,int depth)
+	public KDNode buildTree(List<double[]> points,int depth)
 	{
 		if(points.isEmpty())
 			return null;
@@ -49,7 +49,7 @@ public class KDTree
 		return nearestNeighbor(root,queryPoint,root,0);
 	}
 	
-	private KDNode nearestNeighbor(
+	public KDNode nearestNeighbor(
 		KDNode currentNode,double[] queryPoint,KDNode bestNode,int depth
 	)
 	{

@@ -40,16 +40,16 @@ public class LooseList<T>
 	
 	@Override public Iterator<T> iterator()
 	{
-		return new looselist_Iterator<>(list);
+		return new LooseListIterator<>(list);
 	}
 	
-	private static class looselist_Iterator<T>
+	private static class LooseListIterator<T>
 		implements Iterator<T>
 	{
 		private final List<SoftReference<T>> queue;
 		private int i;
 		
-		public looselist_Iterator(List<SoftReference<T>> l)
+		public LooseListIterator(List<SoftReference<T>> l)
 		{
 			this.queue=l;
 			this.i    =0;

@@ -4,13 +4,7 @@ import java.nio.ByteBuffer;
 
 public class CircularBuffer
 {
-
-    /*----------------------------------------------------------------- /
-    / generic implementation of a FIFO Circular or ring buffer strategy /
-    /------------------------------------------------------------------*/
-	
 	private final byte[] buffer;
-	
 	private int start, sz;
 	
 	public CircularBuffer(int init_Size)
@@ -23,19 +17,19 @@ public class CircularBuffer
 		this(255);
 	}
 	
-	public int used_sz()
+	public int usedSize()
 	{
 		return sz;
 	}
 	
-	public int total_sz()
+	public int totalSize()
 	{
 		return buffer.length;
 	}
 	
-	public int free_sz()
+	public int freeSize()
 	{
-		return total_sz()-used_sz();
+		return totalSize()-usedSize();
 	}
 	
 	public void drop(int elementsCount)
@@ -81,14 +75,11 @@ public class CircularBuffer
 			next(len);
 			return;
 		}
-		rem=getRem(data,rem,i);
+		rem=getRem(data,rem,i); // ??
 	}
 	
 	public void init()
 	{
-        /*---------------------------------------------------------------------------------------- /
-        / returns the buffer to the original state, and is unnecessary for direct initalialization /
-        /-----------------------------------------------------------------------------------------*/
 		start=0;
 		sz   =0;
 	}
@@ -176,6 +167,5 @@ public class CircularBuffer
 	public int free(int n)
 	{
 		return start>=n?sz>0?n-start:buffer.length-n:buffer.length-n;
-		
 	}
 }
