@@ -1,7 +1,7 @@
 package pkg.exoad.poprock.core;
 
-import net.exoad.annotations.ServiceClass;
-import net.exoad.math.Maths;
+import pkg.exoad.poprock.core.annotations.ServiceClass;
+import pkg.exoad.poprock.core.math.Maths;
 
 import java.io.Serializable;
 import java.util.Arrays;

@@ -1,9 +1,9 @@
 package pkg.exoad.poprock.core.registry;
 import pkg.exoad.poprock.core.Functor11;
 import pkg.exoad.poprock.core.ICollatable;
+import pkg.exoad.poprock.core.SharedServices;
 import pkg.exoad.poprock.core.debug.DebugService;
 import pkg.exoad.poprock.core.debug.DebuggableAllRequiredNamedFieldsMixin;
-import pkg.exoad.poprock.core.SharedServices;
 
 import java.util.Optional;
 /**

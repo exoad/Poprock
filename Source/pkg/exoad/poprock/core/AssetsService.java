@@ -1,9 +1,9 @@
 package pkg.exoad.poprock.core;
 
-import net.exoad.annotations.ServiceClass;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import pkg.exoad.poprock.core.annotations.ServiceClass;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;

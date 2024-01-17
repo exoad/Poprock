@@ -1,11 +1,11 @@
 package pkg.exoad.poprock.core.registry;
 
-import net.exoad.annotations.ServiceClass;
-import net.exoad.annotations.VolatileImpl;
-import pkg.exoad.poprock.core.debug.DebugService;
-import pkg.exoad.poprock.core.debug.DebuggableMixin;
 import pkg.exoad.poprock.core.EventPoolService;
 import pkg.exoad.poprock.core.Services;
+import pkg.exoad.poprock.core.annotations.ServiceClass;
+import pkg.exoad.poprock.core.annotations.VolatileImpl;
+import pkg.exoad.poprock.core.debug.DebugService;
+import pkg.exoad.poprock.core.debug.DebuggableMixin;
 import pkg.exoad.poprock.core.mixins.NamedObjMixin;
 
 import java.util.HashMap;

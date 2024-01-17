@@ -1,7 +1,7 @@
 package pkg.exoad.poprock.core.debug;
 
-import net.exoad.annotations.ProgramInvoked;
-import net.exoad.annotations.ServiceClass;
+import pkg.exoad.poprock.core.annotations.ProgramInvoked;
+import pkg.exoad.poprock.core.annotations.ServiceClass;
 
 import java.io.PrintStream;
 import java.text.MessageFormat;

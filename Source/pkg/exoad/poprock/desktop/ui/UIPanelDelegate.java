@@ -1,9 +1,9 @@
 package pkg.exoad.poprock.desktop.ui;
 
+import javax.swing.*;
 import pkg.exoad.poprock.core.debug.DebugService;
 import pkg.exoad.poprock.desktop.ui.java.UXPanel;
 
-import javax.swing.*;
 import java.awt.*;
 import java.util.function.Consumer;
 

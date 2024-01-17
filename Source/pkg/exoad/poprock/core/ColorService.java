@@ -1,6 +1,6 @@
 package pkg.exoad.poprock.core;
 
-import net.exoad.annotations.ServiceClass;
+import pkg.exoad.poprock.core.annotations.ServiceClass;
 
 /**
  * Color Service - A utility class for providing basic operations on Colors. However, it

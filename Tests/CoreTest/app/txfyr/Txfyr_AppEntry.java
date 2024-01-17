@@ -2,8 +2,8 @@ package app.txfyr;
 
 import static java.lang.System.out;
 
-import net.exoad.txfyr.Txfyr;
-import net.exoad.txfyr.TxfyrReader;
+import pkg.exoad.poprock.core.txfyr.Txfyr;
+import pkg.exoad.poprock.core.txfyr.TxfyrReader;
 class Txfyr_AppEntry
 {
 	public static void main(String[] args)

@@ -1,6 +1,6 @@
 package pkg.exoad.poprock.core.debug;
 
-import net.exoad.annotations.NotVirtual;
+import pkg.exoad.poprock.core.annotations.NotVirtual;
 /**
  * A mixin that contains some helpful functions for getting a formatted name of
  * the current object represented with its current runtime state.

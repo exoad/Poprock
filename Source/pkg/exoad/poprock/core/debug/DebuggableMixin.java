@@ -1,6 +1,6 @@
 package pkg.exoad.poprock.core.debug;
 
-import net.exoad.annotations.NotVirtual;
+import pkg.exoad.poprock.core.annotations.NotVirtual;
 
 /**
  * A [minimal] mixin sort of interface to allow for easy use of throwing

@@ -1,8 +1,9 @@
 <component name="libraryTable">
-  <library name="requires">
+  <library name="Requires">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/requires/flatlaf.jar!/" />
-      <root url="jar://$PROJECT_DIR$/requires/flatlaf-intellij.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Requires/flatlaf-intellij.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Requires/luaj-jse-3.0.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Requires/flatlaf.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

@@ -1,7 +1,6 @@
 package pkg.exoad.poprock.desktop.ui.services;
-import pkg.exoad.poprock.core.debug.DebugService;
-
 import javax.swing.*;
+import pkg.exoad.poprock.core.debug.DebugService;
 public final class UIServices
 {
 	private UIServices(){}

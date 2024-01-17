@@ -1,9 +1,6 @@
 package pkg.exoad.poprock.desktop.ui.java;
 
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.JTextPane;
+import javax.swing.*;
 import javax.swing.text.JTextComponent;
 
 @DefsEqual(

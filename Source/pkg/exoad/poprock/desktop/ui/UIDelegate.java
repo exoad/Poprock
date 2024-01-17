@@ -1,15 +1,11 @@
 package pkg.exoad.poprock.desktop.ui;
 
-import javax.swing.JComponent;
+import javax.swing.*;
 import javax.swing.border.Border;
-
-import pkg.exoad.poprock.core.Color;
 import pkg.exoad.poprock.core.AwtMixerService;
+import pkg.exoad.poprock.core.Color;
 
-import java.awt.Dimension;
-import java.awt.Component;
-
-import javax.swing.BorderFactory;
+import java.awt.*;
 
 public class UIDelegate<T extends JComponent>
 	implements

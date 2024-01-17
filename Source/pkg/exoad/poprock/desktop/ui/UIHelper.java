@@ -1,11 +1,9 @@
 package pkg.exoad.poprock.desktop.ui;
 
-import javax.swing.BorderFactory;
-import javax.swing.JMenuItem;
-import javax.swing.JPopupMenu;
+import javax.swing.*;
 import javax.swing.border.Border;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.Objects;
 
 public final class UIHelper

@@ -1,5 +1,5 @@
 package pkg.exoad.poprock.core.debug;
-import net.exoad.annotations.NotVirtual;
+import pkg.exoad.poprock.core.annotations.NotVirtual;
 import pkg.exoad.poprock.core.mixins.InitializingMixinProvider;
 public interface DiagnosticsModuleMixin
 	extends InitializingMixinProvider

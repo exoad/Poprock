@@ -1,11 +1,10 @@
 package pkg.exoad.poprock.core;
 
-import net.exoad.annotations.ServiceClass;
+import pkg.exoad.poprock.core.annotations.ServiceClass;
 import pkg.exoad.poprock.desktop.ui.Offset;
 import pkg.exoad.poprock.desktop.ui.Size;
 
-import java.awt.Point;
-import java.awt.Dimension;
+import java.awt.*;
 
 /**
  * AwtMixerService - A utility class designed to convert from common AWT Utility

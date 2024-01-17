@@ -1,8 +1,8 @@
 package pkg.exoad.poprock.core.registry;
-import net.exoad.annotations.NotVirtual;
-import pkg.exoad.poprock.core.ITypeInferencing;
-import pkg.exoad.poprock.core.debug.DebugService;
 import pkg.exoad.poprock.core.EventPoolService;
+import pkg.exoad.poprock.core.ITypeInferencing;
+import pkg.exoad.poprock.core.annotations.NotVirtual;
+import pkg.exoad.poprock.core.debug.DebugService;
 
 import java.util.Collection;
 import java.util.HashSet;

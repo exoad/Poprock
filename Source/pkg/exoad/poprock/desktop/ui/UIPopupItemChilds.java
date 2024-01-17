@@ -1,8 +1,7 @@
 package pkg.exoad.poprock.desktop.ui;
 
-import pkg.exoad.poprock.core.BasicService;
-
 import javax.swing.*;
+import pkg.exoad.poprock.core.BasicService;
 
 public final class UIPopupItemChilds
 {

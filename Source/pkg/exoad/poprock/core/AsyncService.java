@@ -1,6 +1,6 @@
 package pkg.exoad.poprock.core;
 
-import net.exoad.annotations.ServiceClass;
+import pkg.exoad.poprock.core.annotations.ServiceClass;
 
 import java.util.Timer;
 import java.util.TimerTask;

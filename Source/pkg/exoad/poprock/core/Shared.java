@@ -1,9 +1,8 @@
 package pkg.exoad.poprock.core;
 
+import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.UUID;
-
-import java.lang.ref.WeakReference;
 
 /**
  * <h2>Shared Object Pooling</h2>

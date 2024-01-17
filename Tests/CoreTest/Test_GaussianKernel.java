@@ -1,4 +1,4 @@
-import net.exoad.image.Kernels;
+import pkg.exoad.poprock.core.io.image.Kernels;
 @Section(name="Test gaussian auto generating calculations") public class Test_GaussianKernel
 	implements TestRoot,
 			   TestMixin

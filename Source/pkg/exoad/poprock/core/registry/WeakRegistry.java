@@ -1,5 +1,5 @@
 package pkg.exoad.poprock.core.registry;
-import net.exoad.annotations.VolatileImpl;
+import pkg.exoad.poprock.core.annotations.VolatileImpl;
 import pkg.exoad.poprock.core.debug.DebugService;
 import pkg.exoad.poprock.core.debug.DebuggableMixin;
 import pkg.exoad.poprock.core.mixins.NamedObjMixin;
@@ -52,7 +52,7 @@ public final class WeakRegistry
 																						 .get(
 																							 id)
 																						 .get())
-																				 .hashCode()<<31)&0xFF)+"]");
+																				 .hashCode())&0xFF)+"]");
 		leafs.put(id,new WeakReference<>(entry));
 	}
 	

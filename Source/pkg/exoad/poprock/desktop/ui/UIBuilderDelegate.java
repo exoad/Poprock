@@ -1,8 +1,8 @@
 package pkg.exoad.poprock.desktop.ui;
 
-import java.util.function.Supplier;
+import javax.swing.*;
 
-import javax.swing.JComponent;
+import java.util.function.Supplier;
 
 /**
  * A builder delegate that allows for the usage of a lambda

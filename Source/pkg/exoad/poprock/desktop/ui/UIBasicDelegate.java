@@ -1,8 +1,7 @@
 package pkg.exoad.poprock.desktop.ui;
 
-import pkg.exoad.poprock.core.debug.SelfReportingMixin;
-
 import javax.swing.*;
+import pkg.exoad.poprock.core.debug.SelfReportingMixin;
 
 /**
  * Root of all UI delegates to extend from and the main extrapolation from the

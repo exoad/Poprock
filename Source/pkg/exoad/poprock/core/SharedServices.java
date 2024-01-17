@@ -1,10 +1,10 @@
 package pkg.exoad.poprock.core;
-import net.exoad.annotations.ServiceClass;
+import pkg.exoad.poprock.core.annotations.ServiceClass;
 import pkg.exoad.poprock.core.debug.DebugService;
 import pkg.exoad.poprock.core.debug.DiagnosticsMode;
 
-import java.util.TreeMap;
 import java.util.Optional;
+import java.util.TreeMap;
 @ServiceClass(requiresArming=false)
 public final class SharedServices
 {

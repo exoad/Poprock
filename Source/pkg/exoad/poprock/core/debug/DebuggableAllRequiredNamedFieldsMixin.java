@@ -1,5 +1,5 @@
 package pkg.exoad.poprock.core.debug;
-import net.exoad.annotations.NotVirtual;
+import pkg.exoad.poprock.core.annotations.NotVirtual;
 public interface DebuggableAllRequiredNamedFieldsMixin
 {
 	@NotVirtual public default void ASSERT(Object e)

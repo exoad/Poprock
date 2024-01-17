@@ -1,6 +1,6 @@
 package pkg.exoad.poprock.desktop.ui.java;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 
 public class UXPanel
 	extends

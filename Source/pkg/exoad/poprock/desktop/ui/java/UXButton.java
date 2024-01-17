@@ -1,8 +1,6 @@
 package pkg.exoad.poprock.desktop.ui.java;
 
-import javax.swing.JButton;
-import javax.swing.JPanel;
-
+import javax.swing.*;
 import pkg.exoad.poprock.core.Color;
 
 @DefsEqual(
