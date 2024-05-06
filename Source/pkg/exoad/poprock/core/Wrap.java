@@ -1,4 +1,5 @@
 package pkg.exoad.poprock.core;
+import pkg.exoad.poprock.core.halite.model.impl_Model;
 /**
  * A non managed version of {@link Shared}
  *
@@ -18,6 +19,11 @@ public class Wrap<T>
 	public static <A> Wrap<A> of(A value)
 	{
 		return new Wrap<>(value);
+	}
+	
+	public T obj(final impl_Model clone) // for legacy purposes
+	{
+		return getValue();
 	}
 	
 	public T getValue()
